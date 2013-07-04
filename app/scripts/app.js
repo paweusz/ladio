@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp', [])
+angular.module('radioApp', ['ngResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

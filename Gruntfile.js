@@ -28,6 +28,12 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
+    develop: {
+      server: {
+        file: 'express/app.js',
+        nodeArgs: ['--debug']
+      }
+    },
     watch: {
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
@@ -310,6 +316,11 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin'
+  ]);
+
+  grunt.registerTask('express', [
+    'develop',
+    'watch'
   ]);
 
   grunt.registerTask('default', [

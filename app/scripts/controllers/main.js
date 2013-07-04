@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $resource) {
+    var Genre = $resource('/genres');
+    $scope.genres = Genre.query(function() {
+      console.log('pimpa');
+      
+    });
   });
