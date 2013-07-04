@@ -30,8 +30,7 @@ module.exports = function (grunt) {
     yeoman: yeomanConfig,
     develop: {
       server: {
-        file: 'express/app.js',
-        nodeArgs: ['--debug']
+        file: 'express/app.js'
       }
     },
     watch: {
@@ -319,8 +318,11 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('express', [
-    'develop',
-    'watch'
+      'clean:server',
+      'concurrent:server',
+      'develop',
+      'open',
+      'watch'
   ]);
 
   grunt.registerTask('default', [
