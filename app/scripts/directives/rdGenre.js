@@ -6,12 +6,15 @@ angular.module('radioApp')
       transclude: true,
       replace: true,
       scope: {
-        onClick: '&onClick'
+        onClick: '&',
+        onClickArg: '@'
       },
       templateUrl: 'scripts/directives/rdGenre.html',
       link: function(scope, iElement, iAttrs) {
         console.debug('postLink');
-        iElement.bind('click', scope.onClick);
+        iElement.bind('click', function() {
+          scope.onClick({arg: scope.onClickArg});
+        });
       }
     }
   });
