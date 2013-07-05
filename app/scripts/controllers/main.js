@@ -6,7 +6,7 @@ angular.module('radioApp')
     $scope.genres = Genre.query(function() {
       console.log('genre query');
     });
-    $scope.play = function(stationId) {
-      console.debug('play ' + stationId);
+    $scope.play = function() {
+      console.debug('play ' + this.thing.id);
     };
   });
