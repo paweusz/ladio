@@ -4,6 +4,7 @@ angular.module('radioApp')
   .directive('rdGenre', function () {
     return {
       transclude: true,
+      replace: true,
       scope: {
         onClick: '&onClick'
       },
