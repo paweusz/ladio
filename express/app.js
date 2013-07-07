@@ -25,7 +25,8 @@ app.configure('development', function(){
 });
 
 app.get('/genres', genre.genres);
-app.get('/subgenres/:genreId', genre.subGenres);
+app.get('/genres/:genreId/subgenres', genre.subGenres);
+app.get('/genres/:genreId/subgenres/:subgenreId/stations', genre.stations);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

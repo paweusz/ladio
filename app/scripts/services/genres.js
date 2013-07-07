@@ -7,7 +7,7 @@ angular.module('radioApp')
         return $resource('/genres').query();
       },
       subGenres: function(genreId) {
-        return $resource('/subgenres/:genreId').query({genreId:genreId});
+        return $resource('/genres/:genreId/subgenres').query({genreId:genreId});
       }
     }
   });
