@@ -10,6 +10,10 @@ angular.module('radioApp', ['ngResource'])
         templateUrl: 'views/genres.html',
         controller: 'GenresCtrl'
       })
+      .when('/subgenres/:genreId', {
+        templateUrl: 'views/subgenres.html',
+        controller: 'SubGenresCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
