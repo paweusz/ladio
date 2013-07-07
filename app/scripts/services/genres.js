@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .factory('Dirble', function($resource) {
+  .factory('Genres', function($resource) {
     return {
       genres: function() {
         return $resource('/genres').query();
