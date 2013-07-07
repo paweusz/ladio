@@ -1,4 +1,5 @@
 <div class="station" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
-  <div><span>{{station.name}}</span></div>
+  <div class="ctrl ng-class: isPlaying()"></div>
+  <div class="name" ng-click="play()"><span>{{station.name}}</span></div>
   <div><span class="url"><a href="{{station.website}}" target="blank">{{station.website}}</a></span></div>
 </div>

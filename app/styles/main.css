@@ -32,3 +32,21 @@ body {
 .station .url {
   font-size: 12px;
 }
+
+.station .name {
+  background-image: url('/styles/play.png');
+  background-repeat: no-repeat;  
+  padding-left: 22px;
+  background-position: 0 50%;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.station .ctrl.playing {
+  min-width: 48px;
+  min-height: 48px;
+  background-image: url("/styles/speaker.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 10px;  
+}
