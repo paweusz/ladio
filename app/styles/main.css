@@ -4,9 +4,10 @@ body {
     color: #333;
 }
 
-div.genre {
+div.genre, div.station {
     border: 1px solid blue;
     background-color: yellow;
     padding: 15px;
+    margin: 2px;
     float: left;    
 }

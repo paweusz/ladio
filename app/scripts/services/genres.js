@@ -8,6 +8,10 @@ angular.module('radioApp')
       },
       subGenres: function(genreId) {
         return $resource('/genres/:genreId/subgenres').query({genreId:genreId});
+      },
+      stations: function(genreId, subGenreId) {
+        return $resource('/genres/:genreId/subgenres/:subGenreId/stations').query(
+          {genreId: genreId, subGenreId: subGenreId});
       }
     }
   });
