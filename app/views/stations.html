@@ -1,1 +1,4 @@
-<div class="station" ng-repeat="station in stations">{{station.name}}</div>
+<div class="station" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
+  <div><span>{{station.name}}</span></div>
+  <div><span>{{station.website}}</span></div>
+</div>
