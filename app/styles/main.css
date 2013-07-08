@@ -25,6 +25,10 @@ body {
   margin: 8px 0px 0px 8px;
 }
 
+.station.disabled {
+  background-color: #d6d6d6;
+}
+
 .genre a, .station a {
   color: white;
 }
@@ -40,6 +44,11 @@ body {
   background-position: 0 50%;
   margin-bottom: 5px;
   cursor: pointer;
+}
+
+.station.disabled .name {
+  pointer-events: none;
+  cursor: default;
 }
 
 .station .ctrl.playing {

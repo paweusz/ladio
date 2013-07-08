@@ -7,11 +7,15 @@ angular.module('radioApp')
 
     $scope.play = function() {
       $scope.currentStationId = this.station.id;
-      console.debug('play ' + this.currentStationId);
+      console.debug('play ' + this.station.streamurl);
     };
 
-    $scope.isPlaying = function() {
+    $scope.playingCss = function() {
       return $scope.currentStationId === this.station.id ? 'playing' : '';
+    };
+
+    $scope.stationCss = function() {
+      return this.station.status === 0 ? 'disabled' : '';
     };
 
   });
