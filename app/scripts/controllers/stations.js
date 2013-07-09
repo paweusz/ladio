@@ -9,7 +9,11 @@ angular.module('radioApp')
     $scope.play = function() {
       var streamUrl = this.station.streamurl;
       console.debug('play ' + streamUrl);
-      $scope.streams = Pls.streams(streamUrl);
+      if (streamUrl.match(/.pls$/)) {
+        $scope.streams = Pls.streams(streamUrl);
+      } else {
+        $scope.streams = [{url: streamUrl}];
+      }
       
       $scope.currentStationId = this.station.id;
     };

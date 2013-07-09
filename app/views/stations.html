@@ -1,5 +1,5 @@
 <div>
-  <div ng-repeat="stream in streams">{{stream.url}}</div>
+  <div ng-repeat="stream in streams"><a href="{{stream.url}}" target="blank">{{stream.url}}</a></div>
 </div>
 <!--audio controls="controls" autoplay="autoplay">
   <source ng-repeat="stream in streams" src="{{stream.url}};"></source>
