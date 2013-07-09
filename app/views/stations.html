@@ -1,5 +1,12 @@
+<div>
+  <div ng-repeat="stream in streams">{{stream.url}}</div>
+</div>
+<!--audio controls="controls" autoplay="autoplay">
+  <source ng-repeat="stream in streams" src="{{stream.url}};"></source>
+</audio-->
 <div class="station ng-class: stationCss()" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
   <div class="ctrl ng-class: playingCss()"></div>
   <div class="name" ng-click="play()"><span>{{station.name}}</span></div>
   <div><span class="url"><a href="{{station.website}}" target="blank">{{station.website}}</a></span></div>
+  <div><span class="url"><a href="{{station.streamurl}}" target="blank">Play in external app</a></span></div>
 </div>

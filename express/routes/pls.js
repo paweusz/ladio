@@ -35,9 +35,5 @@ function doGetPls(ref, res) {
 
 exports.streams = function(req, res) {
   var ref = req.query.pls;
-  if (ref.match(/.pls$/)) {
-    doGetPls(ref, res);
-  } else {
-    res.json([{url: ref}]);
-  }
+  doGetPls(ref, res);
 };
