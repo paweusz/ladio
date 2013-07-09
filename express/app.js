@@ -5,6 +5,7 @@
 
 var express = require('express')
   , genre = require('./routes/genre')
+  , pls = require('./routes/pls')
   , http = require('http')
   , path = require('path');
 
@@ -27,7 +28,7 @@ app.configure('development', function(){
 app.get('/genres', genre.genres);
 app.get('/genres/:genreId/subgenres', genre.subGenres);
 app.get('/genres/:genreId/subgenres/:subgenreId/stations', genre.stations);
-app.get('/streams', genre.streams);
+app.get('/streams', pls.streams);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
