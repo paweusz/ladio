@@ -4,7 +4,7 @@
  */
 
 var express = require('express')
-  , genre = require('./routes/genre')
+  , dirble = require('./routes/dirble')
   , pls = require('./routes/pls')
   , http = require('http')
   , path = require('path');
@@ -25,9 +25,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/genres', genre.genres);
-app.get('/genres/:genreId/subgenres', genre.subGenres);
-app.get('/genres/:genreId/subgenres/:subgenreId/stations', genre.stations);
+app.get('/genres', dirble.genres);
+app.get('/genres/:genreId/subgenres', dirble.subGenres);
+app.get('/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
 app.get('/streams', pls.streams);
 
 http.createServer(app).listen(app.get('port'), function(){
