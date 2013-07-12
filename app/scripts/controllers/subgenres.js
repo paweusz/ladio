@@ -2,6 +2,7 @@
 
 angular.module('radioApp')
   .controller('SubGenresCtrl', function ($scope, $routeParams, Genres) {
-    $scope.genreId = $routeParams.genreId;
-    $scope.subgenres = Genres.subGenres($scope.genreId);
+    var genreId = $routeParams.genreId;
+    $scope.genre = Genres.genre(genreId);
+    $scope.subgenres = Genres.subGenres(genreId);
   });

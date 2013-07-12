@@ -322,7 +322,6 @@ module.exports = function (grunt) {
       'clean:server',
       'concurrent:server',
       'develop',
-      'open',
       'watch'
   ]);
 
