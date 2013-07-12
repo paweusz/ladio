@@ -1,5 +1,5 @@
 <div>
-  <span>Home</span>
-  <span>{{genre.name}}</span>
+  <a href="#/genres"><span>Home</span></a>
+  <a href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
 </div>
 <div class="genre" ng-repeat="subgenre in subgenres" title="{{subgenre.description}}"><a href="#/genres/{{genre.id}}/subgenres/{{subgenre.id}}/stations">{{subgenre.name}}</a></div>
