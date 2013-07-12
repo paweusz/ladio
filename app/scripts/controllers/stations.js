@@ -2,7 +2,13 @@
 
 angular.module('radioApp')
   .controller('StationsCtrl', function ($scope, $routeParams, Genres, Pls) {
+    var genreId = $routeParams.genreId;
+    var subGenreId = $routeParams.subGenreId;
+
+    $scope.genre = Genres.genre(genreId);
+    $scope.subGenre = Genres.subGenre(genreId, subGenreId);
     $scope.stations = Genres.stations($routeParams.genreId, $routeParams.subGenreId);
+
     $scope.currentStationId = null;
     $scope.streams = [];
 

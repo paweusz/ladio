@@ -1,4 +1,9 @@
 <div>
+  <a href="#/genres"><span>Genres</span></a>
+  <a href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
+  <a href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
+</div>
+<div>
   <div ng-repeat="stream in streams"><a href="{{stream.url}}" target="blank">{{stream.url}}</a></div>
 </div>
 <audio controls="controls" autoplay="autoplay">
