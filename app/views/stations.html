@@ -4,10 +4,10 @@
   <a href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
 </div>
 <div>
-  <div ng-repeat="stream in streams"><a href="{{stream.url}}" target="blank">{{stream.url}}</a></div>
+  <div ng-repeat="stream in streams"><a href="{{stream}}" target="blank">{{stream}}</a></div>
 </div>
 <audio controls="controls" autoplay="autoplay">
-  <source ng-repeat="stream in streams" src="{{stream.url}}"></source>
+  <source ng-repeat="stream in streams" src="{{stream}}"></source>
 </audio>
 <div class="station ng-class: stationCss()" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
   <div class="ctrl ng-class: playingCss()"></div>

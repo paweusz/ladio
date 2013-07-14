@@ -14,7 +14,6 @@ function parsePls(pls) {
 }
 
 function doGetPls(ref, res) {
-  console.log(ref);
   http.get(ref, function (http_res) {
     var data = "";
 

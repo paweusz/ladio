@@ -15,12 +15,29 @@ angular.module('radioApp')
     $scope.play = function() {
       var streamUrl = this.station.streamurl;
       console.debug('play ' + streamUrl);
-      if (streamUrl.match(/.pls$/)) {
-        $scope.streams = Pls.streams(streamUrl);
-      } else {
-        $scope.streams = [{url: streamUrl}];
+
+      function prepareStreams(streams, stream) {
+        streams.push(stream);
+        //Shoutcast server trick
+        if (stream.match(/\/$/)) {
+          streams.push(stream + ';');
+        } else {
+          streams.push(stream + '/;');
+        }
       }
-      
+
+      var streams = [];
+      if (streamUrl.match(/.pls$/)) {
+        Pls.streams(streamUrl, function(plsStreams) {
+          angular.forEach(plsStreams, function(plsStream) {
+            prepareStreams(streams, plsStream.url);
+          });
+        });
+      } else {
+        prepareStreams(streams, streamUrl);
+      }
+      $scope.streams = streams;      
+
       $scope.currentStationId = this.station.id;
     };
 
