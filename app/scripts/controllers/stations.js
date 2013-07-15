@@ -8,6 +8,8 @@ angular.module('radioApp')
     $scope.genre = Genres.genre(genreId);
     $scope.subGenre = Genres.subGenre(genreId, subGenreId);
     $scope.stations = Genres.stations($routeParams.genreId, $routeParams.subGenreId);
+    $scope.isGenre = true;
+    $scope.isSubGenre = true;
 
     $scope.currentStationId = null;
     $scope.streams = [];
@@ -41,6 +43,11 @@ angular.module('radioApp')
       $scope.currentStationId = this.station.id;
     };
 
+    $scope.stop = function() {
+      var streamUrl = this.station.streamurl;
+      console.debug('stop ' + streamUrl);
+    };
+    
     $scope.playingCss = function() {
       return $scope.currentStationId === this.station.id ? 'playing' : '';
     };

@@ -1,8 +1,4 @@
-<div id="breadcrumbs">
-  <a href="#/genres"><span>Genres</span></a>
-  <a href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
-  <a href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
-</div>
+<ng-include src="'/views/breadcrumbs.html'"></ng-include>
 <div>
   <div ng-repeat="stream in streams"><a href="{{stream}}" target="blank">{{stream}}</a></div>
 </div>
@@ -10,7 +6,7 @@
   <source ng-repeat="stream in streams" src="{{stream}}"></source>
 </audio>
 <div class="station ng-class: stationCss()" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
-  <div class="ctrl ng-class: playingCss()"></div>
+  <div class="ctrl ng-class: playingCss()" ng-click="stop()"></div>
   <div class="name" ng-click="play()"><span>{{station.name}}</span></div>
   <div><span class="url"><a href="{{station.website}}" target="blank">{{station.website}}</a></span></div>
   <div><span class="url"><a href="{{station.streamurl}}" target="blank">Play in external app</a></span></div>
