@@ -2,9 +2,7 @@
 <div>
   <div ng-repeat="stream in streams"><a href="{{stream}}" target="blank">{{stream}}</a></div>
 </div>
-<audio controls="controls" autoplay="autoplay">
-  <source ng-repeat="stream in streams" src="{{stream}}"></source>
-</audio>
+<div rd-player="streams"></div>
 <div class="station ng-class: stationCss()" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
   <div class="ctrl ng-class: playingCss()" ng-click="stop()"></div>
   <div class="name" ng-click="play()"><span>{{station.name}}</span></div>
