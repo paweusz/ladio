@@ -3,12 +3,16 @@
 angular.module('radioApp')
   .factory('Genres', function($resource, $q) {
       var genresResult;
+      var backend = {
+        host: 'localhost',
+        port: 9001
+      };
 
       function genresPromise() {
         var genresDeferred = $q.defer();
 
         if (!genresResult) {
-          $resource('/genres').query(function(genresRs) {
+          $resource('http://:host\\::port/genres', backend).query(function(genresRs) {
             genresResult = {
               asArray: [],
               asHash: {}
@@ -38,7 +42,7 @@ angular.module('radioApp')
               asHash: {}
             };
             genre.subGenres = subGenres;
-            $resource('/genres/:genreId/subgenres').query(
+            $resource('http://:host\\::port/genres/:genreId/subgenres', backend).query(
               {genreId:genreId}, function(subGenresRs) {
                 angular.forEach(subGenresRs, function(subGenre) {
                   subGenres.asArray.push(subGenre);
@@ -91,7 +95,7 @@ angular.module('radioApp')
           subGenresPromise(genreId).then(function(subGenres) {
             var subGenre = subGenres.asHash[subGenreId];
             if (!subGenre.stations) {
-              $resource('/genres/:genreId/subgenres/:subGenreId/stations').query(
+              $resource('http://:host\\::port/genres/:genreId/subgenres/:subGenreId/stations', backend).query(
                 {genreId: genreId, subGenreId: subGenreId}, function(stationsRs) {
                   subGenre.stations = stationsRs;
                   result.push.apply(result, subGenre.stations);
