@@ -6,5 +6,5 @@ angular.module('radioApp')
       streams: function(url, callbackFn) {
         return $resource('/streams').query({pls: url}, callbackFn);
       }
-    }
+    };
   });

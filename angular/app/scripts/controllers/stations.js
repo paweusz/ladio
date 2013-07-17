@@ -38,7 +38,7 @@ angular.module('radioApp')
       } else {
         prepareStreams(streams, streamUrl);
       }
-      $scope.streams = streams;      
+      $scope.streams = streams;
 
       $scope.currentStationId = this.station.id;
     };

@@ -2,8 +2,7 @@
   "name": "radio",
   "version": "0.0.0",
   "dependencies": {
-    "grunt-karma": "~0.4.5",
-    "express": "3.0.3"
+    "grunt-karma": "~0.4.5"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -27,8 +26,7 @@
     "matchdep": "~0.1.2",
     "connect-livereload": "~0.2.0",
     "grunt-google-cdn": "~0.2.0",
-    "grunt-ngmin": "~0.0.2",
-    "grunt-develop": "0.0.4"
+    "grunt-ngmin": "~0.0.2"
   },
   "engines": {
     "node": ">=0.8.0"
