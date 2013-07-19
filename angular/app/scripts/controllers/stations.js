@@ -5,9 +5,27 @@ angular.module('radioApp')
     var genreId = $routeParams.genreId;
     var subGenreId = $routeParams.subGenreId;
 
-    $scope.genre = Genres.genre(genreId);
-    $scope.subGenre = Genres.subGenre(genreId, subGenreId);
-    $scope.stations = Genres.stations($routeParams.genreId, $routeParams.subGenreId);
+    Genres.genre(genreId).then(function(genre) {
+      console.debug('Genre fetched. ' + genre.name);
+      $scope.genre = genre;
+    }, function(data) {
+      console.debug('Error fetching genre. ' + data.status);
+    });
+    
+    Genres.subGenre(genreId, subGenreId).then(function(subGenre) {
+      console.debug('Subgenre fetched. ' + subGenre.name);
+      $scope.subGenre = subGenre;
+    }, function(data) {
+      console.debug('Error fetching subgenre. ' + data.status);
+    });
+    
+    Genres.stations($routeParams.genreId, $routeParams.subGenreId).success(function(data) {
+      console.debug('Stations fetched.');
+      $scope.stations = data;
+    }).error(function(data, status) {
+      console.error('Error fetching stations data. ' + status);
+    });
+
     $scope.isGenre = true;
     $scope.isSubGenre = true;
 
@@ -30,10 +48,13 @@ angular.module('radioApp')
 
       var streams = [];
       if (streamUrl.match(/.pls$/)) {
-        Pls.streams(streamUrl, function(plsStreams) {
+        Pls.streams(streamUrl).success(function(plsStreams) {
+          console.debug('Pls fetched.');
           angular.forEach(plsStreams, function(plsStream) {
             prepareStreams(streams, plsStream.url);
           });
+        }).error(function(data, status) {
+          console.error('Error fetching pls data. ' + status);
         });
       } else {
         prepareStreams(streams, streamUrl);
