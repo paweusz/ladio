@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .factory('Genres', function($resource, $q) {
+  .factory('Genres', function($resource, $q, $http) {
       var genresResult;
       var backend = {
         host: 'localhost',
@@ -95,12 +95,16 @@ angular.module('radioApp')
           subGenresPromise(genreId).then(function(subGenres) {
             var subGenre = subGenres.asHash[subGenreId];
             if (!subGenre.stations) {
-              $resource('http://:host\\::port/genres/:genreId/subgenres/:subGenreId/stations', backend).query(
-                {genreId: genreId, subGenreId: subGenreId}, function(stationsRs) {
+              $http.get('http://' + backend.host + ':' + backend.port +
+                '/genres/' + genreId + '/subgenres/' + subGenreId + '/stations')
+                .success(function(stationsRs) {
+                  console.debug('Stations fetched.');
                   subGenre.stations = stationsRs;
                   result.push.apply(result, subGenre.stations);
+                })
+                .error(function(data) {
+                  console.error('Error fetching stations data. ' + data);
                 });
-              console.debug('got stations');
             } else {
               result.push.apply(result, subGenre.stations);
             }
