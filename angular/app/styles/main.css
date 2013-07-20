@@ -6,6 +6,10 @@ body {
   padding: 0;
 }
 
+.genres {
+  padding: 18px 0 0 18px;
+}
+
 .genre, .station {
   color: white;
   background-color: #5494a6;
@@ -17,7 +21,9 @@ body {
 .genre {
   padding: 25px;
   border-radius: 25px;
-  margin: 0px 0px 18px 18px;
+  margin: 0px 18px 18px 0px;
+  width: 130px;
+  text-align: center;
 }
 
 .genre a {
@@ -98,7 +104,7 @@ body {
 }
 
 #content {
-  margin-top: 58px;
+  margin-top: 49px;
 }
 
 ul#breadcrumbs {
