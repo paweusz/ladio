@@ -46,15 +46,23 @@ angular.module('radioApp')
         },
 
         stations: function(genreId, subGenreId) {
+          var options = {cache: true};
+          var stationsPrms;
           if (subGenreId) {
-            return $http.get(url + '/genres/' + genreId + '/subgenres/' + subGenreId + '/stations', {
-              cache: true
-            });
+            stationsPrms = $http.get(url + '/genres/' + genreId + '/subgenres/' + subGenreId + '/stations', options);
           } else {
-            return $http.get(url + '/genres/' + genreId + '/stations', {
-              cache: true
-            });
+            stationsPrms = $http.get(url + '/genres/' + genreId + '/stations', options);
           }
+          return stationsPrms.then(function(data) {
+            var result = [];
+            var stations = data.data;
+            for (var i = 0; i < stations.length; i++) {
+              if (stations[i].status === 1) {
+                result.push(stations[i]);
+              }
+            }
+            return result;
+          });
         }
         
       };

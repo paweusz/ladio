@@ -19,11 +19,12 @@ angular.module('radioApp')
       console.error('Error fetching subgenres data. ' + status);
     });
 
-    Genres.stations($scope.genreId).success(function(data) {
+    Genres.stations($scope.genreId).then(function(stations) {
       console.debug('Stations fetched.');
-      $scope.stations = data;
-    }).error(function(data, status) {
-      console.error('Error fetching stations data. ' + status);
+      $scope.stations = stations;
+    }, function(data) {
+      console.error('Error fetching stations data. ' + data.status);
     });
+
 
   });
