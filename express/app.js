@@ -38,6 +38,7 @@ app.all('*', function (req, res, next) {
 
 app.get('/genres', dirble.genres);
 app.get('/genres/:genreId/subgenres', dirble.subGenres);
+app.get('/genres/:genreId/stations', dirble.stations);
 app.get('/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
 app.get('/streams', pls.streams);
 

@@ -18,7 +18,7 @@ angular.module('radioApp')
             var genresRs = data.data;
             for (var i = 0; i < genresRs.length; i++) {
               var genre = genresRs[i];
-              if (genre.id == genreId) {
+              if (genre.id === genreId) {
                 return genre;
               }
             }
@@ -37,7 +37,7 @@ angular.module('radioApp')
             var subGenresRs = data.data;
             for (var i = 0; i < subGenresRs.length; i++) {
               var subGenre = subGenresRs[i];
-              if (subGenre.id == subGenreId) {
+              if (subGenre.id === subGenreId) {
                 return subGenre;
               }
             }
@@ -46,9 +46,15 @@ angular.module('radioApp')
         },
 
         stations: function(genreId, subGenreId) {
-          return $http.get(url + '/genres/' + genreId + '/subgenres/' + subGenreId + '/stations', {
-            cache: true
-          });
+          if (subGenreId) {
+            return $http.get(url + '/genres/' + genreId + '/subgenres/' + subGenreId + '/stations', {
+              cache: true
+            });
+          } else {
+            return $http.get(url + '/genres/' + genreId + '/stations', {
+              cache: true
+            });
+          }
         }
         
       };

@@ -2,8 +2,8 @@
 
 angular.module('radioApp')
   .controller('StationsCtrl', function ($scope, $routeParams, Genres, Pls) {
-    var genreId = $routeParams.genreId;
-    var subGenreId = $routeParams.subGenreId;
+    var genreId = parseInt($routeParams.genreId, 10);
+    var subGenreId = parseInt($routeParams.subGenreId, 10);
 
     Genres.genre(genreId).then(function(genre) {
       console.debug('Genre fetched. ' + genre.name);
@@ -19,7 +19,7 @@ angular.module('radioApp')
       console.debug('Error fetching subgenre. ' + data.status);
     });
     
-    Genres.stations($routeParams.genreId, $routeParams.subGenreId).success(function(data) {
+    Genres.stations($routeParams.subGenreId).success(function(data) {
       console.debug('Stations fetched.');
       $scope.stations = data;
     }).error(function(data, status) {

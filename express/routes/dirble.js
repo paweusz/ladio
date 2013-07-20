@@ -26,6 +26,10 @@ exports.subGenres = function(req, res) {
 };
 
 exports.stations = function(req, res) {
-  doGetJson('/stations/apikey/' + apiKey + '/id/' + req.params.subgenreId, res);
+  var genreId = req.params.subgenreId;
+  if (!genreId) {
+    genreId = req.params.genreId;
+  }
+  doGetJson('/stations/apikey/' + apiKey + '/id/' + genreId, res);
 };
 

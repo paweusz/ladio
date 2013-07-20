@@ -1,7 +1,4 @@
 <ng-include src="'/views/breadcrumbs.html'"></ng-include>
-<div>
-  <div ng-repeat="stream in streams"><a href="{{stream}}" target="blank">{{stream}}</a></div>
-</div>
 <div rd-player="streams"></div>
 <div class="station ng-class: stationCss()" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
   <div class="ctrl ng-class: playingCss()" ng-click="stop()"></div>
