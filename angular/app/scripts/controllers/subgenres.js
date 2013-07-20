@@ -2,6 +2,7 @@
 
 angular.module('radioApp')
   .controller('SubGenresCtrl', function ($scope, $routeParams, Genres) {
+
     var genreId = parseInt($routeParams.genreId, 10);
 
     Genres.genre(genreId).then(function(genre) {
@@ -25,6 +26,4 @@ angular.module('radioApp')
       console.error('Error fetching stations data. ' + status);
     });
 
-    $scope.isGenre = true;
-    $scope.isSubGenre = false;
   });

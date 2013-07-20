@@ -1,6 +1,6 @@
 <div id="breadcrumbs">
   <a href="#/genres"><span>Genres</span></a>
-  <a ng-show="isGenre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
-  <a ng-show="isSubGenre" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
+  <a ng-show="genre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
+  <a ng-show="subGenre" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
 </div>
 

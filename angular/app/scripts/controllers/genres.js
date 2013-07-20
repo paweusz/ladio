@@ -2,6 +2,7 @@
 
 angular.module('radioApp')
   .controller('GenresCtrl', function ($scope, Genres) {
+
     Genres.genres().success(function(data) {
       console.debug('Genres fetched.');
       $scope.genres = data;
@@ -9,6 +10,4 @@ angular.module('radioApp')
       console.error('Error fetching genres data. ' + status);
     });
 
-    $scope.isGenre = false;
-    $scope.isSubGenre = false;
   });

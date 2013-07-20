@@ -2,6 +2,7 @@
 
 angular.module('radioApp')
   .controller('StationsCtrl', function ($scope, $routeParams, Genres, Pls) {
+
     var genreId = parseInt($routeParams.genreId, 10);
     var subGenreId = parseInt($routeParams.subGenreId, 10);
 
@@ -25,9 +26,6 @@ angular.module('radioApp')
     }).error(function(data, status) {
       console.error('Error fetching stations data. ' + status);
     });
-
-    $scope.isGenre = true;
-    $scope.isSubGenre = true;
 
     $scope.currentStationId = null;
     $scope.streams = [];
