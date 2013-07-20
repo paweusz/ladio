@@ -1,9 +1,11 @@
 <ng-include src="'/views/breadcrumbs.html'"></ng-include>
-<div class="genre" ng-repeat="subgenre in subgenres" title="{{subgenre.description}}"><a href="#/genres/{{genre.id}}/subgenres/{{subgenre.id}}/stations">{{subgenre.name}}</a></div>
-<div rd-player="streams"></div>
-<div class="station ng-class: stationCss()" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
-  <div class="ctrl ng-class: playingCss()" ng-click="stop()"></div>
-  <div class="name" ng-click="play()"><span>{{station.name}}</span></div>
-  <div><span class="url"><a href="{{station.website}}" target="blank">{{station.website}}</a></span></div>
-  <div><span class="url"><a href="{{station.streamurl}}" target="blank">Play in external app</a></span></div>
+<div id="content">
+  <div class="genre" ng-repeat="subgenre in subgenres" title="{{subgenre.description}}"><a href="#/genres/{{genre.id}}/subgenres/{{subgenre.id}}/stations">{{subgenre.name}}</a></div>
+  <div rd-player="streams"></div>
+  <div class="station ng-class: stationCss()" ng-repeat="station in stations" title="{{station.country}}&nbsp;{{station.bitrate}}">
+    <div class="ctrl ng-class: playingCss()" ng-click="stop()"></div>
+    <div class="name" ng-click="play()"><span>{{station.name}}</span></div>
+    <div><span class="url"><a href="{{station.website}}" target="blank">{{station.website}}</a></span></div>
+    <div><span class="url"><a href="{{station.streamurl}}" target="blank">Play in external app</a></span></div>
+  </div>
 </div>

@@ -1,6 +1,8 @@
-<div id="breadcrumbs">
-  <a href="#/genres"><span>Genres</span></a>
-  <a ng-show="genre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
-  <a ng-show="subGenre" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
+<div id="header">
+  <ul id="breadcrumbs">
+    <li><a href="#/genres"><span>Genres</span></a></li>
+    <li><a ng-show="genre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a></li>
+    <li><a ng-show="subGenre" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a></li>
+  </ul>
 </div>
 
