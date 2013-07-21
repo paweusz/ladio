@@ -31,8 +31,7 @@ angular.module('radioApp')
     $scope.streams = [];
 
     $scope.play = function() {
-      var streamUrl = this.station.streamurl;
-      console.debug('play ' + streamUrl);
+      console.debug('Play ' + this.station.name);
 
       function prepareStreams(streams, stream) {
         streams.push(stream);
@@ -43,23 +42,31 @@ angular.module('radioApp')
           streams.push(stream + '/;');
         }
       }
-
-      var streams = [];
-      if (streamUrl.match(/.pls$/)) {
-        Pls.streams(streamUrl).success(function(plsStreams) {
-          console.debug('Pls fetched.');
-          angular.forEach(plsStreams, function(plsStream) {
-            prepareStreams(streams, plsStream.url);
+      
+      function playStreams(streamUrl) {
+        var streams = [];
+        if (streamUrl.match(/.pls$/)) {
+          Pls.streams(streamUrl).success(function(plsStreams) {
+            console.debug('Pls fetched.');
+            angular.forEach(plsStreams, function(plsStream) {
+              prepareStreams(streams, plsStream.url);
+            });
+          }).error(function(data, status) {
+            console.error('Error fetching pls data. ' + status);
           });
-        }).error(function(data, status) {
-          console.error('Error fetching pls data. ' + status);
-        });
-      } else {
-        prepareStreams(streams, streamUrl);
+        } else {
+          prepareStreams(streams, streamUrl);
+        }
+        return streams;
       }
-      $scope.streams = streams;
-
-      $scope.currentStationId = this.station.id;
+      
+      if ($scope.currentStationId !== this.station.id) {
+        $scope.streams = playStreams(this.station.streamurl);
+        $scope.currentStationId = this.station.id;
+      } else {
+        $scope.streams = [];
+        $scope.currentStationId = null;
+      }
     };
 
     $scope.stop = function() {
