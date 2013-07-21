@@ -5,7 +5,7 @@
     <div rd-player="streams"></div>
 
     <div ng-click="play()" class="station ng-class:stationCss()" ng-repeat="station in stations" title="{{station.name}}">
-      <div class="name"><span>{{station.name}}</span></div>
+      <div class="name">{{station.name}}</div>
       <div class="panel" ng-show="isPanelVisible()">
         <div><span><a href="{{station.website}}" target="blank">{{station.website}}</a></span></div>
         <div><span>Country: {{station.country}}</span></div>
