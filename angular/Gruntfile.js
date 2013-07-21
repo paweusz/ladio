@@ -37,16 +37,23 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
-      livereload: {
+      js: {
+        options: {
+          livereload: LIVERELOAD_PORT
+        },
+        files: [
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'
+        ],
+        tasks: ['jshint']
+      },
+      html: {
         options: {
           livereload: LIVERELOAD_PORT
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: ['jshint']
+        ]
       },
       sass: {
         options: {

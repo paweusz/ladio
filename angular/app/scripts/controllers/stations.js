@@ -67,12 +67,19 @@ angular.module('radioApp')
       console.debug('stop ' + streamUrl);
     };
     
-    $scope.playingCss = function() {
-      return $scope.currentStationId === this.station.id ? 'playing' : '';
-    };
-
     $scope.stationCss = function() {
-      return this.station.status === 0 ? 'disabled' : '';
+      var classes = [];
+      if (this.station.status === 0) {
+        classes.push('disabled');
+      }
+      if ($scope.currentStationId === this.station.id) {
+        classes.push('playing');
+      }
+      return classes.join(' ');
+    };
+    
+    $scope.isPanelVisible = function() {
+      return false;
     };
 
   });

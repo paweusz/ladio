@@ -1,3 +1,6 @@
+$playing-color-bgn: #f7914f;
+$playing-color-stp: #d66229;
+
 body {
   background: #fafafa;
   font-family: Gill Sans,sans-serif;
@@ -42,6 +45,8 @@ body {
   border-radius: 15px;
   padding: 15px;
   margin: 0px 10px 10px 0px;
+  width: 130px;
+  cursor: pointer;
 
   &.disabled {
     background-color: #d6d6d6;
@@ -51,30 +56,20 @@ body {
     }
   }
 
-  .url {
-    font-size: 12px;
-  }
-
-  .name {
-    background-image: url('/styles/play.png');
-    background-repeat: no-repeat;  
-    padding-left: 22px;
-    background-position: 0 50%;
-    margin-bottom: 5px;
-    cursor: pointer;
-  }
-
-  .ctrl.playing {
-    min-width: 48px;
-    min-height: 48px;
-    background-image: url("/styles/speaker.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-bottom: 10px;
-
+  &.playing {
     animation-name: playing;
-    animation-duration: 6s;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
+    -webkit-animation-name: playing;
+    -webkit-animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+
+    background-color: $playing-color-bgn;
+    background-image: linear-gradient(to bottom right, $playing-color-bgn, $playing-color-stp);
+  }
+
+  .panel {
+    font-size: 12px;
   }
 
 }
@@ -84,16 +79,34 @@ body {
     transform: scale(1, 1);
   }
 
-  5% {
-    transform: scale(1.2, 1.2);
+  10% {
+    transform: scale(0.9, 0.9);
   }
 
-  10% {
+  20% {
     transform: scale(1, 1);
   }
 
   to {
     transform: scale(1, 1);
+  }
+}
+
+@-webkit-keyframes playing {
+  from {
+    -webkit-transform: scale(1, 1);
+  }
+
+  10% {
+    -webkit-transform: scale(0.9, 0.9);
+  }
+
+  20% {
+    -webkit-transform: scale(1, 1);
+  }
+
+  to {
+    -webkit-transform: scale(1, 1);
   }
 }
 
