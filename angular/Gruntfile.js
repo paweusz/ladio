@@ -43,11 +43,19 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         tasks: ['jshint']
+      },
+      sass: {
+        options: {
+          livereload: LIVERELOAD_PORT
+        },
+        files: [
+          '<%= yeoman.app %>/styles/{,*/}*.scss',
+        ],
+        tasks: ['compass']
       }
     },
     connect: {
@@ -235,7 +243,7 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist'
+        'coffee:dist', 'jshint', 'compass'
       ],
       test: [
         'coffee'
@@ -273,6 +281,14 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/scripts.js': [
             '<%= yeoman.dist %>/scripts/scripts.js'
           ]
+        }
+      }
+    },
+    compass: {
+      dev: {
+        options: {
+          sassDir: 'app/styles',
+          cssDir: 'app/css'
         }
       }
     }

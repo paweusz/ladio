@@ -10,6 +10,10 @@ body {
   padding: 18px 0 0 18px;
 }
 
+.stations {
+  padding: 10px 0px 0px 10px;
+}
+
 .genre, .station {
   color: white;
   background-color: #5494a6;
@@ -18,65 +22,61 @@ body {
   font-size: 16px;
 }
 
+.genre a, .station a {
+  color: white;
+}
+
 .genre {
   padding: 25px;
   border-radius: 25px;
   margin: 0px 18px 18px 0px;
   width: 130px;
   text-align: center;
-}
-
-.genre a {
-  text-decoration:none;
+  
+  a {
+    text-decoration:none;
+  }
 }
 
 .station {
   border-radius: 15px;
   padding: 15px;
   margin: 0px 10px 10px 0px;
-}
 
-.station.disabled {
-  background-color: #d6d6d6;
-}
+  &.disabled {
+    background-color: #d6d6d6;
+    .name {
+      pointer-events: none;
+      cursor: default;
+    }
+  }
 
-.genre a, .station a {
-  color: white;
-}
+  .url {
+    font-size: 12px;
+  }
 
-.stations {
-  padding: 10px 0px 0px 10px;
-}
+  .name {
+    background-image: url('/styles/play.png');
+    background-repeat: no-repeat;  
+    padding-left: 22px;
+    background-position: 0 50%;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
 
-.station .url {
-  font-size: 12px;
-}
+  .ctrl.playing {
+    min-width: 48px;
+    min-height: 48px;
+    background-image: url("/styles/speaker.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 10px;
 
-.station .name {
-  background-image: url('/styles/play.png');
-  background-repeat: no-repeat;  
-  padding-left: 22px;
-  background-position: 0 50%;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
+    animation-name: playing;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+  }
 
-.station.disabled .name {
-  pointer-events: none;
-  cursor: default;
-}
-
-.station .ctrl.playing {
-  min-width: 48px;
-  min-height: 48px;
-  background-image: url("/styles/speaker.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-bottom: 10px;
-
-  animation-name: playing;
-  animation-duration: 6s;
-  animation-iteration-count: infinite;
 }
 
 @keyframes playing {
@@ -117,19 +117,19 @@ ul#breadcrumbs {
   list-style-type:none;
   padding: 0;
   margin: 0;
+
+  li {
+    display: inline-block;
+    margin: 15px 0px 15px 15px;
+    a {
+      color: #fafafa;
+      text-decoration:none;
+      &:hover {
+        color: #5494a6;
+      }
+    }
+  }
+
 }
 
-ul#breadcrumbs li {
-  display: inline-block;
-  margin: 15px 0px 15px 15px;
-}
-
-ul#breadcrumbs li a {
-  color: #fafafa;
-  text-decoration:none;
-}
-
-ul#breadcrumbs li a:hover {
-  color: #5494a6;
-}
 
