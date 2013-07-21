@@ -30,14 +30,15 @@ body {
 }
 
 .genre {
-  padding: 25px;
   border-radius: 25px;
   margin: 0px 18px 18px 0px;
-  width: 130px;
-  text-align: center;
+  width: 147px;
   
   a {
+    padding: 25px;
     text-decoration:none;
+    text-align: center;
+    display: block;
   }
 }
 
