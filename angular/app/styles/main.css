@@ -33,7 +33,7 @@ body {
 .station {
   border-radius: 15px;
   padding: 15px;
-  margin: 0px 0px 8px 8px;
+  margin: 0px 10px 10px 0px;
 }
 
 .station.disabled {
@@ -42,6 +42,10 @@ body {
 
 .genre a, .station a {
   color: white;
+}
+
+.stations {
+  padding: 10px 0px 0px 10px;
 }
 
 .station .url {
