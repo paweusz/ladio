@@ -14,6 +14,10 @@ angular.module('radioApp', ['ngResource'])
         templateUrl: 'views/subgenres.html',
         controller: 'SubGenresCtrl'
       })
+      .when('/genres/:genreId/stations', {
+        templateUrl: 'views/stations.html',
+        controller: 'StationsCtrl'
+      })
       .when('/genres/:genreId/subgenres/:subGenreId/stations', {
         templateUrl: 'views/stations.html',
         controller: 'StationsCtrl'
