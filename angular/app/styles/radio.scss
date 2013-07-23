@@ -1,5 +1,6 @@
 $playing-color-bgn: #f7914f;
-$playing-color-stp: #d66229;
+$playing-color-end: #d66229;
+$station-color: #5494a6;
 
 body {
   background: #fafafa;
@@ -15,7 +16,7 @@ body {
 
 .genre, .station {
   color: white;
-  background-color: #5494a6;
+  background-color: $station-color;
   box-shadow: 5px 5px 10px rgb(63, 63, 63);
   float: left;    
   font-size: 16px;
@@ -68,7 +69,16 @@ body {
     -webkit-animation-iteration-count: infinite;
 
     background-color: $playing-color-bgn;
-    background-image: linear-gradient(to bottom right, $playing-color-bgn, $playing-color-stp);
+    background-image: linear-gradient(to bottom right, $playing-color-bgn, $playing-color-end);
+  }
+
+  &.suspended {
+    animation-name: suspended;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: suspended;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
   }
 
   .panel {
@@ -110,6 +120,34 @@ body {
 
   to {
     -webkit-transform: scale(1, 1);
+  }
+}
+
+@keyframes suspended {
+  from {
+    background-color: $station-color;
+  }
+
+  50% {
+    background-color: $playing-color-end;
+  }
+
+  to {
+    background-color: $station-color;
+  }
+}
+
+@-webkit-keyframes suspended {
+  from {
+    background-color: $station-color;
+  }
+
+  50% {
+    background-color: $playing-color-end;
+  }
+
+  to {
+    background-color: $station-color;
   }
 }
 

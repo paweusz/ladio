@@ -34,7 +34,12 @@ angular.module('radioApp')
       console.error('Error fetching stations data. ' + data.status);
     });
 
-    $scope.currentStationId = null;
+    var State = {
+      SUSPENDED: 0,
+      PLAYING: 1
+    };
+
+    $scope.currentStation = null;
     $scope.streams = [];
 
     $scope.play = function() {
@@ -67,18 +72,28 @@ angular.module('radioApp')
         return streams;
       }
       
-      if ($scope.currentStationId !== this.station.id) {
+      if (!$scope.currentStation || $scope.currentStation && $scope.currentStation.id !== this.station.id) {
         $scope.streams = playStreams(this.station.streamurl);
-        $scope.currentStationId = this.station.id;
+        $scope.currentStation = {
+          id: this.station.id,
+          state: State.SUSPENDED
+        };
       } else {
         $scope.streams = [];
-        $scope.currentStationId = null;
+        $scope.currentStation = null;
       }
     };
+    
+    $scope.playingStarted = function() {
+      $scope.currentStation.state = State.PLAYING;
+    };
+    
+    $scope.playingSuspended = function() {
+      $scope.currentStation.state = State.SUSPENDED;
+    };
 
-    $scope.stop = function() {
-      var streamUrl = this.station.streamurl;
-      console.debug('stop ' + streamUrl);
+    $scope.playingError = function() {
+      $scope.currentStation = null;
     };
     
     $scope.stationCss = function() {
@@ -86,8 +101,13 @@ angular.module('radioApp')
       if (this.station.status === 0) {
         classes.push('disabled');
       }
-      if ($scope.currentStationId === this.station.id) {
-        classes.push('playing');
+      var currentStation = $scope.currentStation;
+      if (currentStation && currentStation.id === this.station.id) {
+        if (currentStation.state === State.PLAYING) {
+          classes.push('playing');
+        } else if (currentStation.state === State.SUSPENDED) {
+          classes.push('suspended');
+        }
       }
       return classes.join(' ');
     };
