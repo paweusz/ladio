@@ -1,20 +1,28 @@
 var http = require("http");
+var cache = require("./cache");
+
 var apiKey = 'b4c059a7383415cb5295c9faec124b151213a788';
 var apiUrl = 'http://dirble.com/dirapi'
 
 function doGetJson(url, res) {
-  http.get(apiUrl + url, function (http_res) {
-    var data = "";
+  var cached = cache.get(url);
+  if (cached) {
+    res.json(cached);
+  } else {
+    http.get(apiUrl + url, function (http_res) {
+      var data = "";
 
-    http_res.on("data", function (chunk) {
-      data += chunk;
+      http_res.on("data", function (chunk) {
+        data += chunk;
+      });
+      
+      http_res.on("end", function () {
+        var resJson = JSON.parse(data);
+        cache.put(url, resJson);
+        res.json(resJson);
+      });
     });
-    
-    http_res.on("end", function () {
-      var resJson = JSON.parse(data);
-      res.json(resJson);
-    });
-  });
+  }
 }
 
 exports.genres = function(req, res) {
