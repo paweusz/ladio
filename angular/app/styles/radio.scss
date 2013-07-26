@@ -1,6 +1,8 @@
 $playing-color-bgn: #f7914f;
 $playing-color-end: #d66229;
 $station-color: #5494a6;
+$ruler-color: #4E4E4E;
+
 
 body {
   background: #fafafa;
@@ -206,7 +208,7 @@ ul {
 .ruler {
   background-color: #DFDFDF;
   padding: 10px;
-  color: #4E4E4E;
+  color: $ruler-color;
   font-size: 16px;
   margin-top: 10px;
   padding-left: 30px;
@@ -214,6 +216,7 @@ ul {
   li {
     margin: 0px 0px 0px 5px;
     a {
+      color: $ruler-color;
       &:hover {
         color: #5494a6;
       }
