@@ -1,11 +1,11 @@
 $playing-color-bgn: #f7914f;
 $playing-color-end: #d66229;
 $station-color: #5494a6;
-$ruler-color: #4E4E4E;
-
+$ruler-color: #FAFAFA;
+$ruler-bg-color: #888888;
 
 body {
-  background: #fafafa;
+  background-color: #000000;
   font-family: Gill Sans,sans-serif;
   font-size: 18px;
   margin: 0;
@@ -17,8 +17,27 @@ a {
   outline: 0;
 }
 
+#header {
+  /*background-image: -moz-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
+  background-image: -webkit-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
+  box-shadow: 0px 0px 10px rgb(63, 63, 63);*/
+  background-color: #4c4c4c;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+#content {
+  position: absolute;
+  top: 50px;
+  bottom: 0px;
+  overflow: auto;
+  width: 100%;
+}
+
 .genres, .stations {
-  padding: 18px 0 0 18px;
+  padding: 10px 0 0 10px;
   &:after {
     clear: both;
     content: "";
@@ -27,21 +46,18 @@ a {
 }
 
 .genre, .station {
-  color: white;
+  color: $ruler-color;
   background-color: $station-color;
-  box-shadow: 5px 5px 10px rgb(63, 63, 63);
   float: left;    
   font-size: 16px;
-  border-radius: 25px;
-  margin: 0px 18px 18px 0px;
-}
-
-.genre a, .station a {
-  color: white;
+  margin: 0px 1px 1px 0px;
+  a {
+    color: $ruler-color;
+  }
 }
 
 .genre {
-  width: 147px;
+  width: 166px;
 
   a {
     padding: 25px;
@@ -51,8 +67,7 @@ a {
 }
 
 .station {
-  width: 130px;
-  border-radius: 25px;
+  width: 146px;
   padding: 25px;
   cursor: pointer;
   
@@ -80,6 +95,7 @@ a {
     -webkit-animation-iteration-count: infinite;
 
     background-color: $playing-color-bgn;
+    color: #fafafa;
     background-image: linear-gradient(to bottom right, $playing-color-bgn, $playing-color-end);
   }
 
@@ -90,10 +106,67 @@ a {
     -webkit-animation-name: suspended;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
+    color: #fafafa;
   }
 
   .panel {
     font-size: 12px;
+  }
+
+}
+
+ul {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin: 5px 0px 5px 5px;
+  }
+
+  &#navigation {
+    font-size: 16px;
+    font-weight: bold;
+
+    li {
+      position: relative;
+      margin: 0px 0px 0px 15px;
+      padding: 15px 0;
+      a {
+        color: #fafafa;
+      }
+      &.selected div {
+        height: 10px;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+        background-color: $playing-color-bgn;
+      }
+    }
+  }
+}
+
+.ruler {
+  background-color: $ruler-bg-color;
+  padding: 10px;
+  color: $ruler-color;
+  font-size: 16px;
+  margin-top: 10px;
+  padding-left: 30px;
+
+  li {
+    margin: 0px 0px 0px 5px;
+    a {
+      color: $ruler-color;
+      &:hover {
+        color: #5494a6;
+      }
+    }
+  }
+  
+  li:first-child {
+    margin: 0;
   }
 
 }
@@ -162,74 +235,4 @@ a {
   }
 }
 
-#header {
-  background-image: -moz-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
-  background-image: -webkit-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
-  box-shadow: 0px 0px 10px rgb(63, 63, 63);
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-}
-
-#content {
-  position: absolute;
-  top: 50px;
-  bottom: 0px;
-  overflow: auto;
-  width: 100%;
-}
-
-ul {
-  list-style-type:none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    display: inline-block;
-    margin: 5px 0px 5px 5px;
-  }
-
-  &#navigation {
-    font-size: 16px;
-    font-weight: bold;
-
-    li {
-      margin: 15px 0px 15px 15px;
-      a {
-        color: #fafafa;
-        &:hover {
-          color: #5494a6;
-        }
-        &.selected {
-          color: $playing-color-bgn;
-        }
-      }
-    }
-  }
-}
-
-.ruler {
-  background-color: #DFDFDF;
-  padding: 10px;
-  color: $ruler-color;
-  font-size: 16px;
-  margin-top: 10px;
-  padding-left: 30px;
-
-  li {
-    margin: 0px 0px 0px 5px;
-    a {
-      color: $ruler-color;
-      &:hover {
-        color: #5494a6;
-      }
-    }
-  }
-  
-  li:first-child {
-    margin: 0;
-  }
-
-}
 
