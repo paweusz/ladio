@@ -26,9 +26,9 @@
     <![endif]-->
 
     <div id="header">
-      <ul id="navigation">
-        <li><a href="#/recent"><span>Recent</span></a></li>
-        <li><a href="#/genres"><span>Catalog</span></a></li>
+      <ul id="navigation" ng-controller="NavigationCtrl">
+        <li><a href="#/recent" class="ng-class:recentCss"><span>Recent</span></a></li>
+        <li><a href="#/genres" class="ng-class:genresCss"><span>Catalog</span></a></li>
       </ul>
     </div>
 
@@ -50,6 +50,7 @@
     <script src="scripts/services/genres.js"></script>
     <script src="scripts/services/pls.js"></script>
     <script src="scripts/directives/rdPlayer.js"></script>
+    <script src="scripts/controllers/navigation.js"></script>
     <script src="scripts/controllers/recent.js"></script>
     <script src="scripts/controllers/genres.js"></script>
     <script src="scripts/controllers/subgenres.js"></script>

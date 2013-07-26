@@ -200,6 +200,9 @@ ul {
         &:hover {
           color: #5494a6;
         }
+        &.selected {
+          color: $playing-color-bgn;
+        }
       }
     }
   }
