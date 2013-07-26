@@ -23,7 +23,7 @@ angular.module('radioApp')
     } else {
       $scope.subGenreId = $scope.genreId;
       $scope.subGenre = {
-        name: ''
+        name: 'Stations'
       };
     }
     
