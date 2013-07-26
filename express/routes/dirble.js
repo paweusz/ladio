@@ -16,6 +16,12 @@ function doGetJson(url, res) {
         data += chunk;
       });
       
+      http_res.on('error',function(e) {
+        console.log("Error: " + e.message); 
+        console.log( e.stack );
+        res.json({});
+      });
+      
       http_res.on("end", function () {
         var resJson = JSON.parse(data);
         cache.put(url, resJson);

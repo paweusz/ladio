@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('GenresCtrl', function ($scope, Genres) {
+  .controller('HomeCtrl', function ($scope, Genres) {
 
     Genres.genres().success(function(data) {
       console.debug('Genres fetched.');

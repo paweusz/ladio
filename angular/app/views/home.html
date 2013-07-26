@@ -1,5 +1,7 @@
 <ng-include src="'/views/breadcrumbs.html'"></ng-include>
 <div id="content">
+  <div class="expander">Favourites</div>
+  <div class="expander">Genres</div>
   <div class="genres">  
     <div class="genre" ng-repeat="genre in genres" title="{{genre.description}}"><a href="#/genres/{{genre.id}}/subgenres">{{genre.name}}</a></div>
   </div>
