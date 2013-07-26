@@ -10,4 +10,11 @@ angular.module('radioApp')
       console.error('Error fetching genres data. ' + status);
     });
 
+    Genres.stations(1).then(function(stations) {
+      console.debug('Stations fetched.');
+      $scope.stations = stations;
+    }, function(data) {
+      console.error('Error fetching stations data. ' + data.status);
+    });
+
   });
