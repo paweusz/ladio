@@ -4,11 +4,15 @@ angular.module('radioApp', ['ngResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        redirectTo: '/home'
+        redirectTo: '/recent'
       })
-      .when('/home', {
-        templateUrl: 'views/home.html',
-        controller: 'HomeCtrl'
+      .when('/recent', {
+        templateUrl: 'views/recent.html',
+        controller: 'RecentCtrl'
+      })
+      .when('/genres', {
+        templateUrl: 'views/genres.html',
+        controller: 'GenresCtrl'
       })
       .when('/genres/:genreId/subgenres', {
         templateUrl: 'views/subgenres.html',

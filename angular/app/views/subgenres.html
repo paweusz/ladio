@@ -1,6 +1,6 @@
-<ng-include src="'/views/breadcrumbs.html'"></ng-include>
 <div id="content">
 
+  <ng-include src="'/views/partials/breadcrumbs.html'"></ng-include>
   <div class="genres">  
     <div class="genre" title="Stations in this genre"><a href="#/genres/{{genre.id}}/stations">Stations</a></div>
     <div class="genre" ng-repeat="subgenre in subgenres" title="{{subgenre.description}}"><a href="#/genres/{{genre.id}}/subgenres/{{subgenre.id}}/stations">{{subgenre.name}}</a></div>

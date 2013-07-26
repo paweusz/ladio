@@ -10,6 +10,10 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration:none;
+}
+
 .genres, .stations {
   padding: 18px 0 0 18px;
   &:after {
@@ -38,7 +42,6 @@ body {
 
   a {
     padding: 25px;
-    text-decoration:none;
     text-align: center;
     display: block;
   }
@@ -171,35 +174,55 @@ body {
   top: 50px;
   bottom: 0px;
   overflow: auto;
+  width: 100%;
 }
 
-ul#breadcrumbs {
-  font-size: 16px;
-  font-weight: bold;
+ul {
   list-style-type:none;
   padding: 0;
   margin: 0;
 
   li {
     display: inline-block;
-    margin: 15px 0px 15px 15px;
+    margin: 5px 0px 5px 5px;
+  }
+
+  &#navigation {
+    font-size: 16px;
+    font-weight: bold;
+
+    li {
+      margin: 15px 0px 15px 15px;
+      a {
+        color: #fafafa;
+        &:hover {
+          color: #5494a6;
+        }
+      }
+    }
+  }
+}
+
+.ruler {
+  background-color: #DFDFDF;
+  padding: 10px;
+  color: #4E4E4E;
+  font-size: 16px;
+  margin-top: 10px;
+  padding-left: 30px;
+
+  li {
+    margin: 0px 0px 0px 5px;
     a {
-      color: #fafafa;
-      text-decoration:none;
       &:hover {
         color: #5494a6;
       }
     }
   }
+  
+  li:first-child {
+    margin: 0;
+  }
 
-}
-
-.expander {
-  background-color: #DFDFDF;
-  padding: 5px;
-  color: #4E4E4E;
-  font-size: 16px;
-  margin-top: 10px;
-  padding-left: 35px;
 }
 
