@@ -26,13 +26,12 @@ div.emph {
   position: absolute;
   bottom: 0px;
   background-color: $playing-color-bgn;
+  background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+  background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
   display: none;
 }
 
 #header {
-  /*background-image: -moz-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
-  background-image: -webkit-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
-  box-shadow: 0px 0px 10px rgb(63, 63, 63);*/
   background-color: #4c4c4c;
   position: absolute;
   left: 0;
