@@ -170,28 +170,34 @@ ul {
 @keyframes suspended {
   from {
     background-color: $station-color;
+    background-image: none;
   }
 
   50% {
     background-color: $playing-color-end;
+    background-image: none;
   }
 
   to {
     background-color: $station-color;
+    background-image: none;
   }
 }
 
 @-webkit-keyframes suspended {
   from {
     background-color: $station-color;
+    background-image: none;
   }
 
   50% {
     background-color: $playing-color-end;
+    background-image: none;
   }
 
   to {
     background-color: $station-color;
+    background-image: none;
   }
 }
 
