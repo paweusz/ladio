@@ -96,11 +96,11 @@ div.emph {
     }
   }
 
-  &.playing div.emph {
-    display: block;
+  &.playing {
+    background-color: $playing-color-end;
   }
 
-  &.suspended div.emph {
+  &.suspended {
     display: block;
     animation-name: suspended;
     animation-duration: 1s;
@@ -170,34 +170,28 @@ ul {
 @keyframes suspended {
   from {
     background-color: $station-color;
-    background-image: none;
   }
 
   50% {
     background-color: $playing-color-end;
-    background-image: none;
   }
 
   to {
     background-color: $station-color;
-    background-image: none;
   }
 }
 
 @-webkit-keyframes suspended {
   from {
     background-color: $station-color;
-    background-image: none;
   }
 
   50% {
     background-color: $playing-color-end;
-    background-image: none;
   }
 
   to {
     background-color: $station-color;
-    background-image: none;
   }
 }
 
