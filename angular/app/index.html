@@ -25,21 +25,29 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <div id="header">
-      <ul id="navigation" ng-controller="NavigationCtrl">
-        <li class="ng-class:recentCss">
-          <a href="#/recent">Recent</a>
-          <div class="emph"></div>
-        </li>
-        <li class="ng-class:genresCss">
-          <a href="#/genres">Catalog</a>
-          <div class="emph"></div>
-        </li>
-      </ul>
-    </div>
+    <div ng-controller="PlayerCtrl">
+      <div id="header">
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+        <ul id="navigation" ng-controller="NavigationCtrl">
+          <li class="ng-class:recentCss">
+            <a href="#/recent">Recent</a>
+            <div class="emph"></div>
+          </li>
+          <li class="ng-class:genresCss">
+            <a href="#/genres">Catalog</a>
+            <div class="emph"></div>
+          </li>
+        </ul>
+
+        <div rd-player="streams" 
+          onPlayingStarted="playingStarted()" onPlayingError="playingError()"
+          onPlayingSuspended="playingSuspended()"></div>
+
+      </div>
+
+      <!-- Add your site or application content here -->
+      <div class="container" ng-view=""></div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -56,6 +64,7 @@
     <script src="scripts/services/genres.js"></script>
     <script src="scripts/services/pls.js"></script>
     <script src="scripts/directives/rdPlayer.js"></script>
+    <script src="scripts/controllers/player.js"></script>
     <script src="scripts/controllers/navigation.js"></script>
     <script src="scripts/controllers/recent.js"></script>
     <script src="scripts/controllers/genres.js"></script>

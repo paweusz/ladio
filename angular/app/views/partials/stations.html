@@ -1,10 +1,6 @@
   <div class="stations">
 
-    <div rd-player="streams" 
-      onPlayingStarted="playingStarted()" onPlayingError="playingError()"
-      onPlayingSuspended="playingSuspended()"></div>
-
-    <div ng-click="play()" class="station ng-class:stationCss()" ng-repeat="station in stations" title="{{station.name}}">
+    <div ng-click="play(station)" class="station ng-class:stationCss()" ng-repeat="station in stations" title="{{station.name}}">
 
       <div class="name">{{station.name}}</div>
 
