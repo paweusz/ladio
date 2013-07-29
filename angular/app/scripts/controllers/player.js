@@ -68,13 +68,9 @@ angular.module('radioApp')
       $scope.currentStation = null;
     };
     
-    $scope.$on('onStationChanged', function(event, station) {
+    $scope.play = function(station) {
       console.debug('Station changed to ' + station.name);
       playOrStop(station);
-    });
-
-    $scope.play = function(station) {
-      $scope.$emit('onStationChanged', station);
     };
 
     $scope.stationCss = function() {
