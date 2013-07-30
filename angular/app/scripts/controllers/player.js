@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('PlayerCtrl', function ($scope, Pls) {
+  .controller('PlayerCtrl', function ($scope, Pls, Stat) {
 
     $scope.State = {
       SUSPENDED: 0,
@@ -41,6 +41,7 @@ angular.module('radioApp')
         id: station.id,
         state: $scope.State.SUSPENDED
       };
+      Stat.stationPlayed(station);
     }
     
     function stop() {
