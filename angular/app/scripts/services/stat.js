@@ -2,7 +2,18 @@
 
 angular.module('radioApp')
   .service('Stat', function() {
-    var recentStat = [];
+    var recentKey = 'com.padio.recent';
+    
+    var recentStat = localStorage[recentKey];
+    if (!recentStat) {
+      recentStat = [];
+    } else {
+      recentStat = JSON.parse(recentStat);
+    }
+    
+    function updateStorage() {
+      localStorage[recentKey] = JSON.stringify(recentStat);
+    }
     
     function findStation(station) {
       for (var i = 0; i < recentStat.length; i++) {
@@ -22,6 +33,8 @@ angular.module('radioApp')
         }
         recentStat.unshift(station);
         recentStat = recentStat.slice(0, 6);
+
+        updateStorage();        
       },
 
       recentStations: function() {
