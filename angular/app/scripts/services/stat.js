@@ -31,10 +31,10 @@ angular.module('radioApp')
         if (statIdx !== -1) {
           recentStat.splice(statIdx, 1);
         }
-        recentStat.unshift(station);
-        recentStat = recentStat.slice(0, 6);
+        recentStat.unshift(angular.copy(station));
+        recentStat.splice(24, recentStat.length - 24);
 
-        updateStorage();        
+        updateStorage();
       },
 
       recentStations: function() {

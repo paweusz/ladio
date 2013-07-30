@@ -36,21 +36,19 @@ angular.module('radioApp')
     }
     
     function play(station) {
-      $scope.streams = playStreams(station.streamurl);
       $scope.currentStation = {
-        id: station.id,
+        station: station,
+        streams: playStreams(station.streamurl),
         state: $scope.State.SUSPENDED
       };
-      Stat.stationPlayed(station);
     }
     
     function stop() {
       $scope.currentStation = null;
-      $scope.streams = [];
     }
     
     function playOrStop(station) {
-      if (!$scope.currentStation || $scope.currentStation && $scope.currentStation.id !== station.id) {
+      if (!$scope.currentStation || $scope.currentStation && $scope.currentStation.station.id !== station.id) {
         play(station);
       } else {
         stop();
@@ -59,6 +57,7 @@ angular.module('radioApp')
     
     $scope.playingStarted = function() {
       $scope.currentStation.state = $scope.State.PLAYING;
+      Stat.stationPlayed($scope.currentStation.station);
     };
     
     $scope.playingSuspended = function() {
@@ -80,7 +79,7 @@ angular.module('radioApp')
         classes.push('disabled');
       }
       var currentStation = $scope.currentStation;
-      if (currentStation && currentStation.id === this.station.id) {
+      if (currentStation && currentStation.station.id === this.station.id) {
         if (currentStation.state === $scope.State.PLAYING) {
           classes.push('playing');
         } else if (currentStation.state === $scope.State.SUSPENDED) {
