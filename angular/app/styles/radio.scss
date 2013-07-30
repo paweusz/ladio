@@ -1,55 +1,91 @@
 $playing-color-bgn: #f7914f;
 $playing-color-end: #d66229;
 $station-color: #5494a6;
+$ruler-color: #FAFAFA;
+$ruler-bg-color: #888888;
 
 body {
-  background: #fafafa;
+  background-color: #353535;
   font-family: Gill Sans,sans-serif;
   font-size: 18px;
   margin: 0;
   padding: 0;
 }
 
+a {
+  text-decoration:none;
+  outline: 0;
+  &:hover {
+    color: $playing-color-bgn;
+  }
+}
+
+div.emph {
+  height: 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background-color: $playing-color-bgn;
+  background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+  background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+  display: none;
+}
+
+#header {
+  background-color: #4c4c4c;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+#content {
+  position: absolute;
+  top: 49px;
+  bottom: 0px;
+  overflow: auto;
+  width: 100%;
+}
+
 .genres, .stations {
-  padding: 18px 0 0 18px;
+  margin: 10px 0;
+  &:after {
+    clear: both;
+    content: "";
+    display: block;
+  }
 }
 
 .genre, .station {
-  color: white;
+  color: $ruler-color;
   background-color: $station-color;
-  box-shadow: 5px 5px 10px rgb(63, 63, 63);
   float: left;    
   font-size: 16px;
-  border-radius: 25px;
-  margin: 0px 18px 18px 0px;
-}
-
-.genre a, .station a {
-  color: white;
+  margin: 0px 1px 1px 0px;
+  width: 150px;
+  a {
+    color: $ruler-color;
+  }
 }
 
 .genre {
-  width: 147px;
-
   a {
     padding: 25px;
-    text-decoration:none;
     text-align: center;
     display: block;
   }
 }
 
 .station {
-  width: 130px;
-  border-radius: 25px;
-  padding: 25px;
   cursor: pointer;
+  position: relative;
   
   .name {
     text-overflow: ellipsis;
     text-align: center;
     overflow: hidden;
     height: 38px;
+    margin: 25px;
   }
 
   &.disabled {
@@ -61,24 +97,19 @@ body {
   }
 
   &.playing {
-    animation-name: playing;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    -webkit-animation-name: playing;
-    -webkit-animation-duration: 4s;
-    -webkit-animation-iteration-count: infinite;
-
-    background-color: $playing-color-bgn;
-    background-image: linear-gradient(to bottom right, $playing-color-bgn, $playing-color-end);
+    background-color: $playing-color-end;
   }
 
   &.suspended {
+    display: block;
     animation-name: suspended;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+    animation-timing-function: linear;
     -webkit-animation-name: suspended;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
   }
 
   .panel {
@@ -87,40 +118,53 @@ body {
 
 }
 
-@keyframes playing {
-  from {
-    transform: scale(1, 1);
+ul {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin: 5px 0px 5px 5px;
   }
 
-  10% {
-    transform: scale(0.9, 0.9);
-  }
+  &#navigation {
+    font-size: 16px;
+    font-weight: bold;
 
-  20% {
-    transform: scale(1, 1);
-  }
-
-  to {
-    transform: scale(1, 1);
+    li {
+      position: relative;
+      margin: 0px 0px 0px 15px;
+      padding: 15px 0;
+      a {
+        color: #fafafa;
+      }
+      &.selected div.emph {
+        display: block;
+      }
+    }
   }
 }
 
-@-webkit-keyframes playing {
-  from {
-    -webkit-transform: scale(1, 1);
+.ruler {
+  background-color: $ruler-bg-color;
+  padding: 10px;
+  color: $ruler-color;
+  font-size: 16px;
+  margin-top: 10px;
+  padding-left: 30px;
+
+  li {
+    margin: 0px 0px 0px 5px;
+    a {
+      color: $ruler-color;
+    }
+  }
+  
+  li:first-child {
+    margin: 0;
   }
 
-  10% {
-    -webkit-transform: scale(0.9, 0.9);
-  }
-
-  20% {
-    -webkit-transform: scale(1, 1);
-  }
-
-  to {
-    -webkit-transform: scale(1, 1);
-  }
 }
 
 @keyframes suspended {
@@ -149,41 +193,6 @@ body {
   to {
     background-color: $station-color;
   }
-}
-
-#header {
-  background-image: -moz-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
-  background-image: -webkit-linear-gradient(top, rgb(105, 105, 105) 0%, rgb(63, 63, 63) 100%);
-  box-shadow: 0px 0px 10px rgb(63, 63, 63);
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-}
-
-#content {
-  margin-top: 49px;
-}
-
-ul#breadcrumbs {
-  font-size: 16px;
-  font-weight: bold;
-  list-style-type:none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    display: inline-block;
-    margin: 15px 0px 15px 15px;
-    a {
-      color: #fafafa;
-      text-decoration:none;
-      &:hover {
-        color: #5494a6;
-      }
-    }
-  }
-
 }
 
 

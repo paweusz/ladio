@@ -3,7 +3,7 @@
 angular.module('radioApp')
   .factory('Genres', function($resource, $q, $http) {
 
-      var url = 'http://localhost:9001';
+      var url = 'http://notebook:9001';
 
       return {
 
