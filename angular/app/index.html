@@ -40,8 +40,11 @@
         </ul>
 
         <div rd-player="currentStation.streams" 
-          onPlayingStarted="playingStarted()" onPlayingError="playingError()"
+          onPlayingStarted="playingStarted()" 
+          onPlayingError="playingError()"
           onPlayingSuspended="playingSuspended()"></div>
+
+        <div id="station-info">{{currentStation.station.name}}</div>
 
       </div>
 
