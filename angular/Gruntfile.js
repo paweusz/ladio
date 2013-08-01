@@ -51,7 +51,7 @@ module.exports = function (grunt) {
           livereload: LIVERELOAD_PORT
         },
         files: [
-          '<%= yeoman.app %>/{,views/{,*/}*}*.html',
+          '<%= yeoman.app %>/{,views/{,partials/}}*.html',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       },
@@ -218,7 +218,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
+          src: ['*.html', 'views/*.html', 'views/partials/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
