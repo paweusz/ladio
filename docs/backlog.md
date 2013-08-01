@@ -5,8 +5,6 @@ This is product backlog for Padio.
 
 To do
 -----
-* Introduce play/stop controls and station name in the header
-
 * Make 'Catalog' tab remember last location so user don't have to travers
   whole directory to get to place where he was before.
 
@@ -30,6 +28,8 @@ To do
 
 In progress
 -----------
+* Introduce play/stop controls and station name in the header
+
 
 Done
 ----
