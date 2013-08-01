@@ -72,6 +72,8 @@ angular.module('radioApp')
       console.debug('Station changed to ' + station.name);
       playOrStop(station);
     };
+    
+    $scope.stop = stop;
 
     $scope.stationCss = function() {
       var classes = [];
@@ -80,6 +82,19 @@ angular.module('radioApp')
       }
       var currentStation = $scope.currentStation;
       if (currentStation && currentStation.station.id === this.station.id) {
+        if (currentStation.state === $scope.State.PLAYING) {
+          classes.push('playing');
+        } else if (currentStation.state === $scope.State.SUSPENDED) {
+          classes.push('suspended');
+        }
+      }
+      return classes.join(' ');
+    };
+    
+    $scope.stateCss = function() {
+      var classes = [];
+      var currentStation = $scope.currentStation;
+      if (currentStation) {
         if (currentStation.state === $scope.State.PLAYING) {
           classes.push('playing');
         } else if (currentStation.state === $scope.State.SUSPENDED) {

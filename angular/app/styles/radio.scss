@@ -44,6 +44,21 @@ div.emph {
     top: 15px;
     right: 15px;
     font-size: 16px;
+    text-shadow: 0 0 0.5em #FFF;
+    
+    #ctrl {
+    
+      &.playing {
+        background-color: white;
+        width: 23px;
+        height: 23px;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-right: 5px;
+      }
+    }
+    
   }
 }
 
