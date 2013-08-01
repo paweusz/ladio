@@ -12,6 +12,8 @@ To do
 
 * Home tab
 
+* Refresh UI (background img, station margin, button icons, header shadow)
+
 * Install application in Google Play. Also think out application name and change branding.
 
 * Favourites tab
