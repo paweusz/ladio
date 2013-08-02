@@ -64,6 +64,20 @@ div.emph {
         border-width: 11px 0 11px 22px;
         border-style: solid;
       }
+      
+      &.suspended {
+        width: 18px;
+        height: 18px;
+        border: 2px solid white;
+        animation-name: rotate;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        -webkit-animation-name: rotate;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+      }
 
     }
     
@@ -223,6 +237,26 @@ ul {
 
   to {
     background-color: $station-color;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(90deg);
   }
 }
 
