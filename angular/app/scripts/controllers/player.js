@@ -4,8 +4,16 @@ angular.module('radioApp')
   .controller('PlayerCtrl', function ($scope, Pls, Stat) {
 
     $scope.State = {
-      SUSPENDED: 0,
-      PLAYING: 1
+      STOPPED: 0,
+      SUSPENDED: 1,
+      PLAYING: 2,
+      ERROR: 3
+    };
+
+    $scope.currentStation = {
+      station: null,
+      streams: [],
+      state: $scope.State.STOPPED
     };
 
     function prepareStreams(streams, stream) {
@@ -36,23 +44,27 @@ angular.module('radioApp')
     }
     
     function play(station) {
-      $scope.currentStation = {
-        station: station,
-        streams: playStreams(station.streamurl),
-        state: $scope.State.SUSPENDED
-      };
+      var cs = $scope.currentStation;
+      cs.station = station;
+      cs.streams = playStreams(station.streamurl);
+      cs.state = $scope.State.SUSPENDED;
     }
     
     function stop() {
-      $scope.currentStation = null;
+      var cs = $scope.currentStation;
+      cs.state = $scope.State.STOPPED;
+      cs.streams = [];
     }
     
     function playOrStop(station) {
-      if (!$scope.currentStation || $scope.currentStation && $scope.currentStation.station.id !== station.id) {
-        play(station);
-      } else {
-        stop();
+      var cs = $scope.currentStation;
+      if (cs.station && cs.station.id === station.id) {//Clicked the same station
+        if (cs.state === $scope.State.PLAYING || cs.state === $scope.State.SUSPENDED) {
+          stop();
+          return;
+        }
       }
+      play(station);
     }
     
     $scope.playingStarted = function() {
@@ -65,7 +77,7 @@ angular.module('radioApp')
     };
 
     $scope.playingError = function() {
-      $scope.currentStation = null;
+      $scope.currentStation.state = $scope.State.ERROR;
     };
     
     $scope.play = function(station) {
@@ -80,12 +92,14 @@ angular.module('radioApp')
       if (this.station.status === 0) {
         classes.push('disabled');
       }
-      var currentStation = $scope.currentStation;
-      if (currentStation && currentStation.station.id === this.station.id) {
-        if (currentStation.state === $scope.State.PLAYING) {
+      var cs = $scope.currentStation;
+      if (cs.station && cs.station.id === this.station.id) {
+        if (cs.state === $scope.State.PLAYING) {
           classes.push('playing');
-        } else if (currentStation.state === $scope.State.SUSPENDED) {
+        } else if (cs.state === $scope.State.SUSPENDED) {
           classes.push('suspended');
+        } else if (cs.state === $scope.State.ERROR) {
+          classes.push('error');
         }
       }
       return classes.join(' ');
@@ -93,13 +107,13 @@ angular.module('radioApp')
     
     $scope.stateCss = function() {
       var classes = [];
-      var currentStation = $scope.currentStation;
-      if (currentStation) {
-        if (currentStation.state === $scope.State.PLAYING) {
-          classes.push('playing');
-        } else if (currentStation.state === $scope.State.SUSPENDED) {
-          classes.push('suspended');
-        }
+      var cs = $scope.currentStation;
+      if (cs.state === $scope.State.PLAYING) {
+        classes.push('playing');
+      } else if (cs.state === $scope.State.SUSPENDED) {
+        classes.push('suspended');
+      } else if (cs.state === $scope.State.ERROR) {
+        classes.push('error');
       }
       return classes.join(' ');
     };
