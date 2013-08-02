@@ -13,7 +13,7 @@ angular.module('radioApp')
     $scope.currentStation = {
       station: null,
       streams: [],
-      state: $scope.State.STOPPED
+      state: null
     };
 
     function prepareStreams(streams, stream) {
@@ -58,6 +58,9 @@ angular.module('radioApp')
     
     function playOrStop(station) {
       var cs = $scope.currentStation;
+      if (!station) {
+        station = cs.station;
+      }
       if (cs.station && cs.station.id === station.id) {//Clicked the same station
         if (cs.state === $scope.State.PLAYING || cs.state === $scope.State.SUSPENDED) {
           stop();
@@ -81,7 +84,6 @@ angular.module('radioApp')
     };
     
     $scope.play = function(station) {
-      console.debug('Station changed to ' + station.name);
       playOrStop(station);
     };
     
@@ -112,6 +114,8 @@ angular.module('radioApp')
         classes.push('playing');
       } else if (cs.state === $scope.State.SUSPENDED) {
         classes.push('suspended');
+      } else if (cs.state === $scope.State.STOPPED && cs.station) {
+        classes.push('stopped');
       } else if (cs.state === $scope.State.ERROR) {
         classes.push('error');
       }
