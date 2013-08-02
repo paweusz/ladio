@@ -44,8 +44,8 @@
           onPlayingError="playingError()"
           onPlayingSuspended="playingSuspended()"></div>
 
-        <div id="station-info">
-          <div id="ctrl" class="ng-class:stateCss()" ng-click="play()"></div>
+        <div id="station-info" class="ng-class:stateCss()" ng-click="play()">
+          <div id="ctrl"></div>
           <span>{{currentStation.station.name}}</span>
         </div>
 

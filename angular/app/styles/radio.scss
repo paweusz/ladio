@@ -40,45 +40,48 @@ div.emph {
   
   #station-info {
     position: absolute;
-    color: white;
     top: 15px;
     right: 15px;
     font-size: 16px;
+    color: white;
     text-shadow: 0 0 0.5em #FFF;
+    cursor: pointer;
     
     #ctrl {
-    
-      cursor: pointer;
       margin-right: 5px;
       display: inline-block;
       vertical-align: middle;
+    }
 
-      &.playing {
-        background-color: white;
-        width: 22px;
-        height: 22px;
-      }
+    &.playing #ctrl {
+      background-color: white;
+      width: 22px;
+      height: 22px;
+    }
 
-      &.stopped {
-        border-color: transparent transparent transparent white;
-        border-width: 11px 0 11px 22px;
-        border-style: solid;
-      }
-      
-      &.suspended {
-        width: 18px;
-        height: 18px;
-        border: 2px solid white;
-        animation-name: rotate;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        -webkit-animation-name: rotate;
-        -webkit-animation-duration: 1s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-      }
+    &.stopped #ctrl {
+      border-color: transparent transparent transparent white;
+      border-width: 11px 0 11px 22px;
+      border-style: solid;
+    }
+    
+    &.suspended #ctrl {
+      width: 18px;
+      height: 18px;
+      border: 2px solid white;
+      animation-name: rotate;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      -webkit-animation-name: rotate;
+      -webkit-animation-duration: 1s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+    }
 
+    &.error {
+      color: #FF0000;
+      text-shadow: 0 0 0.5em #FF0000;
     }
     
   }
