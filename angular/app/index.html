@@ -39,10 +39,10 @@
           </li>
         </ul>
 
-        <div rd-player="currentStation.streams" 
+        <audio rd-player="currentStation.streams" 
           onPlayingStarted="playingStarted()" 
           onPlayingError="playingError()"
-          onPlayingSuspended="playingSuspended()"></div>
+          onPlayingSuspended="playingSuspended()"></audio>
 
         <div id="station-info" class="ng-class:stateCss()" ng-click="play()">
           <div id="ctrl"></div>
