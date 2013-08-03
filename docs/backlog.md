@@ -32,7 +32,7 @@ To do
 
 In progress
 -----------
-
+* Bugfix: handling of paused station (causes suspended state)
 
 Done
 ----

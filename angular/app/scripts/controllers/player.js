@@ -5,7 +5,7 @@ angular.module('radioApp')
 
     $scope.State = {
       STOPPED: 0,
-      SUSPENDED: 1,
+      CONNECTING: 1,
       PLAYING: 2,
       ERROR: 3
     };
@@ -52,20 +52,20 @@ angular.module('radioApp')
       if (cs.station && cs.station.id === station.id) {//Clicked the same station
         switch (cs.state) {
         case $scope.State.PLAYING:
-        case $scope.State.SUSPENDED:
+        case $scope.State.CONNECTING:
           $scope.$broadcast('rd-player.pauseReq');
           cs.state = $scope.State.STOPPED;
           return;
         case $scope.State.STOPPED:
           $scope.$broadcast('rd-player.playReq');
-          cs.state = $scope.State.SUSPENDED;
+          cs.state = $scope.State.CONNECTING;
           return;
         }
       }
 
       //Prepare playing of new station
       cs.station = station;
-      cs.state = $scope.State.SUSPENDED;
+      cs.state = $scope.State.CONNECTING;
       cs.streams = playStreams(station.streamurl);
     }
     
@@ -74,10 +74,6 @@ angular.module('radioApp')
       Stat.stationPlayed($scope.currentStation.station);
     };
     
-    $scope.playingSuspended = function() {
-      $scope.currentStation.state = $scope.State.SUSPENDED;
-    };
-
     $scope.playingError = function() {
       $scope.currentStation.state = $scope.State.ERROR;
       $scope.currentStation.streams = null;
@@ -96,8 +92,8 @@ angular.module('radioApp')
       if (cs.station && cs.station.id === this.station.id) {
         if (cs.state === $scope.State.PLAYING) {
           classes.push('playing');
-        } else if (cs.state === $scope.State.SUSPENDED) {
-          classes.push('suspended');
+        } else if (cs.state === $scope.State.CONNECTING) {
+          classes.push('connecting');
         } else if (cs.state === $scope.State.ERROR) {
           classes.push('error');
         }
@@ -110,8 +106,8 @@ angular.module('radioApp')
       var cs = $scope.currentStation;
       if (cs.state === $scope.State.PLAYING) {
         classes.push('playing');
-      } else if (cs.state === $scope.State.SUSPENDED) {
-        classes.push('suspended');
+      } else if (cs.state === $scope.State.CONNECTING) {
+        classes.push('connecting');
       } else if (cs.state === $scope.State.STOPPED && cs.station) {
         classes.push('stopped');
       } else if (cs.state === $scope.State.ERROR) {
