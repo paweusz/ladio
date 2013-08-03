@@ -42,10 +42,6 @@ angular.module('radioApp')
           console.debug('Playing started.');
           scope.$apply(attrs.onplayingstarted);
         });
-        element.bind('suspend', function() {
-          console.debug('Playing suspended.');
-          scope.$apply(attrs.onplayingsuspended);
-        });
         element.bind('error', function() {
           console.debug('Playing error.');
           scope.$apply(attrs.onplayingerror);

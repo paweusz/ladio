@@ -65,7 +65,7 @@ div.emph {
       border-style: solid;
     }
     
-    &.suspended #ctrl {
+    &.connecting #ctrl {
       width: 18px;
       height: 18px;
       border: 2px solid white;
@@ -148,13 +148,13 @@ div.emph {
     background-color: $playing-color-end;
   }
 
-  &.suspended {
+  &.connecting {
     display: block;
-    animation-name: suspended;
+    animation-name: connecting;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    -webkit-animation-name: suspended;
+    -webkit-animation-name: connecting;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
@@ -215,7 +215,7 @@ ul {
 
 }
 
-@keyframes suspended {
+@keyframes connecting {
   from {
     background-color: $station-color;
   }
@@ -229,7 +229,7 @@ ul {
   }
 }
 
-@-webkit-keyframes suspended {
+@-webkit-keyframes connecting {
   from {
     background-color: $station-color;
   }

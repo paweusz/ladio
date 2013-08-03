@@ -33,10 +33,10 @@ To do
 In progress
 -----------
 
-
 Done
 ----
 * Introduce recenty played stations
 * Introduce play/stop controls and station name in the header
 * Bugfix: second click of play doesn't start station
+* Bugfix: handling of paused station (causes suspended state)
 
