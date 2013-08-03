@@ -5,8 +5,6 @@ This is product backlog for Padio.
 
 To do
 -----
-* Bugfix: second click of play doesn't start station
-
 * Refresh UI (background img, station margin, button icons, header shadow, stations layout in js)
 
 * Home tab
@@ -40,4 +38,5 @@ Done
 ----
 * Introduce recenty played stations
 * Introduce play/stop controls and station name in the header
+* Bugfix: second click of play doesn't start station
 
