@@ -5,16 +5,16 @@ This is product backlog for Padio.
 
 To do
 -----
-* Make 'Catalog' tab remember last location so user don't have to travers
-  whole directory to get to place where he was before.
+* Bugfix: second click of play doesn't start station
+
+* Refresh UI (background img, station margin, button icons, header shadow, stations layout in js)
 
 * Home tab
 
-* Refresh UI (background img, station margin, button icons, header shadow)
-
 * Install application in Google Play. Also think out application name and change branding.
 
-* Bugfix: second click of play doesn't start station
+* Make 'Catalog' tab remember last location so user don't have to travers
+  whole directory to get to place where he was before.
 
 * Favourites tab
 
