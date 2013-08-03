@@ -33,6 +33,7 @@ div.emph {
 
 #header {
   background-color: #4c4c4c;
+  box-shadow: 0 0 40px 10px #000;
   position: fixed;
   top: 0;
   left: 0;
@@ -144,6 +145,8 @@ div.emph {
 
   &.playing {
     background-color: $playing-color-end;
+    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%)  
   }
 
   &.connecting {
