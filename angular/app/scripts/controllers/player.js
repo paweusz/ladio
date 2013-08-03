@@ -12,8 +12,8 @@ angular.module('radioApp')
 
     $scope.currentStation = {
       station: null,
-      streams: [],
-      state: null
+      streams: null,
+      state: $scope.State.STOPPED
     };
 
     function prepareStreams(streams, stream) {
@@ -43,31 +43,30 @@ angular.module('radioApp')
       return streams;
     }
     
-    function play(station) {
-      var cs = $scope.currentStation;
-      cs.station = station;
-      cs.streams = playStreams(station.streamurl);
-      cs.state = $scope.State.SUSPENDED;
-    }
-    
-    function stop() {
-      var cs = $scope.currentStation;
-      cs.state = $scope.State.STOPPED;
-      cs.streams = [];
-    }
-    
     function playOrStop(station) {
       var cs = $scope.currentStation;
       if (!station) {
         station = cs.station;
       }
+
       if (cs.station && cs.station.id === station.id) {//Clicked the same station
-        if (cs.state === $scope.State.PLAYING || cs.state === $scope.State.SUSPENDED) {
-          stop();
+        switch (cs.state) {
+        case $scope.State.PLAYING:
+        case $scope.State.SUSPENDED:
+          $scope.$broadcast('rd-player.pauseReq');
+          cs.state = $scope.State.STOPPED;
+          return;
+        case $scope.State.STOPPED:
+          $scope.$broadcast('rd-player.playReq');
+          cs.state = $scope.State.SUSPENDED;
           return;
         }
       }
-      play(station);
+
+      //Prepare playing of new station
+      cs.station = station;
+      cs.state = $scope.State.SUSPENDED;
+      cs.streams = playStreams(station.streamurl);
     }
     
     $scope.playingStarted = function() {
@@ -81,14 +80,13 @@ angular.module('radioApp')
 
     $scope.playingError = function() {
       $scope.currentStation.state = $scope.State.ERROR;
+      $scope.currentStation.streams = null;
     };
     
     $scope.play = function(station) {
       playOrStop(station);
     };
     
-    $scope.stop = stop;
-
     $scope.stationCss = function() {
       var classes = [];
       if (this.station.status === 0) {
@@ -125,7 +123,5 @@ angular.module('radioApp')
     $scope.isPanelVisible = function() {
       return false;
     };
-
-    stop();
 
   });
