@@ -51,6 +51,10 @@ angular.module('radioApp')
           scope.$apply(attrs.onplayingerror);
         });
 
+        /*element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing Aprogress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
+          console.debug('Event debugger: ' + event.type);
+        });*/
+
         //Angular event handlers
         scope.$on('rd-player.pauseReq', function() {
           var audioTag = element[0];
