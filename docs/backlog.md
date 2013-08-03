@@ -16,6 +16,8 @@ To do
 
 * Search tab
 
+* Display currently played track
+
 * Switch to [IceCast](http://api.dir.xiph.org/experimental/full). Check first for possibility to add stations based on shoutcast servers.
 
 * Add station functionality
