@@ -48,26 +48,29 @@ div.emph {
     cursor: pointer;
     
     #ctrl {
-      margin-right: 5px;
-      display: inline-block;
-      vertical-align: middle;
+      position: absolute;
+      left: -32px;
+    }
+    
+    #name {
+      white-space: nowrap;
     }
 
     &.playing #ctrl {
       background-color: white;
-      width: 22px;
-      height: 22px;
+      width: 19px;
+      height: 19px;
     }
 
     &.stopped #ctrl {
       border-color: transparent transparent transparent white;
-      border-width: 11px 0 11px 22px;
+      border-width: 9px 0 10px 19px;
       border-style: solid;
     }
     
     &.connecting #ctrl {
-      width: 18px;
-      height: 18px;
+      width: 15px;
+      height: 15px;
       border: 2px solid white;
       animation-name: rotate;
       animation-duration: 1s;
