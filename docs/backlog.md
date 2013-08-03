@@ -5,8 +5,6 @@ This is product backlog for Padio.
 
 To do
 -----
-* Refresh UI (background img, station margin, button icons, header shadow, stations layout in js)
-
 * Home tab
 
 * Install application in Google Play. Also think out application name and change branding.
@@ -32,6 +30,8 @@ To do
 
 In progress
 -----------
+* Refresh UI (background img, station margin, button icons, header shadow, stations layout in js)
+
 
 Done
 ----
