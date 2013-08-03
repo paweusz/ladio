@@ -33,10 +33,10 @@ div.emph {
 
 #header {
   background-color: #4c4c4c;
-  position: absolute;
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
   
   #station-info {
     position: absolute;
@@ -88,11 +88,7 @@ div.emph {
 }
 
 #content {
-  position: absolute;
-  top: 49px;
-  bottom: 0px;
-  overflow: auto;
-  width: 100%;
+  margin-top: 59px;
 }
 
 .genres, .stations {
@@ -126,7 +122,6 @@ div.emph {
 
 .station {
   cursor: pointer;
-  position: relative;
   
   .name {
     text-overflow: ellipsis;
