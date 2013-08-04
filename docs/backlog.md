@@ -16,6 +16,8 @@ To do
 
 * Search tab
 
+* Bugfix: Playing stalls after computer wake up
+
 * Display currently played track
 
 * Switch to [IceCast](http://api.dir.xiph.org/experimental/full). Check first for possibility to add stations based on shoutcast servers.
@@ -32,7 +34,7 @@ To do
 
 In progress
 -----------
-* Refresh UI (background img, station margin, button icons, header shadow, stations layout in js)
+* Refresh UI (background img, station margin, +button icons, +header shadow, stations layout in js, alpha marker)
 
 
 Done
