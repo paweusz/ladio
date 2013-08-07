@@ -4,11 +4,10 @@
       <div ng-click="play(station)" class="station ng-class:stationCss()" ng-repeat="station in stations" title="{{station.name}}">
 
         <div class="name">{{station.name}}</div>
+        <div class="desc">{{station.bitrate}}&nbsp;{{station.country}}</div>
 
         <div class="panel" ng-show="isPanelVisible()">
           <div><span><a href="{{station.website}}" target="blank">{{station.website}}</a></span></div>
-          <div><span>Country: {{station.country}}</span></div>
-          <div><span>Bitrate: {{station.bitrate}}</span></div>
           <div><span><a href="{{station.streamurl}}" target="blank">Play in external app</a></span></div>
         </div>
       </div>
