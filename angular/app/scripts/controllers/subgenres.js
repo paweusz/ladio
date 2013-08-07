@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('SubGenresCtrl', function ($scope, $routeParams, Genres) {
+  .controller('SubGenresCtrl', function ($scope, $routeParams, $location, Genres) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);
 
@@ -18,5 +18,13 @@ angular.module('radioApp')
     }).error(function(data, status) {
       console.error('Error fetching subgenres data. ' + status);
     });
+
+    $scope.stations = function(subgenre) {
+      $location.path('/genres/' + $scope.genreId + '/stations');
+    };
+
+    $scope.select = function(subgenre) {
+      $location.path('/genres/' + $scope.genreId + '/subgenres/' + subgenre.id + '/stations');
+    };
 
   });

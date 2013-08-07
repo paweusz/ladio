@@ -122,30 +122,23 @@ div.emph {
   font-size: 16px;
   margin: 0px 1px 1px 0px;
   width: 159px;
+  height: 80px;
+  cursor: pointer;
   a {
     color: $ruler-color;
   }
 }
 
-.genre {
-  a {
-    padding: 25px;
-    text-align: center;
-    display: block;
-  }
+.name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 10px;
+  word-break: break-word;
+  max-height: 40px;
 }
 
 .station {
-  cursor: pointer;
   
-  .name {
-    text-overflow: ellipsis;
-    text-align: center;
-    overflow: hidden;
-    height: 38px;
-    margin: 25px;
-  }
-
   &.disabled {
     background-color: #d6d6d6;
     .name {
