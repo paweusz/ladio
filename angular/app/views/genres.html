@@ -2,7 +2,9 @@
 
   <ng-include src="'/views/partials/breadcrumbs.html'"></ng-include>
   <div class="genres">  
-    <div class="genre" ng-repeat="genre in genres" title="{{genre.description}}"><a href="#/genres/{{genre.id}}/subgenres">{{genre.name}}</a></div>
+    <div class="container">
+      <div class="genre" ng-repeat="genre in genres" title="{{genre.description}}"><a href="#/genres/{{genre.id}}/subgenres">{{genre.name}}</a></div>
+    </div>
   </div>
 
 </div>

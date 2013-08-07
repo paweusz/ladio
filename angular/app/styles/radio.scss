@@ -39,10 +39,14 @@ div.emph {
   left: 0;
   right: 0;
   
+  .container {
+    position: relative;
+  }
+  
   #station-info {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 0;
     font-size: 16px;
     color: white;
     text-shadow: 0 0 0.5em #FFF;
@@ -91,6 +95,12 @@ div.emph {
   }
 }
 
+.container {
+  width: calc(160px*6);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #content {
   margin-top: 59px;
 }
@@ -110,6 +120,7 @@ div.emph {
   float: left;    
   font-size: 16px;
   margin: 0px 1px 1px 0px;
+  width: 159px;
   a {
     color: $ruler-color;
   }
@@ -182,7 +193,7 @@ ul {
 
     li {
       position: relative;
-      margin: 0px 0px 0px 15px;
+      margin: 0px 10px 0px 0px;
       padding: 15px 0;
       a {
         color: #fafafa;
@@ -196,11 +207,10 @@ ul {
 
 .ruler {
   background-color: $ruler-bg-color;
-  padding: 10px;
+  padding: 10px 0;
   color: $ruler-color;
   font-size: 16px;
   margin-top: 10px;
-  padding-left: 30px;
 
   li {
     margin: 0px 0px 0px 5px;
