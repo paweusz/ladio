@@ -39,6 +39,7 @@ div.emph {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 10;
   
   .container {
     position: relative;
@@ -135,7 +136,7 @@ div.emph {
   overflow: hidden;
   margin: 10px 10px 0 10px;
   word-break: break-word;
-  max-height: 40px;
+  max-height: 38px;
 }
 
 .desc {
@@ -156,13 +157,19 @@ div.emph {
   }
 
   &.playing {
-    background-color: $playing-color-end;
     background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%)  
+    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 10px;
+    background-position: 0 100%;
   }
 
   &.connecting {
-    display: block;
+    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0px;
     animation-name: connecting;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -229,29 +236,29 @@ ul {
 
 @keyframes connecting {
   from {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 
   50% {
-    background-color: $playing-color-end;
+    background-size: 100% 10px;
   }
 
   to {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 }
 
 @-webkit-keyframes connecting {
   from {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 
   50% {
-    background-color: $playing-color-end;
+    background-size: 100% 10px;
   }
 
   to {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 }
 
