@@ -124,6 +124,7 @@ div.emph {
   width: 159px;
   height: 80px;
   cursor: pointer;
+  position: relative;
   a {
     color: $ruler-color;
   }
@@ -140,6 +141,8 @@ div.emph {
 .desc {
   margin: 0 10px 10px 10px;
   font-size: 9px;
+  position: absolute;
+  bottom: 0;
 }
 
 .station {
