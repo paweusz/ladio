@@ -22,7 +22,7 @@ a {
 }
 
 div.emph {
-  height: 10px;
+  height: 5px;
   width: 100%;
   position: absolute;
   bottom: 0px;
@@ -144,6 +144,7 @@ div.emph {
   font-size: 9px;
   position: absolute;
   bottom: 0;
+  color: #404040;
 }
 
 .station {
@@ -160,7 +161,7 @@ div.emph {
     background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
     background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
     background-repeat: no-repeat;
-    background-size: 100% 10px;
+    background-size: 100% 5px;
     background-position: 0 100%;
   }
 
@@ -240,7 +241,7 @@ ul {
   }
 
   50% {
-    background-size: 100% 10px;
+    background-size: 100% 5px;
   }
 
   to {
@@ -254,7 +255,7 @@ ul {
   }
 
   50% {
-    background-size: 100% 10px;
+    background-size: 100% 5px;
   }
 
   to {
