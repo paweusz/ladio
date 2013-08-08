@@ -34,7 +34,7 @@ To do
 
 In progress
 -----------
-* Refresh UI (background img, station margin, +button icons, +header shadow, stations layout in js, alpha marker)
+* Refresh UI (background img, +station margin, +button icons, +header shadow, +stations layout in js, alpha marker)
 
 
 Done
