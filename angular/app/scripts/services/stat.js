@@ -32,7 +32,7 @@ angular.module('radioApp')
           recentStat.splice(statIdx, 1);
         }
         recentStat.unshift(angular.copy(station));
-        recentStat.splice(24, recentStat.length - 24);
+        recentStat.splice(30, recentStat.length - 30);
 
         updateStorage();
       },
