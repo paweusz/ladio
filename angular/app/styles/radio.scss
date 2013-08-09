@@ -126,7 +126,16 @@ div.emph {
   height: 80px;
   cursor: pointer;
   position: relative;
+}
+
+.msg {
+  color: $ruler-color;
+  background-color: $station-color;
+  padding: 30px 10px;
+  text-align: center;
+  margin: 10px 0;
   a {
+    text-decoration: underline;
     color: $ruler-color;
   }
 }

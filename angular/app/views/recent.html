@@ -3,6 +3,11 @@
   <div class="ruler">
     <div class="container">Recently played</div>
   </div>
-  <ng-include src="'/views/partials/stations.html'"></ng-include>
+
+  <ng-include src="'/views/partials/stations.html'" ng-show="stations.length != 0"></ng-include>
+
+  <div class="container" ng-show="stations.length == 0">
+    <div class="msg">Nothing here yet. Select station from <a href="#/genres">the catalog</a>.</div>
+  </div>
 
 </div>
