@@ -41,7 +41,7 @@ To do
 
 In progress
 -----------
-* Refresh UI (background img, +station margin, +button icons, +header shadow, +stations layout in js, nothing here text for recent, capitalize first letters in names and descs, alpha letter indicating alpha version)
+* Refresh UI (background img, +station margin, +button icons, +header shadow, +stations layout in js, nothing here text for recent, +capitalize first letters in names and descs, alpha letter indicating alpha version)
 
 
 Done
