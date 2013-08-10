@@ -9,9 +9,9 @@ To do
   whole directory to get to place where he was before. Swap recent and catalog items.
   Remember last open tab.
 
-* Home tab
+* Home tab. Also think out application name and change branding. Put note that it's alpha version.
 
-* Install application in Google Play. Also think out application name and change branding.
+* Install application in Google Play
 
 * Media queries
 
@@ -41,7 +41,7 @@ To do
 
 In progress
 -----------
-* Refresh UI (background img, +station margin, +button icons, +header shadow, +stations layout in js, nothing here text for recent, +capitalize first letters in names and descs, alpha letter indicating alpha version)
+* Refresh UI (+background img, +url icon, +station margin, +button icons, +header shadow, +stations layout in js, +nothing here text for recent, +capitalize first letters in names and descs)
 
 
 Done
