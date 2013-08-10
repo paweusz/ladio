@@ -19,7 +19,7 @@ angular.module('radioApp')
       console.error('Error fetching subgenres data. ' + status);
     });
 
-    $scope.stations = function(subgenre) {
+    $scope.stations = function() {
       $location.path('/genres/' + $scope.genreId + '/stations');
     };
 
