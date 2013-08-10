@@ -1,10 +1,13 @@
 'use strict';
 
-angular.module('radioApp', ['ngResource'])
+angular.module('radioApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        redirectTo: '/genres'
+        template: '<div></div>',
+        controller: function($scope, $location, State) {
+          $location.path(State.getLastURL());
+        }
       })
       .when('/recent', {
         templateUrl: 'views/recent.html',

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .factory('Genres', function($resource, $q, $http) {
+  .factory('Genres', function($http) {
 
       var url = 'http://notebook:9001';
 

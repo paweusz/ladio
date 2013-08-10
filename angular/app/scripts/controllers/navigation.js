@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('NavigationCtrl', function ($scope, $location) {
+  .controller('NavigationCtrl', function ($scope, $location, State) {
 
     $scope.items = [
       {label: 'Catalog', path: '/genres', currentPath: '/genres'},
@@ -27,6 +27,12 @@ angular.module('radioApp')
 
     $scope.$on('$routeChangeSuccess', function() {
       var path = $location.path();
+      if (path === '/') {
+        return;
+      }
+      
+      State.setLastURL(path);
+      
       var items = $scope.items;
       for (var i = 0; i < items.length; i++) {
         var patt = new RegExp('^' + items[i].path);
