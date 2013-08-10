@@ -4,6 +4,14 @@ $station-color: #5494a6;
 $ruler-color: #FAFAFA;
 $ruler-bg-color: #888888;
 
+@mixin selection {
+    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+    background-position: 0 100%;
+}
+
 body {
   background: #000 url("/css/radio-bg.jpg") no-repeat fixed right bottom;
   font-family: Gill Sans,sans-serif;
@@ -19,17 +27,6 @@ a {
   &:hover {
     color: $playing-color-bgn;
   }
-}
-
-div.emph {
-  height: 5px;
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
-  background-color: $playing-color-bgn;
-  background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-  background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-  display: none;
 }
 
 #header {
@@ -56,7 +53,7 @@ div.emph {
     
     #ctrl {
       position: absolute;
-      left: -32px;
+      left: -30px;
     }
     
     #name {
@@ -169,19 +166,11 @@ div.emph {
   }
 
   &.playing {
-    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 5px;
-    background-position: 0 100%;
+    @include selection;
   }
 
   &.connecting {
-    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-    background-size: 100% 0px;
+    @include selection;
     animation-name: connecting;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -211,16 +200,16 @@ ul {
   &#navigation {
     font-size: 16px;
     font-weight: bold;
+    color: $ruler-color;
 
     li {
       position: relative;
       margin: 0px 10px 0px 0px;
       padding: 15px 0;
-      a {
-        color: #fafafa;
-      }
-      &.selected div.emph {
-        display: block;
+      cursor: pointer;
+
+      &.selected {
+        @include selection;
       }
     }
   }

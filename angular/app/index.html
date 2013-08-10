@@ -30,14 +30,8 @@
         <div class="container">
 
           <ul id="navigation" ng-controller="NavigationCtrl">
-            <li class="ng-class:recentCss">
-              <a href="#/recent">Recent</a>
-              <div class="emph"></div>
-            </li>
-            <li class="ng-class:genresCss">
-              <a href="#/genres">Catalog</a>
-              <div class="emph"></div>
-            </li>
+            <li ng-cloak class="ng-class:item.css" ng-click="select(item)"
+              ng-repeat="item in items">{{item.label}}</a></li>
           </ul>
 
           <audio rd-player="currentStation.streams" 
@@ -71,6 +65,7 @@
     <script src="scripts/services/genres.js"></script>
     <script src="scripts/services/pls.js"></script>
     <script src="scripts/services/stat.js"></script>
+    <script src="scripts/services/state.js"></script>
     <script src="scripts/directives/rdPlayer.js"></script>
     <script src="scripts/controllers/player.js"></script>
     <script src="scripts/controllers/navigation.js"></script>
