@@ -5,10 +5,6 @@ This is product backlog for Padio.
 
 To do
 -----
-* Make 'Catalog' tab remember last location so user don't have to traverse
-  whole directory to get to place where he was before. Swap recent and catalog items.
-  Remember last open tab.
-
 * Home tab. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
 
 * Install application in Google Play
@@ -41,6 +37,10 @@ To do
 
 In progress
 -----------
+* Make 'Catalog' tab remember last location so user don't have to traverse
+  whole directory to get to place where he was before. Swap recent and catalog items.
+  Remember last open tab.
+
 
 
 Done
