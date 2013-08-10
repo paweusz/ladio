@@ -5,7 +5,7 @@ $ruler-color: #FAFAFA;
 $ruler-bg-color: #888888;
 
 body {
-  background-color: #353535;
+  background: #000 url("/styles/radio-bg.jpg") no-repeat fixed right bottom;
   font-family: Gill Sans,sans-serif;
   font-size: 18px;
   margin: 0;
@@ -126,6 +126,7 @@ div.emph {
   height: 80px;
   cursor: pointer;
   position: relative;
+  box-shadow: 5px 5px 10px #202020;
 }
 
 .msg {
