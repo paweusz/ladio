@@ -4,7 +4,7 @@ angular.module('radioApp', ['ngResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        redirectTo: '/recent'
+        redirectTo: '/genres'
       })
       .when('/recent', {
         templateUrl: 'views/recent.html',
