@@ -1,16 +1,18 @@
 <div class="ruler">
-  <ul id="breadcrumbs">
-    <li><a href="#/genres"><span>Genres</span></a></li>
-    <li ng-show="genre || genreId">&raquo;</li>
-    <li>
-      <a ng-show="genre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
-      <a ng-show="!genre && genreId">&hellip;</a>
-    </li>
-    <li ng-show="subGenre || subGenreId">&raquo;</li>
-    <li>
-      <a ng-show="subGenre" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
-      <a ng-show="!subGenre && subGenreId">&hellip;</a>
-    </li>
-  </ul>
+  <div class="container">
+    <ul id="breadcrumbs">
+      <li><a href="#/genres"><span>Genres</span></a></li>
+      <li ng-show="genre || genreId">&raquo;</li>
+      <li>
+        <a ng-show="genre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
+        <a ng-show="!genre && genreId">&hellip;</a>
+      </li>
+      <li ng-show="subGenre || subGenreId">&raquo;</li>
+      <li>
+        <a ng-show="subGenre" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
+        <a ng-show="!subGenre && subGenreId">&hellip;</a>
+      </li>
+    </ul>
+  </div>
 </div>
 

@@ -5,22 +5,29 @@ This is product backlog for Padio.
 
 To do
 -----
-* Refresh UI (background img, station margin, button icons, header shadow, stations layout in js)
+* Make 'Catalog' tab remember last location so user don't have to traverse
+  whole directory to get to place where he was before. Swap recent and catalog items.
+  Remember last open tab.
 
-* Home tab
+* Home tab. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
 
-* Install application in Google Play. Also think out application name and change branding.
+* Install application in Google Play
 
-* Make 'Catalog' tab remember last location so user don't have to travers
-  whole directory to get to place where he was before.
+* Media queries
 
 * Favourites tab
 
 * Search tab
 
+* Bugfix: Playing stalls after computer wake up
+
+* Share buttons (twitter, facebook, etc)
+
+* Display currently played track
+
 * Switch to [IceCast](http://api.dir.xiph.org/experimental/full). Check first for possibility to add stations based on shoutcast servers.
 
-* Add station functionality
+* "Add station" functionality
 
 * SSO support
 
@@ -30,8 +37,11 @@ To do
 
 * Add expandable panel with station details
 
+* Add clock - regular one that displays time
+
 In progress
 -----------
+
 
 Done
 ----
@@ -39,4 +49,5 @@ Done
 * Introduce play/stop controls and station name in the header
 * Bugfix: second click of play doesn't start station
 * Bugfix: handling of paused station (causes suspended state)
+* Refresh UI (+background img, +url icon, +station margin, +button icons, +header shadow, +stations layout in js, +nothing here text for recent, +capitalize first letters in names and descs)
 

@@ -116,8 +116,4 @@ angular.module('radioApp')
       return classes.join(' ');
     };
     
-    $scope.isPanelVisible = function() {
-      return false;
-    };
-
   });

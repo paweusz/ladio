@@ -27,31 +27,33 @@
 
     <div ng-controller="PlayerCtrl">
       <div id="header">
+        <div class="container">
 
-        <ul id="navigation" ng-controller="NavigationCtrl">
-          <li class="ng-class:recentCss">
-            <a href="#/recent">Recent</a>
-            <div class="emph"></div>
-          </li>
-          <li class="ng-class:genresCss">
-            <a href="#/genres">Catalog</a>
-            <div class="emph"></div>
-          </li>
-        </ul>
+          <ul id="navigation" ng-controller="NavigationCtrl">
+            <li class="ng-class:recentCss">
+              <a href="#/recent">Recent</a>
+              <div class="emph"></div>
+            </li>
+            <li class="ng-class:genresCss">
+              <a href="#/genres">Catalog</a>
+              <div class="emph"></div>
+            </li>
+          </ul>
 
-        <audio rd-player="currentStation.streams" 
-          onPlayingStarted="playingStarted()" 
-          onPlayingError="playingError()"></audio>
+          <audio rd-player="currentStation.streams" 
+            onPlayingStarted="playingStarted()" 
+            onPlayingError="playingError()"></audio>
 
-        <div id="station-info" class="ng-class:stateCss()" ng-click="play()">
-          <div id="ctrl"></div>
-          <span>{{currentStation.station.name}}</span>
+          <div id="station-info" class="ng-class:stateCss()" ng-click="play()">
+            <div id="ctrl"></div>
+            <div id="name" ng-cloak>{{currentStation.station.name}}</div>
+          </div>
+
         </div>
-
       </div>
 
       <!-- Add your site or application content here -->
-      <div class="container" ng-view=""></div>
+      <div ng-view=""></div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

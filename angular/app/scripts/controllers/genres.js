@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('GenresCtrl', function ($scope, Genres) {
+  .controller('GenresCtrl', function ($scope, $location, Genres) {
 
     Genres.genres().success(function(data) {
       console.debug('Genres fetched.');
@@ -9,5 +9,9 @@ angular.module('radioApp')
     }).error(function(data, status) {
       console.error('Error fetching genres data. ' + status);
     });
+    
+    $scope.select = function(genre) {
+      $location.path('/genres/' + genre.id + '/subgenres');
+    };
 
   });

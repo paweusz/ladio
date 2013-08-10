@@ -5,11 +5,12 @@ $ruler-color: #FAFAFA;
 $ruler-bg-color: #888888;
 
 body {
-  background-color: #353535;
+  background: #000 url("/styles/radio-bg.jpg") no-repeat fixed right bottom;
   font-family: Gill Sans,sans-serif;
   font-size: 18px;
   margin: 0;
   padding: 0;
+  min-width: calc(160px * 6)
 }
 
 a {
@@ -21,7 +22,7 @@ a {
 }
 
 div.emph {
-  height: 10px;
+  height: 5px;
   width: 100%;
   position: absolute;
   bottom: 0px;
@@ -33,41 +34,50 @@ div.emph {
 
 #header {
   background-color: #4c4c4c;
-  position: absolute;
+  box-shadow: 0 0 40px 10px #000;
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
+  z-index: 10;
+  
+  .container {
+    position: relative;
+  }
   
   #station-info {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 0;
     font-size: 16px;
     color: white;
     text-shadow: 0 0 0.5em #FFF;
     cursor: pointer;
     
     #ctrl {
-      margin-right: 5px;
-      display: inline-block;
-      vertical-align: middle;
+      position: absolute;
+      left: -32px;
+    }
+    
+    #name {
+      white-space: nowrap;
     }
 
     &.playing #ctrl {
       background-color: white;
-      width: 22px;
-      height: 22px;
+      width: 19px;
+      height: 19px;
     }
 
     &.stopped #ctrl {
       border-color: transparent transparent transparent white;
-      border-width: 11px 0 11px 22px;
+      border-width: 9px 0 10px 19px;
       border-style: solid;
     }
     
     &.connecting #ctrl {
-      width: 18px;
-      height: 18px;
+      width: 15px;
+      height: 15px;
       border: 2px solid white;
       animation-name: rotate;
       animation-duration: 1s;
@@ -87,12 +97,14 @@ div.emph {
   }
 }
 
+.container {
+  width: calc(160px * 6);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #content {
-  position: absolute;
-  top: 49px;
-  bottom: 0px;
-  overflow: auto;
-  width: 100%;
+  margin-top: 59px;
 }
 
 .genres, .stations {
@@ -110,32 +122,44 @@ div.emph {
   float: left;    
   font-size: 16px;
   margin: 0px 1px 1px 0px;
-  width: 150px;
+  width: 159px;
+  height: 80px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 5px 5px 10px #202020;
+}
+
+.msg {
+  color: $ruler-color;
+  background-color: $station-color;
+  padding: 30px 10px;
+  text-align: center;
+  margin: 10px 0;
   a {
+    text-decoration: underline;
     color: $ruler-color;
   }
 }
 
-.genre {
-  a {
-    padding: 25px;
-    text-align: center;
-    display: block;
-  }
+.name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 10px 10px 0 10px;
+  word-break: break-word;
+  max-height: 38px;
+  text-transform: uppercase;
+}
+
+.desc {
+  margin: 0 10px 10px 10px;
+  font-size: 9px;
+  position: absolute;
+  bottom: 0;
+  color: #404040;
 }
 
 .station {
-  cursor: pointer;
-  position: relative;
   
-  .name {
-    text-overflow: ellipsis;
-    text-align: center;
-    overflow: hidden;
-    height: 38px;
-    margin: 25px;
-  }
-
   &.disabled {
     background-color: #d6d6d6;
     .name {
@@ -145,11 +169,19 @@ div.emph {
   }
 
   &.playing {
-    background-color: $playing-color-end;
+    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+    background-position: 0 100%;
   }
 
   &.connecting {
-    display: block;
+    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0px;
     animation-name: connecting;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -182,7 +214,7 @@ ul {
 
     li {
       position: relative;
-      margin: 0px 0px 0px 15px;
+      margin: 0px 10px 0px 0px;
       padding: 15px 0;
       a {
         color: #fafafa;
@@ -196,11 +228,10 @@ ul {
 
 .ruler {
   background-color: $ruler-bg-color;
-  padding: 10px;
+  padding: 10px 0;
   color: $ruler-color;
   font-size: 16px;
   margin-top: 10px;
-  padding-left: 30px;
 
   li {
     margin: 0px 0px 0px 5px;
@@ -217,29 +248,29 @@ ul {
 
 @keyframes connecting {
   from {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 
   50% {
-    background-color: $playing-color-end;
+    background-size: 100% 5px;
   }
 
   to {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 }
 
 @-webkit-keyframes connecting {
   from {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 
   50% {
-    background-color: $playing-color-end;
+    background-size: 100% 5px;
   }
 
   to {
-    background-color: $station-color;
+    background-size: 100% 0px;
   }
 }
 
