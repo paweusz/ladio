@@ -5,7 +5,9 @@ This is product backlog for Padio.
 
 To do
 -----
-* Home tab. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
+* Spinner for loading stations/genres.
+
+* Home or about tab/popup. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
 
 * Install application in Google Play
 
