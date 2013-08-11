@@ -32,6 +32,7 @@ angular.module('radioApp')
       $scope.stations = stations;
     }, function(data) {
       console.error('Error fetching stations data. ' + data.status);
+      $scope.stations = [];
     });
 
   });
