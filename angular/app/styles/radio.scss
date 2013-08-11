@@ -235,6 +235,69 @@ ul {
 
 }
 
+.spinner {
+  position: absolute;
+  left: calc(50% - 50px);
+  top: calc(50% - 30px);
+
+  div:first-child {
+    margin-left: 0px;
+  }
+  
+  div {
+    width: 20px;
+    height: 60px;
+    background-color: $ruler-color;
+    float: left;
+    margin-left: 15px;
+    box-shadow: 0 0 20px #FFF;
+    opacity: 0.1;
+    transform: scale(0.7);
+    animation-name: spinner;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-transform: scale(0.7);
+    -webkit-animation-name: spinner;
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+  }
+  
+  .block2 {
+    -webkit-animation-delay:0.2s;
+    animation-delay:0.3s;
+  }
+  .block3 {
+    -webkit-animation-delay:0.4s;
+    animation-delay:0.6s;
+  }
+}
+
+@-webkit-keyframes spinner {
+  from {
+    -webkit-transform: scale(1.3);
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: scale(0.7);
+    opacity: 0.1;
+  }
+}
+
+@keyframes spinner {
+  from {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(0.7);
+    opacity: 0.1;
+  }
+}
+
 @keyframes connecting {
   from {
     background-size: 100% 0px;
