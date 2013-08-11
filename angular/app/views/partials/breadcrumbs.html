@@ -9,7 +9,8 @@
       </li>
       <li ng-show="subGenre || subGenreId">&raquo;</li>
       <li>
-        <a ng-show="subGenre" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
+        <a ng-show="subGenre && subGenre.id != -1" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
+        <a ng-show="subGenre && subGenre.id == -1" href="#/genres/{{genre.id}}/stations"><span>Stations</span></a>
         <a ng-show="!subGenre && subGenreId">&hellip;</a>
       </li>
     </ul>

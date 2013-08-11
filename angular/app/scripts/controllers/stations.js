@@ -22,9 +22,7 @@ angular.module('radioApp')
       });
     } else {
       $scope.subGenreId = $scope.genreId;
-      $scope.subGenre = {
-        name: 'Stations'
-      };
+      $scope.subGenre = {id: -1};
     }
     
     Genres.stations($scope.subGenreId).then(function(stations) {
