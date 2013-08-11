@@ -8,6 +8,7 @@ angular.module('radioApp')
       $scope.genres = data;
     }).error(function(data, status) {
       console.error('Error fetching genres data. ' + status);
+      $scope.genres = [];
     });
     
     $scope.select = function(genre) {
