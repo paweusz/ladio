@@ -5,8 +5,6 @@ This is product backlog for Padio.
 
 To do
 -----
-* Spinner for loading stations/genres.
-
 * Home or about tab/popup. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
 
 * Install application in Google Play
@@ -39,11 +37,7 @@ To do
 
 In progress
 -----------
-* Make 'Catalog' tab remember last location so user don't have to traverse
-  whole directory to get to place where he was before. Swap recent and catalog items.
-  Remember last open tab.
-
-
+* Spinner for loading stations/genres.
 
 Done
 ----
@@ -52,4 +46,7 @@ Done
 * Bugfix: second click of play doesn't start station
 * Bugfix: handling of paused station (causes suspended state)
 * Refresh UI (+background img, +url icon, +station margin, +button icons, +header shadow, +stations layout in js, +nothing here text for recent, +capitalize first letters in names and descs)
+* Make 'Catalog' tab remember last location so user don't have to traverse
+  whole directory to get to place where he was before. Swap recent and catalog items.
+  Remember last open tab.
 
