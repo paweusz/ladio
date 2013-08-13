@@ -45,7 +45,7 @@ a {
   #station-info {
     position: absolute;
     top: 15px;
-    right: 0;
+    right: 45px;
     font-size: 16px;
     color: white;
     text-shadow: 0 0 0.5em #FFF;
@@ -275,6 +275,23 @@ ul {
   .block3 {
     -webkit-animation-delay:0.6s;
     animation-delay:0.6s;
+  }
+}
+
+#prefs-btn {
+  width: 28px;
+  position: absolute;
+  top: calc(50% - 28px/2);
+  right: 0;
+  cursor: pointer;
+  
+  &>div {
+    &:first-child {
+      margin-top: 0;
+    }
+    background-color: $ruler-color;
+    height: 7px;
+    margin-top: 3px;
   }
 }
 
