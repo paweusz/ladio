@@ -49,7 +49,7 @@ a {
   #station-info {
     position: absolute;
     top: 15px;
-    right: 45px;
+    right: 100px;
     font-size: 16px;
     color: white;
     text-shadow: 0 0 0.5em #FFF;
@@ -197,8 +197,8 @@ ul {
   margin: 0;
 
   li {
-    display: inline-block;
-    margin: 5px 0px 5px 5px;
+    margin: 0;
+    cursor: pointer;
   }
 
   &#navigation {
@@ -210,13 +210,17 @@ ul {
       position: relative;
       margin: 0px 10px 0px 0px;
       padding: 15px 0;
-      cursor: pointer;
+      display: inline-block;
 
       &.selected {
         @include selection;
       }
+      &[ng-cloak] {
+        display: none;
+      }
     }
   }
+  
 }
 
 .ruler {
@@ -227,6 +231,7 @@ ul {
   margin-top: 10px;
 
   li {
+    display: inline-block;
     margin: 0px 0px 0px 5px;
     a {
       color: $ruler-color;
@@ -282,21 +287,39 @@ ul {
   }
 }
 
-#prefs-btn {
-  width: 24px;
-  top: calc(50% - 24px/2);
+#prefs {
   position: absolute;
+  top: calc(50% - 12px);
   right: 0;
-  cursor: pointer;
-  
-  &>div {
-    &:first-child {
-      margin-top: 0;
+  padding-left: 10px;
+
+  #prefs-btn {
+    width: 24px;
+    cursor: pointer;
+    
+    &>div {
+      background-color: $ruler-color;
+      height: 6px;
+      margin-bottom: 3px;
     }
-    background-color: $ruler-color;
-    height: 6px;
-    margin-top: 3px;
   }
+
+  #prefs-ddown {
+    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    box-shadow: 5px 5px 10px;
+    display: none;
+  }
+  
+  &:hover #prefs-ddown {
+    display: block;
+  }
+
 }
 
 @-webkit-keyframes spinner {
