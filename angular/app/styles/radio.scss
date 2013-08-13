@@ -12,6 +12,10 @@ $ruler-bg-color: #888888;
     background-position: 0 100%;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none;
+}
+
 body {
   background: #000 url("/images/radio-bg.jpg") no-repeat fixed right bottom;
   font-family: Gill Sans,sans-serif;
