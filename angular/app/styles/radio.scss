@@ -309,11 +309,19 @@ ul {
     background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
     position: absolute;
     right: 0;
-    padding: 10px;
-    width: 100px;
+    padding: 0 10px;
+    min-width: 100px;
     text-align: center;
     box-shadow: 5px 5px 10px;
     display: none;
+    
+    li:first-child {
+      border-top: 0px none;
+    }
+    li {
+      padding: 10px 0;
+      border-top: 1px solid $playing-color-bgn;
+    }
   }
   
   &:hover #prefs-ddown {
