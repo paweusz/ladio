@@ -279,9 +279,9 @@ ul {
 }
 
 #prefs-btn {
-  width: 28px;
+  width: 24px;
+  top: calc(50% - 24px/2);
   position: absolute;
-  top: calc(50% - 28px/2);
   right: 0;
   cursor: pointer;
   
@@ -290,7 +290,7 @@ ul {
       margin-top: 0;
     }
     background-color: $ruler-color;
-    height: 7px;
+    height: 6px;
     margin-top: 3px;
   }
 }
