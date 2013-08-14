@@ -2,12 +2,12 @@
   <div class="container">
     <ul id="breadcrumbs">
       <li><a href="#/genres"><span>Genres</span></a></li>
-      <li ng-show="genre || genreId">&raquo;</li>
+      <li class="separator" ng-show="genre || genreId">&raquo;</li>
       <li>
         <a ng-show="genre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
         <a ng-show="!genre && genreId">&hellip;</a>
       </li>
-      <li ng-show="subGenre || subGenreId">&raquo;</li>
+      <li class="separator" ng-show="subGenre || subGenreId">&raquo;</li>
       <li>
         <a ng-show="subGenre && subGenre.id != -1" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
         <a ng-show="subGenre && subGenre.id == -1" href="#/genres/{{genre.id}}/stations"><span>Stations</span></a>
