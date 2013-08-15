@@ -5,15 +5,19 @@ This is product backlog for Padio.
 
 To do
 -----
-* Home or about tab/popup. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
+* Home or about tab/popup with refs to me, bg_img, dirble. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
 
-* Install application in Google Play
+* Install application in Google Play. Check Google Analytics.
+
+* Add m3u support
 
 * Media queries
 
 * Favourites tab
 
 * Search tab
+
+* Select by country tab
 
 * Bugfix: Playing stalls after computer wake up
 
