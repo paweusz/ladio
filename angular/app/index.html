@@ -52,11 +52,21 @@
             <div id="prefs-ddown">
               <ul>
                 <li>Feedback</li>
-                <li>About</li>
+                <li ng-click="aboutVisible = true">About</li>
               </ul>
             </div>
           </div>
 
+          <div ng-show="aboutVisible">
+            <div class="glasspane"></div>
+            <div class="popup">
+              <div class="popup-close" ng-click="aboutVisible = false">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
 
