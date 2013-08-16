@@ -29,9 +29,6 @@ body {
 a {
   text-decoration:none;
   outline: 0;
-  &:hover {
-    color: $playing-color-bgn;
-  }
 }
 
 #header {
@@ -342,12 +339,17 @@ ul {
   border-radius: 5px 0 5px 5px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   position: fixed;
-  width: 300px;
-  height: 200px;
   left: calc(50% - 150px);
   top: calc(50% - 100px);
+  width: 300px;
+  height: 200px;
   z-index: 10;
-  
+
+  .popup-content {
+    font-size: 16px;
+    padding: 15px 30px;
+  }
+    
   .popup-close {
     width: 30px;
     height: 30px;
@@ -359,23 +361,8 @@ ul {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     
-    div {
-      width: 20px;
-      height: 4px;
-      background-color: $ruler-sep-color;
-      position: absolute;
-      left: calc(50% - 10px);
-      top: calc(50% - 2px);
-
-      &:first-child {
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-      }
-      
-      &:last-child {
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg);
-      }
+    polygon {
+      fill: $ruler-sep-color;
     }
     
   }
