@@ -5,8 +5,6 @@ This is product backlog for Padio.
 
 To do
 -----
-* Home or about tab/popup with refs to me, bg_img, dirble. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
-
 * Install application in Google Play. Check Google Analytics.
 
 * Add m3u support
@@ -16,6 +14,8 @@ To do
 * Favourites tab
 
 * Search tab
+
+* Support for other browsers (FF and IE)
 
 * Select by country tab
 
@@ -41,6 +41,8 @@ To do
 
 In progress
 -----------
+* Home or about tab/popup with refs to me, bg_img, dirble. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
+
 
 Done
 ----
