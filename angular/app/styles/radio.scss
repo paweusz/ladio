@@ -29,6 +29,7 @@ body {
 a {
   text-decoration:none;
   outline: 0;
+  color: $ruler-sep-color;
 }
 
 #header {
@@ -339,15 +340,36 @@ ul {
   border-radius: 5px 0 5px 5px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   position: fixed;
-  left: calc(50% - 150px);
-  top: calc(50% - 100px);
-  width: 300px;
-  height: 200px;
+  left: calc(50% - 430px/2);
+  top: 60px;
+  width: 430px;
   z-index: 10;
 
   .popup-content {
-    font-size: 16px;
-    padding: 15px 30px;
+    font-size: 14px;
+    padding: 30px;
+    
+    &>div:first-child {
+      text-align: center;
+    }
+    
+    .title {
+      font-size: 20px;
+      font-variant: small-caps;
+    }
+
+    .subs {
+      font-size: 12px;
+    }
+    
+    a {
+      text-decoration:underline;
+    }
+    
+    p:last-child {
+      margin-bottom: 0;
+    }
+    
   }
     
   .popup-close {
