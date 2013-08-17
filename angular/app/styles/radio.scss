@@ -326,6 +326,9 @@ ul {
       padding: 10px 0;
       border-top: 1px solid $ruler-sep-color;
     }
+    a {
+      color: $ruler-color;
+    }
   }
   
   &:hover #prefs-ddown {
