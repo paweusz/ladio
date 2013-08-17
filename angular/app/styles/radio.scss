@@ -302,13 +302,11 @@ ul {
   padding-left: 10px;
 
   #prefs-btn {
-    width: 24px;
     cursor: pointer;
-    
-    &>div {
-      background-color: $ruler-color;
-      height: 6px;
-      margin-bottom: 3px;
+    width: 24px;
+    height: 28px;
+    rect {
+      fill: $ruler-color;
     }
   }
 
