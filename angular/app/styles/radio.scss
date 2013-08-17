@@ -32,6 +32,11 @@ a {
   color: $ruler-sep-color;
 }
 
+menu {
+  margin: 0;
+  list-style-type:none;
+}
+
 #header {
   background-color: #4c4c4c;
   box-shadow: 0 0 40px 10px #000;
@@ -309,7 +314,6 @@ ul {
 
   #prefs-ddown {
     background-color: $ruler-bg-color;
-    color: $ruler-color;
     position: absolute;
     right: 0;
     padding: 0 10px;
