@@ -7,15 +7,17 @@ To do
 -----
 * Install application in Google Play. Check Google Analytics.
 
-* Add m3u support
-
-* Media queries
+* Support for other browsers (FF and IE)
 
 * Favourites tab
 
-* Search tab
+* Search field
 
-* Support for other browsers (FF and IE)
+* "Add station" functionality
+
+* Add m3u support
+
+* Media queries
 
 * Select by country tab
 
@@ -26,8 +28,6 @@ To do
 * Display currently played track
 
 * Switch to [IceCast](http://api.dir.xiph.org/experimental/full). Check first for possibility to add stations based on shoutcast servers.
-
-* "Add station" functionality
 
 * SSO support
 
