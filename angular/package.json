@@ -1,6 +1,6 @@
 {
-  "name": "radio",
-  "version": "0.0.0",
+  "name": "ladio",
+  "version": "0.0.1",
   "dependencies": {
     "grunt-karma": "~0.4.5"
   },
