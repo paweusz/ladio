@@ -39,10 +39,12 @@ To do
 
 * Add clock - regular one that displays time
 
+Tech backlog
+------------
+* grunt-replace for backend URLs and support email
+
 In progress
 -----------
-* Home or about tab/popup with refs to me, bg_img, dirble. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
-
 
 Done
 ----
@@ -55,4 +57,6 @@ Done
   whole directory to get to place where he was before. Swap recent and catalog items.
   Remember last open tab.
 * Spinner for loading stations/genres.
+* Home or about tab/popup with refs to me, bg_img, dirble. Also think out application name and change branding. Find icon for app. Put note that it's alpha version.
+
 
