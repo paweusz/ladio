@@ -1,6 +1,6 @@
 $playing-color-bgn: #f7914f;
 $playing-color-end: #d66229;
-$station-color: #5494a6;
+$station-color: rgba(84,148,166,0.95);
 $ruler-color: #FAFAFA;
 $ruler-sep-color: #404040;
 $ruler-bg-color: #888888;
@@ -364,8 +364,8 @@ ul {
     text-align: center;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     position: relative;
-    background-color: $station-color;
     color: $ruler-color;
+    background-color: rgba(84,148,166,0.8);
 
     .title {
       font-size: 20px;
@@ -421,7 +421,7 @@ ul {
   top: 0;
   bottom: 0;
   background-color: black;
-  opacity: 0.2;
+  opacity: 0.5;
   z-index: 5;
 }
 
