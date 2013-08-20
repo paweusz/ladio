@@ -353,9 +353,10 @@ ul {
   position: fixed;
   left: calc(50% - 430px/2);
   top: 80px;
-  width: 430px;
+  width: 445px;
   z-index: 10;
   font-size: 14px;
+  text-align: justify;
 
   .head {
     border-radius: 5px 0 0 0;
@@ -422,6 +423,16 @@ ul {
   background-color: black;
   opacity: 0.2;
   z-index: 5;
+}
+
+.app-icon {
+  background-image: url('/images/icon-shad_96.png');
+  width: 85px;
+  height: 96px;
+  float: left;
+  position: relative;
+  left: -7px;
+  top: -7px;
 }
 
 @-webkit-keyframes spinner {
