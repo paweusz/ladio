@@ -36,11 +36,12 @@ app.all('*', function (req, res, next) {
   }
 })
 
-app.get('/genres', dirble.genres);
-app.get('/genres/:genreId/subgenres', dirble.subGenres);
-app.get('/genres/:genreId/stations', dirble.stations);
-app.get('/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
-app.get('/streams', pls.streams);
+var path = '/api';
+app.get(path + '/genres', dirble.genres);
+app.get(path + '/genres/:genreId/subgenres', dirble.subGenres);
+app.get(path + '/genres/:genreId/stations', dirble.stations);
+app.get(path + '/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
+app.get(path + '/streams', pls.streams);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
