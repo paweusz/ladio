@@ -9,7 +9,7 @@ angular.module('radioApp')
       console.debug('Genre fetched. ' + genre.name);
       $scope.genre = genre;
     }, function(data) {
-      console.debug('Error fetching genre. ' + data.status);
+      console.debug('Error fetching genre. (' + data.status + ':' + data.data + ')');
     });
 
     if ($routeParams.subGenreId) {
@@ -18,7 +18,7 @@ angular.module('radioApp')
         console.debug('Subgenre fetched. ' + subGenre.name);
         $scope.subGenre = subGenre;
       }, function(data) {
-        console.debug('Error fetching subgenre. ' + data.status);
+        console.debug('Error fetching subgenre. (' + data.status + ':' + data.data + ')');
       });
     } else {
       $scope.subGenreId = $scope.genreId;
@@ -29,7 +29,7 @@ angular.module('radioApp')
       console.debug('Stations fetched.');
       $scope.stations = stations;
     }, function(data) {
-      console.error('Error fetching stations data. ' + data.status);
+      console.error('Error fetching stations data. (' + data.status + ':' + data.data + ')');
       $scope.stations = [];
     });
 

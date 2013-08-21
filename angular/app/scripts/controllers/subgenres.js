@@ -9,14 +9,14 @@ angular.module('radioApp')
       console.debug('Genre fetched. ' + genre.name);
       $scope.genre = genre;
     }, function(data) {
-      console.debug('Error fetching genre. ' + data.status);
+      console.debug('Error fetching genre. (' + data.status + ':' + data.data + ')');
     });
     
     Genres.subGenres($scope.genreId).success(function(data) {
       console.debug('Subgenres fetched.');
       $scope.subgenres = data;
     }).error(function(data, status) {
-      console.error('Error fetching subgenres data. ' + status);
+      console.error('Error fetching subgenres data. (' + status + ':' + data + ')');
       $scope.subgenres = [];
     });
 

@@ -35,7 +35,7 @@ angular.module('radioApp')
             prepareStreams(streams, plsStream.url);
           });
         }).error(function(data, status) {
-          console.error('Error fetching pls data. ' + status);
+          console.error('Error fetching pls data. (' + status + ':' + data + ')');
         });
       } else {
         prepareStreams(streams, streamUrl);
