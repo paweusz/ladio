@@ -19,9 +19,6 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, '../app')));
-});
-
-app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
