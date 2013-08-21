@@ -458,9 +458,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.3502466"
-     inkscape:cx="320.40234"
-     inkscape:cy="224.87234"
+     inkscape:zoom="0.83093765"
+     inkscape:cx="424.44285"
+     inkscape:cy="340.90116"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -515,7 +515,7 @@
        rx="20" />
     <g
        id="g6003"
-       transform="translate(-333.07594,404.87342)">
+       transform="translate(-18.972952,418.11148)">
       <rect
          rx="19.485815"
          ry="19.485815"
@@ -1603,10 +1603,10 @@
          inkscape:export-ydpi="39.59" />
     </g>
     <g
-       transform="translate(465.57455,263.08151)"
-       inkscape:export-ydpi="39.272728"
-       inkscape:export-xdpi="39.272728"
-       inkscape:export-filename="/home/paweusz/projects/radio/docs/icon.png"
+       transform="translate(519.73024,-135.26366)"
+       inkscape:export-ydpi="42.630001"
+       inkscape:export-xdpi="42.630001"
+       inkscape:export-filename="/home/paweusz/projects/radio/docs/icon_tmp.png"
        id="g5261">
       <rect
          rx="20"
