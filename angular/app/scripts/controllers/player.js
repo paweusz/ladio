@@ -36,6 +36,7 @@ angular.module('radioApp')
           });
         }).error(function(data, status) {
           console.error('Error fetching pls data. (' + status + ':' + data + ')');
+          $scope.playingError();
         });
       } else {
         prepareStreams(streams, streamUrl);
