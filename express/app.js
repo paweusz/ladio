@@ -30,9 +30,9 @@ app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Range, X-Requested-With');
   if (req.method == "OPTIONS") {
-          res.send(200);
+    res.send(200);
   } else {
-          next();
+    next();
   }
 })
 

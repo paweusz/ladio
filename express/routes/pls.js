@@ -14,6 +14,12 @@ function parsePls(pls) {
 }
 
 function doGetPls(ref, res) {
+  var errHandler = function(e) {
+    var msg = 'Error processing pls request (URL: ' + ref + ', msg: ' + e.message + ')';
+    console.log(msg); 
+    console.log(e.stack);
+    res.send(503, msg);
+  };
   http.get(ref, function (http_res) {
     var data = "";
 
@@ -29,10 +35,18 @@ function doGetPls(ref, res) {
       }
       res.json(obj);
     });
-  });
+
+    http_res.on('error', errHandler);
+    
+  }).on('error', errHandler);
 }
 
 exports.streams = function(req, res) {
   var ref = req.query.pls;
+  if (!ref) {
+    res.send(400);
+    return;
+  }
+  
   doGetPls(ref, res);
 };

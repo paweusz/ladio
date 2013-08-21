@@ -9,6 +9,12 @@ function doGetJson(url, res) {
   if (cached) {
     res.json(cached);
   } else {
+    var errHandler = function(e) {
+      var msg = 'Error processing catalog request (URL: ' + apiUrl + url.replace(apiKey, '...') + ', msg: ' + e.message + ')';
+      console.log(msg); 
+      console.log(e.stack);
+      res.send(503, msg);
+    };
     http.get(apiUrl + url, function (http_res) {
       var data = "";
 
@@ -16,18 +22,14 @@ function doGetJson(url, res) {
         data += chunk;
       });
       
-      http_res.on('error',function(e) {
-        console.log("Error: " + e.message); 
-        console.log( e.stack );
-        res.json({});
-      });
+      http_res.on('error', errHandler);
       
       http_res.on("end", function () {
         var resJson = JSON.parse(data);
         cache.put(url, resJson);
         res.json(resJson);
       });
-    });
+    }).on('error', errHandler);
   }
 }
 
