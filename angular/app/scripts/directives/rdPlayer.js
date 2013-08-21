@@ -51,6 +51,10 @@ angular.module('radioApp')
           console.debug('Event debugger: ' + event.type);
         });*/
 
+        element.bind('abort emptied ended error pause stalled suspend waiting', function(event) {
+          console.debug('Audio event debugger: ' + event.type);
+        });
+
         //Angular event handlers
         scope.$on('rd-player.pauseReq', function() {
           var audioTag = element[0];
