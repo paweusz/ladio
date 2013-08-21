@@ -80,6 +80,10 @@ angular.module('radioApp')
       $scope.currentStation.streams = null;
     };
     
+    $scope.playingStalled = function() {
+      $scope.currentStation.state = $scope.State.ERROR;
+    };
+    
     $scope.play = function(station) {
       playOrStop(station);
     };
