@@ -426,13 +426,14 @@ ul {
 }
 
 .app-icon {
-  background-image: url('/images/icon-shad_96.png');
-  width: 85px;
-  height: 96px;
+  background-image: url('/images/icon-shad_109x123.png');
+  background-repeat: no-repeat;
+  width: 113px;
+  height: 123px;
   float: left;
   position: relative;
-  left: -7px;
-  top: -7px;
+  left: -6px;
+  top: -6px;
 }
 
 @-webkit-keyframes spinner {
