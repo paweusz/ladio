@@ -395,8 +395,7 @@ ul {
   .popup-close {
     width: 30px;
     height: 30px;
-    background-image: -webkit-linear-gradient(top, $playing-color-bgn 50%, $playing-color-end 100%);
-    background-image: -moz-linear-gradient(top, $playing-color-bgn 50%, $playing-color-end 100%);
+    background-color: $ruler-bg-color;
     position: absolute;
     right: -15px;
     top: -15px;
@@ -410,7 +409,7 @@ ul {
       height: 30px;
     }
     polygon {
-      fill: $ruler-sep-color;
+      fill: $ruler-color;
     }
     
   }
