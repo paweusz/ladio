@@ -40,9 +40,14 @@
             onPlayingError="playingError()"
             onPlayingStalled="playingStalled()"></audio>
 
-          <div id="station-info" class="ng-class:stateCss()" ng-click="play()">
-            <div id="ctrl"></div>
-            <div id="name" ng-cloak>{{currentStation.station.name}}</div>
+          <div id="station-info">
+            <div id="station-info-text" class="ng-class:stateCss()" ng-click="play()">
+              <div id="ctrl"></div>
+              <div id="name" ng-cloak>{{currentStation.station.name}}</div>
+            </div>
+            <div class="alert hovering" ng-show="!alertVisible" ng-click="alertVisible = true">
+              <div>Error connecting to station stream</div>
+            </div>
           </div>
           
           <div id="prefs" ng-cloak>
@@ -53,7 +58,7 @@
                 <rect x="0" y="0" width="24" height="6" transform="translate(0 18)"></rect>
               </svg>
             </div>
-            <menu id="prefs-ddown">
+            <menu id="prefs-ddown" class="hovering">
               <li><a href="mailto:ladiohelp@gmail.com">Feedback</a></li>
               <li><a href="" ng-click="aboutVisible = true">About</a></li>
             </menu>
