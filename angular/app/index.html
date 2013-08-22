@@ -26,7 +26,7 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <div ng-controller="PlayerCtrl">
+    <div ng-controller="PlayerCtrl" ng-click="alertVisible = false">
       <div id="header">
         <div class="container">
 
@@ -45,8 +45,9 @@
               <div id="ctrl"></div>
               <div id="name" ng-cloak>{{currentStation.station.name}}</div>
             </div>
-            <div class="alert hovering" ng-show="!alertVisible" ng-click="alertVisible = true">
-              <div>Error connecting to station stream</div>
+            <div class="alert hovering" ng-show="alertVisible" ng-cloak>
+              <div>Error connecting to station.</div>
+              <div>Please try again later.</div>
             </div>
           </div>
           

@@ -439,12 +439,19 @@ ul {
 }
 
 .alert {
-  width: 200px;
+  width: 12em;
   padding: 20px;
   top: 27px;
   background-color: $alert-bg-color;
   color: $alert-color;
   text-shadow: none;
+  
+  div:first-child {
+    margin-top: 0;
+  }
+  div {
+    margin-top: 5px;
+  }
 }
 
 @-webkit-keyframes spinner {
