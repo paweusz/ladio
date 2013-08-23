@@ -73,6 +73,7 @@ angular.module('radioApp')
     $scope.playingStarted = function() {
       $scope.currentStation.state = $scope.State.PLAYING;
       Stat.stationPlayed($scope.currentStation.station);
+      $scope.alertVisible = false;
     };
     
     $scope.playingError = function() {
@@ -83,6 +84,7 @@ angular.module('radioApp')
     
     $scope.playingStalled = function() {
       $scope.currentStation.state = $scope.State.ERROR;
+      $scope.alertVisible = true;
     };
     
     $scope.play = function(station) {
