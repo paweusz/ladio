@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('StationsCtrl', function ($scope, $routeParams, Genres) {
+  .controller('StationsCtrl', function ($scope, $routeParams, $filter, Genres) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);
 
@@ -27,7 +27,10 @@ angular.module('radioApp')
     
     Genres.stations($scope.subGenreId).then(function(stations) {
       console.debug('Stations fetched.');
-      $scope.stations = stations;
+      $scope.stations = $filter('orderBy')(stations, 
+        function(station) {
+          return station.name.trim();
+        });
     }, function(data) {
       console.error('Error fetching stations data. (' + data.status + ':' + data.data + ')');
       $scope.stations = [];
