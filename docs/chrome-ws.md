@@ -9,7 +9,8 @@
 * Enduser help account: ladiohelp@gmail.com
 
   Handles incoming user emails.
-  Contains G analytics.
+  Contains backlog and task boards in G drive. (shared)
+  Contains G analytics. (shared)
 
 * Developer account: ladioteam@gmail.com
 
