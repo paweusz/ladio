@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Ladio",
-  "description": "The Internet Radio",
-  "version": "0.1.0",
+  "description": "Ladio - The Internet Radio",
+  "version": "0.1.1",
   "app": {
     "urls": [
       "http://ladio.herokuapp.com/"
