@@ -62,7 +62,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/styles/{,*/}*.scss',
         ],
-        tasks: ['compass:dev']
+        tasks: ['compass']
       }
     },
     connect: {
@@ -216,8 +216,8 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html', 'views/partials/*.html'],
+          cwd: '.tmp',
+          src: ['{,views/{,partials/}}*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -260,15 +260,13 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist', 'replace:dev', 'compass:dev', 'copy:dev'
+        'coffee:dist', 'replace:dev', 'compass', 'copy:dev'
       ],
       test: [
         'coffee'
       ],
       dist: [
-        'coffee',
-        'imagemin',
-        'htmlmin'
+        'coffee', 'imagemin', 'replace:dist', 'compass'
       ]
     },
     karma: {
@@ -329,9 +327,18 @@ module.exports = function (grunt) {
       dist: {
         options: {
           variables: {
-            'API_URL': 'http://ladio.herokuapp.com/api'
-          }
-        }
+            'API_URL': 'http://ladio.herokuapp.com/api',
+            'VERSION': '&alpha;1'
+          },
+          force: true
+        },
+        files: [
+          {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
+            'scripts/{,*/}*.js',
+            'views/{,*/}*.html',
+            '*.html',
+          ], dest: '.tmp'}
+        ]
       }
     }
   });
@@ -361,8 +368,9 @@ module.exports = function (grunt) {
     'clean:dist',
     'useminPrepare',
     'concurrent:dist',
+    'htmlmin',
     'concat',
-    'copy',
+    'copy:dist',
     'cdnify',
     'ngmin',
     'cssmin',
