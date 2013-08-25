@@ -35,7 +35,8 @@ angular.module('radioApp')
             prepareStreams(streams, plsStream.url);
           });
         }).error(function(data, status) {
-          console.error('Error fetching pls data. ' + status);
+          console.error('Error fetching pls data. (' + status + ':' + data + ')');
+          $scope.playingError();
         });
       } else {
         prepareStreams(streams, streamUrl);
@@ -72,11 +73,18 @@ angular.module('radioApp')
     $scope.playingStarted = function() {
       $scope.currentStation.state = $scope.State.PLAYING;
       Stat.stationPlayed($scope.currentStation.station);
+      $scope.alertVisible = false;
     };
     
     $scope.playingError = function() {
       $scope.currentStation.state = $scope.State.ERROR;
       $scope.currentStation.streams = null;
+      $scope.alertVisible = true;
+    };
+    
+    $scope.playingStalled = function() {
+      $scope.currentStation.state = $scope.State.ERROR;
+      $scope.alertVisible = true;
     };
     
     $scope.play = function(station) {

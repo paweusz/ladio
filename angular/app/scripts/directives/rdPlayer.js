@@ -46,10 +46,18 @@ angular.module('radioApp')
           console.debug('Playing error.');
           scope.$apply(attrs.onplayingerror);
         });
+        element.bind('stalled', function() {
+          console.debug('Playing stalled.');
+          scope.$apply(attrs.onplayingstalled);
+        });
 
         /*element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing Aprogress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
           console.debug('Event debugger: ' + event.type);
         });*/
+
+        element.bind('abort emptied ended error pause stalled suspend waiting', function(event) {
+          console.debug('Audio event debugger: ' + event.type);
+        });
 
         //Angular event handlers
         scope.$on('rd-player.pauseReq', function() {
@@ -60,6 +68,7 @@ angular.module('radioApp')
         scope.$on('rd-player.playReq', function() {
           console.debug('Playing requested.');
           var audioTag = element[0];
+          audioTag.load();
           audioTag.play();
         });
 

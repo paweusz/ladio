@@ -19,9 +19,6 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, '../app')));
-});
-
-app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
@@ -30,17 +27,18 @@ app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Range, X-Requested-With');
   if (req.method == "OPTIONS") {
-          res.send(200);
+    res.send(200);
   } else {
-          next();
+    next();
   }
 })
 
-app.get('/genres', dirble.genres);
-app.get('/genres/:genreId/subgenres', dirble.subGenres);
-app.get('/genres/:genreId/stations', dirble.stations);
-app.get('/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
-app.get('/streams', pls.streams);
+var path = '/api';
+app.get(path + '/genres', dirble.genres);
+app.get(path + '/genres/:genreId/subgenres', dirble.subGenres);
+app.get(path + '/genres/:genreId/stations', dirble.stations);
+app.get(path + '/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
+app.get(path + '/streams', pls.streams);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

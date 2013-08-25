@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('radioApp')
-  .controller('StationsCtrl', function ($scope, $routeParams, Genres) {
+  .controller('StationsCtrl', function ($scope, $routeParams, $filter, Genres) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);
 
@@ -9,7 +9,7 @@ angular.module('radioApp')
       console.debug('Genre fetched. ' + genre.name);
       $scope.genre = genre;
     }, function(data) {
-      console.debug('Error fetching genre. ' + data.status);
+      console.debug('Error fetching genre. (' + data.status + ':' + data.data + ')');
     });
 
     if ($routeParams.subGenreId) {
@@ -18,7 +18,7 @@ angular.module('radioApp')
         console.debug('Subgenre fetched. ' + subGenre.name);
         $scope.subGenre = subGenre;
       }, function(data) {
-        console.debug('Error fetching subgenre. ' + data.status);
+        console.debug('Error fetching subgenre. (' + data.status + ':' + data.data + ')');
       });
     } else {
       $scope.subGenreId = $scope.genreId;
@@ -27,9 +27,12 @@ angular.module('radioApp')
     
     Genres.stations($scope.subGenreId).then(function(stations) {
       console.debug('Stations fetched.');
-      $scope.stations = stations;
+      $scope.stations = $filter('orderBy')(stations, 
+        function(station) {
+          return station.name.trim();
+        });
     }, function(data) {
-      console.error('Error fetching stations data. ' + data.status);
+      console.error('Error fetching stations data. (' + data.status + ':' + data.data + ')');
       $scope.stations = [];
     });
 

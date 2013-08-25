@@ -1,9 +1,11 @@
 $playing-color-bgn: #f7914f;
 $playing-color-end: #d66229;
-$station-color: #5494a6;
+$station-color: rgba(84,148,166,0.95);
 $ruler-color: #FAFAFA;
 $ruler-sep-color: #404040;
 $ruler-bg-color: #888888;
+$alert-bg-color: #ff7070;
+$alert-color: #900000;
 
 @mixin selection {
     background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
@@ -63,46 +65,53 @@ menu {
     text-shadow: 0 0 0.5em #FFF;
     cursor: pointer;
     
-    #ctrl {
-      position: absolute;
-      left: -30px;
-    }
-    
-    #name {
-      white-space: nowrap;
+    #station-info-text {
+      #ctrl {
+        position: absolute;
+        left: -30px;
+      }
+      #name {
+        white-space: nowrap;
+      }
+      &.playing #ctrl {
+        background-color: white;
+        width: 19px;
+        height: 19px;
+
+        animation-name: bump;
+        animation-duration: 6s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        -webkit-animation-name: bump;
+        -webkit-animation-duration: 6s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+      }
+      &.stopped #ctrl {
+        border-color: transparent transparent transparent white;
+        border-width: 9px 0 10px 19px;
+        border-style: solid;
+      }
+      &.connecting #ctrl {
+        width: 15px;
+        height: 15px;
+        border: 2px solid white;
+
+        animation-name: rotate;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        -webkit-animation-name: rotate;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+      }
+      &.error {
+        color: $alert-bg-color;
+        text-shadow: 0 0 0.5em $alert-bg-color;
+      }
     }
 
-    &.playing #ctrl {
-      background-color: white;
-      width: 19px;
-      height: 19px;
-    }
-
-    &.stopped #ctrl {
-      border-color: transparent transparent transparent white;
-      border-width: 9px 0 10px 19px;
-      border-style: solid;
-    }
-    
-    &.connecting #ctrl {
-      width: 15px;
-      height: 15px;
-      border: 2px solid white;
-      animation-name: rotate;
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-      -webkit-animation-name: rotate;
-      -webkit-animation-duration: 1s;
-      -webkit-animation-iteration-count: infinite;
-      -webkit-animation-timing-function: linear;
-    }
-
-    &.error {
-      color: #FF0000;
-      text-shadow: 0 0 0.5em #FF0000;
-    }
-    
   }
 }
 
@@ -321,13 +330,9 @@ ul {
 
   #prefs-ddown {
     background-color: $ruler-bg-color;
-    position: absolute;
-    right: 0;
     padding: 0 10px;
     min-width: 100px;
     text-align: center;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 5px 0 5px 5px;
     display: none;
     
     li:first-child {
@@ -348,14 +353,22 @@ ul {
 
 }
 
+.hovering {
+  position: absolute;
+  right: 0;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px 0 5px 5px;
+}
+
 .popup {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   position: fixed;
   left: calc(50% - 430px/2);
   top: 80px;
-  width: 430px;
+  width: 445px;
   z-index: 10;
   font-size: 14px;
+  text-align: justify;
 
   .head {
     border-radius: 5px 0 0 0;
@@ -363,8 +376,8 @@ ul {
     text-align: center;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     position: relative;
-    background-color: $station-color;
     color: $ruler-color;
+    background-color: rgba(84,148,166,0.8);
 
     .title {
       font-size: 20px;
@@ -392,8 +405,7 @@ ul {
   .popup-close {
     width: 30px;
     height: 30px;
-    background-image: -webkit-linear-gradient(top, $playing-color-bgn 50%, $playing-color-end 100%);
-    background-image: -moz-linear-gradient(top, $playing-color-bgn 50%, $playing-color-end 100%);
+    background-color: $ruler-bg-color;
     position: absolute;
     right: -15px;
     top: -15px;
@@ -407,7 +419,7 @@ ul {
       height: 30px;
     }
     polygon {
-      fill: $ruler-sep-color;
+      fill: $ruler-color;
     }
     
   }
@@ -420,79 +432,34 @@ ul {
   top: 0;
   bottom: 0;
   background-color: black;
-  opacity: 0.2;
+  opacity: 0.5;
   z-index: 5;
 }
 
-@-webkit-keyframes spinner {
-  from {
-    -webkit-transform: scale(1.3);
-    opacity: 1;
-  }
-
-  to {
-    -webkit-transform: scale(0.7);
-    opacity: 0.1;
-  }
+.app-icon {
+  background-image: url('/images/icon-shad_109x123.png');
+  background-repeat: no-repeat;
+  width: 113px;
+  height: 123px;
+  float: left;
+  position: relative;
+  left: -6px;
+  top: -6px;
 }
 
-@keyframes spinner {
-  from {
-    transform: scale(1.3);
-    opacity: 1;
+.alert {
+  width: 12em;
+  padding: 20px;
+  top: 27px;
+  background-color: $alert-bg-color;
+  color: $alert-color;
+  text-shadow: none;
+  
+  div:first-child {
+    margin-top: 0;
   }
-
-  to {
-    transform: scale(0.7);
-    opacity: 0.1;
-  }
-}
-
-@keyframes connecting {
-  from {
-    background-size: 100% 0px;
-  }
-
-  50% {
-    background-size: 100% 5px;
-  }
-
-  to {
-    background-size: 100% 0px;
-  }
-}
-
-@-webkit-keyframes connecting {
-  from {
-    background-size: 100% 0px;
-  }
-
-  50% {
-    background-size: 100% 5px;
-  }
-
-  to {
-    background-size: 100% 0px;
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(90deg);
-  }
-}
-
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-
-  to {
-    -webkit-transform: rotate(90deg);
+  div {
+    margin-top: 5px;
   }
 }
 
