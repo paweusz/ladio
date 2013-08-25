@@ -84,6 +84,7 @@ angular.module('radioApp')
     
     $scope.playingStalled = function() {
       $scope.currentStation.state = $scope.State.ERROR;
+      $scope.currentStation.streams = null;
       $scope.alertVisible = true;
     };
     
