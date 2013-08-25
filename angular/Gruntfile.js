@@ -42,18 +42,18 @@ module.exports = function (grunt) {
           livereload: LIVERELOAD_PORT
         },
         files: [
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'
+          '<%= yeoman.app %>/scripts/{,*/}*.js'
         ],
-        tasks: ['jshint']
+        tasks: ['jshint', 'replace:dev']
       },
       html: {
         options: {
           livereload: LIVERELOAD_PORT
         },
         files: [
-          '<%= yeoman.app %>/{,views/{,partials/}}*.html',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ]
+          '<%= yeoman.app %>/{,views/{,partials/}}*.html'
+        ],
+        tasks: ['replace:dev']
       },
       sass: {
         options: {
@@ -62,7 +62,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/styles/{,*/}*.scss',
         ],
-        tasks: ['compass']
+        tasks: ['compass:dev']
       }
     },
     connect: {
@@ -76,8 +76,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               lrSnippet,
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, '.tmp')
             ];
           }
         }
@@ -225,6 +224,17 @@ module.exports = function (grunt) {
     },
     // Put files not handled in other tasks here
     copy: {
+      dev: {
+        files: [
+          {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
+            '*.{ico,png,txt}',
+            '.htaccess',
+            'bower_components/**/*',
+            'images/{,*/}*.{png,jpg,svg}',
+            'styles/fonts/*'
+          ], dest: '.tmp'}
+        ]
+      },
       dist: {
         files: [{
           expand: true,
@@ -235,7 +245,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'bower_components/**/*',
-            'images/{,*/}*.{gif,webp,svg}',
+            'images/{,*/}*.{png,jpg,svg}',
             'styles/fonts/*'
           ]
         }, {
@@ -250,7 +260,7 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist', 'jshint', 'compass'
+        'coffee:dist', 'replace:dev', 'compass:dev', 'copy:dev'
       ],
       test: [
         'coffee'
@@ -294,8 +304,33 @@ module.exports = function (grunt) {
     compass: {
       dev: {
         options: {
-          sassDir: 'app/styles',
-          cssDir: 'app/css'
+          sassDir: '<%= yeoman.app %>/styles',
+          cssDir: '.tmp/css'
+        }
+      }
+    },
+    replace: {
+      dev: {
+        options: {
+          variables: {
+            'API_URL': 'http://localhost:9001/api',
+            'VERSION': '&alpha;1'
+          },
+          force: true
+        },
+        files: [
+          {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
+            'scripts/{,*/}*.js',
+            'views/{,*/}*.html',
+            '*.html',
+          ], dest: '.tmp'}
+        ]
+      },
+      dist: {
+        options: {
+          variables: {
+            'API_URL': 'http://ladio.herokuapp.com/api'
+          }
         }
       }
     }

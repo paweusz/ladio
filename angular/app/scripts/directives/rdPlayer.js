@@ -55,7 +55,7 @@ angular.module('radioApp')
           console.debug('Event debugger: ' + event.type);
         });*/
 
-        element.bind('abort emptied ended error pause stalled suspend waiting', function(event) {
+        element.bind('abort emptied ended error pause play stalled suspend waiting', function(event) {
           console.debug('Audio event debugger: ' + event.type);
         });
 

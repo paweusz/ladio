@@ -27,7 +27,7 @@ angular.module('radioApp')
     
     Genres.stations($scope.subGenreId).then(function(stations) {
       console.debug('Stations fetched.');
-      $scope.stations = $filter('orderBy')(stations, 
+      $scope.stations = $filter('orderBy')(stations,
         function(station) {
           return station.name.trim();
         });

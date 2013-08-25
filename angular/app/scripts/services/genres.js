@@ -3,7 +3,7 @@
 angular.module('radioApp')
   .factory('Genres', function($http) {
 
-      var url = 'http://localhost:9001/api';
+      var url = '@@API_URL';
 
       return {
 
