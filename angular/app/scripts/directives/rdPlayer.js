@@ -64,13 +64,13 @@ angular.module('radioApp')
           }
         });
 
-        element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing progress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
+        /*element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing progress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
           console.debug('Event debugger: ' + event.type);
-        });
-
-/*        element.bind('abort emptied ended error pause play stalled suspend waiting', function(event) {
-          console.debug('Audio event debugger: ' + event.type);
         });*/
+
+        element.bind('abort emptied ended error pause play stalled suspend waiting', function(event) {
+          console.debug('Audio event debugger: ' + event.type);
+        });
 
         //Angular event handlers
         scope.$on('rd-player.pauseReq', function() {
