@@ -78,7 +78,6 @@ angular.module('radioApp')
         scope.$on('rd-player.playReq', function() {
           console.debug('Playing requested.');
           var audioTag = element[0];
-          audioTag.load();
           audioTag.play();
         });
 
