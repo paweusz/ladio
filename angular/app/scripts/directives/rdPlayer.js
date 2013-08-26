@@ -6,14 +6,19 @@ angular.module('radioApp')
       restrict: 'A',
       scope: true,
       link: function postLink(scope, element, attrs) {
+        var stalled = false;
+
         scope.$watch(attrs.rdPlayer, function(streams) {
+          stalled = false;
+          element.children().remove();
+
           if (!streams || streams.length === 0) {
             console.debug('No streams. Playing stopped.');
+            element[0].load(); //Reset buffer to empty
             return;
           }
           
           console.debug('Playing streams ' + streams);
-          element.children().remove();
           
           var streamErrCnt = 0;
           angular.forEach(streams, function(stream) {
@@ -34,7 +39,6 @@ angular.module('radioApp')
         }, true);
 
         //Audio tag event handlers        
-        var stalled = false;
         element.bind('canplay', function() {
           console.debug('Ready to play.');
           element[0].play();
@@ -72,7 +76,6 @@ angular.module('radioApp')
         scope.$on('rd-player.pauseReq', function() {
           var audioTag = element[0];
           audioTag.pause();
-          stalled = false;
           console.debug('Playing stopped.');
         });
         scope.$on('rd-player.playReq', function() {

@@ -52,8 +52,12 @@ angular.module('radioApp')
 
       if (cs.station && cs.station.id === station.id) {//Clicked the same station
         switch (cs.state) {
-        case $scope.State.PLAYING:
         case $scope.State.CONNECTING:
+          cs.streams = [];
+          cs.station = null;
+          cs.state = $scope.State.STOPPED;
+          return;
+        case $scope.State.PLAYING:
           $scope.$broadcast('rd-player.pauseReq');
           cs.state = $scope.State.STOPPED;
           return;
