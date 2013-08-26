@@ -39,7 +39,8 @@
           <audio rd-player="currentStation.streams" 
             onPlayingStarted="playingStarted()" 
             onPlayingError="playingError()"
-            onPlayingStalled="playingStalled()"></audio>
+            onPlayingStalled="playingStalled()"
+            onPlayingResumed="playingResumed()"></audio>
 
           <div id="station-info">
             <div id="station-info-text" class="ng-class:stateCss()" ng-click="play()">

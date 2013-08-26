@@ -34,6 +34,7 @@ angular.module('radioApp')
         }, true);
 
         //Audio tag event handlers        
+        var stalled = false;
         element.bind('canplay', function() {
           console.debug('Ready to play.');
           element[0].play();
@@ -48,21 +49,30 @@ angular.module('radioApp')
         });
         element.bind('stalled', function() {
           console.debug('Playing stalled.');
+          stalled = true;
           scope.$apply(attrs.onplayingstalled);
         });
-
-        /*element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing Aprogress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
-          console.debug('Event debugger: ' + event.type);
-        });*/
-
-        element.bind('abort emptied ended error pause play stalled suspend waiting', function(event) {
-          console.debug('Audio event debugger: ' + event.type);
+        element.bind('progress', function() {
+          if (stalled) {
+            console.debug('Playing progress.');
+            stalled = false;
+            scope.$apply(attrs.onplayingresumed);
+          }
         });
+
+        element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing progress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
+          console.debug('Event debugger: ' + event.type);
+        });
+
+/*        element.bind('abort emptied ended error pause play stalled suspend waiting', function(event) {
+          console.debug('Audio event debugger: ' + event.type);
+        });*/
 
         //Angular event handlers
         scope.$on('rd-player.pauseReq', function() {
           var audioTag = element[0];
           audioTag.pause();
+          stalled = false;
           console.debug('Playing stopped.');
         });
         scope.$on('rd-player.playReq', function() {

@@ -83,9 +83,11 @@ angular.module('radioApp')
     };
     
     $scope.playingStalled = function() {
-      $scope.currentStation.state = $scope.State.ERROR;
-      $scope.currentStation.streams = null;
-      $scope.alertVisible = true;
+      $scope.currentStation.state = $scope.State.CONNECTING;
+    };
+    
+    $scope.playingResumed = function() {
+      $scope.currentStation.state = $scope.State.PLAYING;
     };
     
     $scope.play = function(station) {
