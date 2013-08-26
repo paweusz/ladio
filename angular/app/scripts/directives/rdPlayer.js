@@ -6,14 +6,19 @@ angular.module('radioApp')
       restrict: 'A',
       scope: true,
       link: function postLink(scope, element, attrs) {
+        var stalled = false;
+
         scope.$watch(attrs.rdPlayer, function(streams) {
+          stalled = false;
+          element.children().remove();
+
           if (!streams || streams.length === 0) {
             console.debug('No streams. Playing stopped.');
+            element[0].load(); //Reset buffer to empty
             return;
           }
           
           console.debug('Playing streams ' + streams);
-          element.children().remove();
           
           var streamErrCnt = 0;
           angular.forEach(streams, function(stream) {
@@ -48,10 +53,18 @@ angular.module('radioApp')
         });
         element.bind('stalled', function() {
           console.debug('Playing stalled.');
+          stalled = true;
           scope.$apply(attrs.onplayingstalled);
         });
+        element.bind('progress', function() {
+          if (stalled) {
+            console.debug('Playing progress.');
+            stalled = false;
+            scope.$apply(attrs.onplayingresumed);
+          }
+        });
 
-        /*element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing Aprogress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
+        /*element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing progress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
           console.debug('Event debugger: ' + event.type);
         });*/
 
@@ -68,7 +81,6 @@ angular.module('radioApp')
         scope.$on('rd-player.playReq', function() {
           console.debug('Playing requested.');
           var audioTag = element[0];
-          audioTag.load();
           audioTag.play();
         });
 
