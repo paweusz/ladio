@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .factory('Pls', function($http) {
     return {
       streams: function(url) {

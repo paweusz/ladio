@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .directive('rdPlayer', function () {
     return {
       restrict: 'A',

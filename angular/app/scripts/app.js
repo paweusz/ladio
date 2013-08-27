@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp', [])
+angular.module('ladioApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

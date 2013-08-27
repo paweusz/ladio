@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .service('State', function state() {
     var stateKey = 'com.padio.state';
     var stateObj = localStorage[stateKey];

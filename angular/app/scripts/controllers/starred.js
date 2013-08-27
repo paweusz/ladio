@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .controller('StarredCtrl', function ($scope) {
 
     $scope.stations = [];

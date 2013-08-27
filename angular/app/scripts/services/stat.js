@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .service('Stat', function() {
     var recentKey = 'com.padio.recent';
     

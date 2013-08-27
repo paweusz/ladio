@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .controller('StationsCtrl', function ($scope, $routeParams, $filter, Genres) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);

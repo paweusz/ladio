@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .controller('PlayerCtrl', function ($scope, Pls, Stat) {
 
     $scope.State = {
