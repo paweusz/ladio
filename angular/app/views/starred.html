@@ -1,13 +1,13 @@
 <div id="content">
 
   <div class="ruler">
-    <div class="container">Recently played stations</div>
+    <div class="container">Favourite stations</div>
   </div>
 
   <ng-include src="'/views/partials/stations.html'" ng-show="stations.length != 0"></ng-include>
 
   <div class="container" ng-show="stations.length == 0">
-    <div class="msg">Nothing here yet. Select station from <a href="#/genres">the catalog</a>.</div>
+    <div class="msg">Nothing here yet. To make station favourite click its star icon.</div>
   </div>
 
 </div>

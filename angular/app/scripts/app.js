@@ -9,10 +9,6 @@ angular.module('radioApp', [])
           $location.path(State.getLastURL());
         }
       })
-      .when('/recent', {
-        templateUrl: 'views/recent.html',
-        controller: 'RecentCtrl'
-      })
       .when('/genres', {
         templateUrl: 'views/genres.html',
         controller: 'GenresCtrl'
@@ -28,6 +24,14 @@ angular.module('radioApp', [])
       .when('/genres/:genreId/subgenres/:subGenreId/stations', {
         templateUrl: 'views/stations.html',
         controller: 'StationsCtrl'
+      })
+      .when('/recent', {
+        templateUrl: 'views/recent.html',
+        controller: 'RecentCtrl'
+      })
+      .when('/starred', {
+        templateUrl: 'views/starred.html',
+        controller: 'StarredCtrl'
       })
       .otherwise({
         redirectTo: '/'
