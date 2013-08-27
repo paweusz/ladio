@@ -203,10 +203,13 @@ menu {
     -webkit-animation-timing-function: linear;
   }
 
-  .panel {
-    font-size: 12px;
+  & .fav-star {
+    display: none;
   }
-
+  
+  &:hover .fav-star {
+    display: block;
+  }
 }
 
 ul {
@@ -460,6 +463,18 @@ ul {
   }
   div {
     margin-top: 5px;
+  }
+}
+
+.fav-star {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  
+  polygon {
+    stroke: $ruler-sep-color;
   }
 }
 
