@@ -6,7 +6,7 @@ angular.module('ladioApp')
     
     var starred = localStorage[starredKey];
     if (!starred) {
-      starred = [];
+      starred = {};
     } else {
       starred = JSON.parse(starred);
     }
@@ -15,29 +15,19 @@ angular.module('ladioApp')
       localStorage[starredKey] = JSON.stringify(starred);
     }
     
-    function findStation(station, stations) {
-      for (var i = 0; i < stations.length; i++) {
-        if (stations[i].id === station.id) {
-          return i;
-        }
-      }
-      return -1;
-    }
-    
     return {
 
       toggle: function(station) {
-        var statIdx = findStation(station, starred);
-        if (statIdx !== -1) {
-          starred.splice(statIdx, 1);
+        if (this.isStarred(station)) {
+          delete starred[station.id];
         } else {
-          starred.push(station);
+          starred[station.id] = station;
         }
         updateStorage();
       },
       
       isStarred: function(station) {
-        return findStation(station, starred) !== -1;
+        return starred[station.id];
       },
 
       starred: function() {
