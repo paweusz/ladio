@@ -474,13 +474,15 @@ ul {
   right: 6px;
   
   polygon {
-    stroke: $ruler-sep-color;
+    stroke: $ruler-color;
+    stroke-width: 5;
+    fill: none;
   }
   
   &.starred {
     display: block;
     polygon {
-      fill: $playing-color-bgn;
+      fill: $ruler-color;
     }
   }
 }
