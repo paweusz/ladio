@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('StarredCtrl', function ($scope) {
+  .controller('StarredCtrl', function ($scope, StarredSrv) {
 
-    $scope.stations = [];
+    $scope.stations = StarredSrv.starred();
 
   });

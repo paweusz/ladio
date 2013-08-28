@@ -31,7 +31,11 @@ angular.module('ladioApp')
       },
 
       starred: function() {
-        return starred;
+        var stations = [];
+        for (var key in starred) {
+          stations.push(starred[key]);
+        }
+        return stations;
       }
 
     };
