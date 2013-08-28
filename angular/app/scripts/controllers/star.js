@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('StarCtrl', function ($scope) {
+  .controller('StarCtrl', function ($scope, StarredSrv) {
     
     $scope.star = function(station) {
-      station.star = !station.star;
+      StarredSrv.toggle(station);
     };
     
     $scope.starCss = function(station) {
       var classes = [];
-      if (station.star) {
+      if (StarredSrv.isStarred(station)) {
         classes.push('starred');
       }
       return classes;
