@@ -476,6 +476,13 @@ ul {
   polygon {
     stroke: $ruler-sep-color;
   }
+  
+  &.starred {
+    display: block;
+    polygon {
+      fill: $playing-color-bgn;
+    }
+  }
 }
 
 
