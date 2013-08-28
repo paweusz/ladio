@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: rdPlayer', function () {
-  beforeEach(module('radioApp'));
+  beforeEach(module('ladioApp'));
 
   var element;
 
