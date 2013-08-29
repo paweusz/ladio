@@ -504,6 +504,10 @@ ul {
       fill: $ruler-color;
     }
   }
+  
+  &:hover polygon {
+    stroke: $hover-color;
+  }
 }
 
 
