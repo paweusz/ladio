@@ -258,6 +258,10 @@ ul {
   
 }
 
+#navigation li:hover {
+  @include hover;
+}
+
 .ruler {
   background-color: $ruler-bg-color;
   padding: 10px 0;
