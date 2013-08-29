@@ -394,7 +394,8 @@ ul {
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     position: relative;
     color: $ruler-color;
-    background-color: rgba(84,148,166,0.8);
+    background-color: $station-color;
+    opacity: 0.9;
 
     .title {
       font-size: 20px;
