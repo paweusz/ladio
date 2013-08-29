@@ -1,5 +1,4 @@
-$playing-color-bgn: #f7914f;
-$playing-color-end: #d66229;
+$playing-color: #f7914f;
 $station-color: rgba(84,148,166,0.95);
 $ruler-color: #FAFAFA;
 $ruler-sep-color: #404040;
@@ -8,8 +7,8 @@ $alert-bg-color: #ff7070;
 $alert-color: #900000;
 
 @mixin selection {
-    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -webkit-linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-image: -moz-linear-gradient(top, $playing-color 0%, $playing-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
