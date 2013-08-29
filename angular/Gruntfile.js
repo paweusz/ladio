@@ -312,7 +312,7 @@ module.exports = function (grunt) {
         options: {
           variables: {
             'API_URL': 'http://localhost:9001/api',
-            'VERSION': '&alpha;1'
+            'VERSION': '&alpha;2'
           },
           force: true
         },
@@ -328,7 +328,7 @@ module.exports = function (grunt) {
         options: {
           variables: {
             'API_URL': 'http://ladio.herokuapp.com/api',
-            'VERSION': '&alpha;1'
+            'VERSION': '&alpha;2'
           },
           force: true
         },
