@@ -1,4 +1,5 @@
 $playing-color: #f7914f;
+$hover-color: #00afed;
 $station-color: rgba(84,148,166,0.95);
 $ruler-color: #FAFAFA;
 $ruler-sep-color: #404040;
@@ -9,6 +10,14 @@ $alert-color: #900000;
 @mixin selection {
     background-image: -webkit-linear-gradient(top, $playing-color 0%, $playing-color 100%);
     background-image: -moz-linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+    background-position: 0 100%;
+}
+
+@mixin hover {
+    background-image: -webkit-linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-image: -moz-linear-gradient(top, $hover-color 0%, $hover-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
@@ -144,6 +153,11 @@ menu {
   cursor: pointer;
   position: relative;
   box-shadow: 5px 5px 10px #202020;
+
+  &:hover {
+    @include hover;
+  }
+
 }
 
 .msg {
@@ -201,7 +215,7 @@ menu {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
   }
-
+  
   & .fav-star {
     display: none;
   }
