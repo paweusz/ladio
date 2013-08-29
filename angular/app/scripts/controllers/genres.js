@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .controller('GenresCtrl', function ($scope, $location, Genres) {
 
     Genres.genres().success(function(data) {

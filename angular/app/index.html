@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <!-- endbuild -->
 </head>
-  <body ng-app="radioApp">
+  <body ng-app="ladioApp">
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -62,7 +62,7 @@
               </svg>
             </div>
             <menu id="prefs-ddown" class="hovering">
-              <li><a href="mailto:ladiohelp@gmail.com">Feedback</a></li>
+              <li><a href="mailto:@@EMAIL">Feedback</a></li>
               <li><a href="" ng-click="aboutVisible = true">About</a></li>
             </menu>
           </div>
@@ -84,8 +84,8 @@
               <div class="body">
                 <div class="app-icon"></div>
                 <div>
-                  <p>Ladio is developed by <a href="mailto:ladioteam@gmail.com">Ladio Team</a>.
-                  This is early access (&alpha; series) release. Feel free to <a href="mailto:ladiohelp@gmail.com">report bugs or feature requests</a>.
+                  <p>Ladio is developed by <a href="mailto:@@EMAIL">Ladio Team</a>.
+                  This is early access (&alpha; series) release. Feel free to <a href="mailto:@@EMAIL">report bugs or feature requests</a>.
                   </p>
                   <p>Stations catalog is provided by <a href="http://dirble.com/" target="_blank">Dirble</a>.
                   Background image is adaptation of <a href="http://www.flickr.com/photos/derstormy/3929444513/" target="_blank">Good (old) radio</a> work by <a href="http://www.flickr.com/photos/derstormy/" target="_blank">René Hofmann</a>, licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/deed.en" target="_blank">Creative Commons</a>.
@@ -120,13 +120,16 @@
     <script src="scripts/services/pls.js"></script>
     <script src="scripts/services/stat.js"></script>
     <script src="scripts/services/state.js"></script>
+    <script src="scripts/services/starred.js"></script>
     <script src="scripts/directives/rdPlayer.js"></script>
     <script src="scripts/controllers/player.js"></script>
     <script src="scripts/controllers/navigation.js"></script>
     <script src="scripts/controllers/recent.js"></script>
+    <script src="scripts/controllers/starred.js"></script>
     <script src="scripts/controllers/genres.js"></script>
     <script src="scripts/controllers/subgenres.js"></script>
     <script src="scripts/controllers/stations.js"></script>
+    <script src="scripts/controllers/star.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/modules.js -->

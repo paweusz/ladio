@@ -1,15 +1,24 @@
-$playing-color-bgn: #f7914f;
-$playing-color-end: #d66229;
-$station-color: rgba(84,148,166,0.95);
+$playing-color: #FF802E;
+$hover-color: #00AFEE;
+$header-color: #3C3C3C;
+$station-color: rgba(76,107,150,0.95);
 $ruler-color: #FAFAFA;
-$ruler-sep-color: #404040;
-$ruler-bg-color: #888888;
+$ruler-sep-color: #202020;
+$ruler-bg-color: #6C6C6C;
 $alert-bg-color: #ff7070;
 $alert-color: #900000;
 
 @mixin selection {
-    background-image: -webkit-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
-    background-image: -moz-linear-gradient(top, $playing-color-bgn 0%, $playing-color-end 100%);
+    background-image: -webkit-linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-image: -moz-linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+    background-position: 0 100%;
+}
+
+@mixin hover {
+    background-image: -webkit-linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-image: -moz-linear-gradient(top, $hover-color 0%, $hover-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
@@ -44,7 +53,7 @@ menu {
 }
 
 #header {
-  background-color: #4c4c4c;
+  background-color: $header-color;
   box-shadow: 0 0 40px 10px #000;
   position: fixed;
   top: 0;
@@ -144,7 +153,12 @@ menu {
   height: 80px;
   cursor: pointer;
   position: relative;
-  box-shadow: 5px 5px 10px #202020;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
+
+  &:hover {
+    @include hover;
+  }
+
 }
 
 .msg {
@@ -157,7 +171,7 @@ menu {
     text-decoration: underline;
     color: $ruler-color;
   }
-  box-shadow: 5px 5px 10px #202020;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
 }
 
 .name {
@@ -174,7 +188,7 @@ menu {
   font-size: 9px;
   position: absolute;
   bottom: 0;
-  color: #404040;
+  color: $ruler-sep-color;
 }
 
 .station {
@@ -202,11 +216,14 @@ menu {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
   }
-
-  .panel {
-    font-size: 12px;
+  
+  & .fav-star {
+    display: none;
   }
-
+  
+  &:hover .fav-star {
+    display: block;
+  }
 }
 
 ul {
@@ -226,7 +243,7 @@ ul {
 
     li {
       position: relative;
-      margin: 0px 10px 0px 0px;
+      margin: 0px 15px 0px 0px;
       padding: 15px 0;
       display: inline-block;
 
@@ -239,6 +256,10 @@ ul {
     }
   }
   
+}
+
+#navigation li:hover {
+  @include hover;
 }
 
 .ruler {
@@ -377,7 +398,8 @@ ul {
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
     position: relative;
     color: $ruler-color;
-    background-color: rgba(84,148,166,0.8);
+    background-color: $station-color;
+    opacity: 0.9;
 
     .title {
       font-size: 20px;
@@ -460,6 +482,36 @@ ul {
   }
   div {
     margin-top: 5px;
+  }
+}
+
+.fav-star {
+  width: 21px;
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  
+  svg {
+    width: 21px;
+    height: 20px;
+  }
+  
+  polygon {
+    stroke: $ruler-color;
+    stroke-width: 5;
+    fill: none;
+  }
+  
+  &.starred {
+    display: block;
+    polygon {
+      fill: $ruler-color;
+    }
+  }
+  
+  &:hover polygon {
+    stroke: $hover-color;
   }
 }
 

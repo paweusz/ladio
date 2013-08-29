@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .factory('Genres', function($http) {
 
       var url = '@@API_URL';

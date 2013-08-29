@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('radioApp', [])
+angular.module('ladioApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -8,10 +8,6 @@ angular.module('radioApp', [])
         controller: function($scope, $location, State) {
           $location.path(State.getLastURL());
         }
-      })
-      .when('/recent', {
-        templateUrl: 'views/recent.html',
-        controller: 'RecentCtrl'
       })
       .when('/genres', {
         templateUrl: 'views/genres.html',
@@ -28,6 +24,14 @@ angular.module('radioApp', [])
       .when('/genres/:genreId/subgenres/:subGenreId/stations', {
         templateUrl: 'views/stations.html',
         controller: 'StationsCtrl'
+      })
+      .when('/recent', {
+        templateUrl: 'views/recent.html',
+        controller: 'RecentCtrl'
+      })
+      .when('/starred', {
+        templateUrl: 'views/starred.html',
+        controller: 'StarredCtrl'
       })
       .otherwise({
         redirectTo: '/'

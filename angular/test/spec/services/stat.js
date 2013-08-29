@@ -3,7 +3,7 @@
 describe('Service: stat', function () {
 
   // load the service's module
-  beforeEach(module('radioApp'));
+  beforeEach(module('ladioApp'));
 
   // instantiate service
   var stat;

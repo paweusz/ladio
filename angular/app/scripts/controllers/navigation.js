@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('radioApp')
+angular.module('ladioApp')
   .controller('NavigationCtrl', function ($scope, $location, State) {
 
     $scope.items = [
       {label: 'Catalog', path: '/genres', currentPath: '/genres'},
-      {label: 'Recent', path: '/recent', currentPath: '/recent'}
+      {label: 'Recent', path: '/recent', currentPath: '/recent'},
+      {label: 'Starred', path: '/starred', currentPath: '/starred'}
     ];
     
     var selectedItem = null;

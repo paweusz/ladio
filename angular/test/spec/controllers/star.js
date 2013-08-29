@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: StarCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('radioApp'));
+  beforeEach(module('ladioApp'));
 
-  var MainCtrl,
+  var StarCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    StarCtrl = $controller('StarCtrl', {
       $scope: scope
     });
   }));

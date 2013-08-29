@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: state', function () {
+describe('Service: starred', function () {
 
   // load the service's module
   beforeEach(module('ladioApp'));
 
   // instantiate service
-  var state;
-  beforeEach(inject(function (_state_) {
-    state = _state_;
+  var starred;
+  beforeEach(inject(function (_starred_) {
+    starred = _starred_;
   }));
 
   it('should do something', function () {
-    expect(!!state).toBe(true);
+    expect(!!starred).toBe(true);
   });
 
 });
