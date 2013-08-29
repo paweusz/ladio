@@ -5,4 +5,5 @@
 * update favicon using [this](http://www.favicon.cc)
 * update promo image(s)
 * update screenshots
+* zip and deploy chrome manifest
 

@@ -1,8 +1,17 @@
 ### Calculations for screenshots
 
-## Needed:
+## Preparation:
 
-* entire screen shots taken at resolution 1440x900.
+Take screenshot with printscreen button of Chrome at resolution 1440x900
+
+Guidelines:
+* with hover
+* playing station stop button with glow
+* playing station selection visible
+
+* catalog when playing some station 
+* genres -> electronic -> Dance when playing some other station
+* starred stations during playing one of those
 
 ## To create screenshot with resolution 1280x800
 
