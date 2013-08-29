@@ -1,9 +1,10 @@
-$playing-color: #f7914f;
-$hover-color: #00afed;
-$station-color: rgba(84,148,166,0.95);
+$playing-color: #FF802E;
+$hover-color: #00AFEE;
+$header-color: #3C3C3C;
+$station-color: rgba(76,107,150,0.95);
 $ruler-color: #FAFAFA;
-$ruler-sep-color: #404040;
-$ruler-bg-color: #888888;
+$ruler-sep-color: #202020;
+$ruler-bg-color: #6C6C6C;
 $alert-bg-color: #ff7070;
 $alert-color: #900000;
 
@@ -52,7 +53,7 @@ menu {
 }
 
 #header {
-  background-color: #4c4c4c;
+  background-color: $header-color;
   box-shadow: 0 0 40px 10px #000;
   position: fixed;
   top: 0;
@@ -152,7 +153,7 @@ menu {
   height: 80px;
   cursor: pointer;
   position: relative;
-  box-shadow: 5px 5px 10px #202020;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
 
   &:hover {
     @include hover;
@@ -170,7 +171,7 @@ menu {
     text-decoration: underline;
     color: $ruler-color;
   }
-  box-shadow: 5px 5px 10px #202020;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
 }
 
 .name {
@@ -187,7 +188,7 @@ menu {
   font-size: 9px;
   position: absolute;
   bottom: 0;
-  color: #404040;
+  color: $ruler-sep-color;
 }
 
 .station {
