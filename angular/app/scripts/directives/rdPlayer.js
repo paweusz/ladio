@@ -51,6 +51,10 @@ angular.module('ladioApp')
           console.debug('Playing error.');
           scope.$apply(attrs.onplayingerror);
         });
+        element.bind('ended', function() {
+          console.debug('Playing ended.');
+          scope.$apply(attrs.onplayingerror);
+        });
         element.bind('stalled', function() {
           console.debug('Playing stalled.');
           stalled = true;
