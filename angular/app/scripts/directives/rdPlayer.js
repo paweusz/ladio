@@ -24,15 +24,13 @@ angular.module('ladioApp')
           
           console.debug('Playing streams ' + streams);
           
-          var streamErrCnt = 0;
           angular.forEach(streams, function(stream) {
             element.append('<source src="' + stream + '"></source>');
           });
 
           element.children().bind('error', function() {
             console.debug('Playing stream error.');
-            streamErrCnt++;
-            if (streamErrCnt === streams.length) {
+            if (element[0].networkState === 3) { //HTMLMediaElement.NETWORK_NO_SOURCE
               console.debug('All streams failed to play');
               scope.$apply(attrs.onplayingerror);
             }
