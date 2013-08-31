@@ -19,9 +19,10 @@ describe('Directive: rdPlayer', function () {
     element = {
       callbacks: {},
       0: {
-        loadCalled: false,
-        load: function() {
-          this.loadCalled = true;
+        load: function() {},
+        play: function() {},
+        error: {
+          code: 3
         }
       },
       bind: function(name, fn) {
@@ -32,6 +33,8 @@ describe('Directive: rdPlayer', function () {
       },
       append: function(childElem) {}
     };
+    spyOn(element[0], 'load');
+    spyOn(element[0], 'play');
     attrs = {
       rdPlayer: "streams",
       onplayingstarted: "playingStarted()",
@@ -44,12 +47,13 @@ describe('Directive: rdPlayer', function () {
   
   it('should reset buffer to empty if no streams are provided', 
       inject(function ($rootScope, rdPlayerDirective) {
-
+      
     $rootScope.streams = [];
     rdPlayerDirective[0].link($rootScope, element, attrs);
     $rootScope.$digest();
 
-    expect(element[0].loadCalled).toBe(true);
+    expect(element[0].load.calls.length).toEqual(1);
+    expect(element[0].play).not.toHaveBeenCalled();
 
   }));
 
@@ -72,6 +76,27 @@ describe('Directive: rdPlayer', function () {
     element[0].networkState = 3;
     streamsElem.callbacks['error']();    
     expect(errorInvoked).toBe(true);
+
+  }));
+
+  it('should reconnect on error', 
+      inject(function ($rootScope, rdPlayerDirective) {
+      
+    $rootScope.playingError = jasmine.createSpy('playingError');
+    
+    $rootScope.streams = ['stream1', 'stream2', 'stream3'];
+    rdPlayerDirective[0].link($rootScope, element, attrs);
+    $rootScope.$digest();
+
+    expect(element[0].load.calls.length).toEqual(1);
+    for (var i = 0; i < 3; i++) {
+      element.callbacks['error']();
+      expect(element[0].load.calls.length).toEqual(i + 2);
+    }
+    expect($rootScope.playingError).not.toHaveBeenCalled();
+    element.callbacks['error']();
+    expect(element[0].load.calls.length).toEqual(4);
+    expect($rootScope.playingError.calls.length).toEqual(1);
 
   }));
 
