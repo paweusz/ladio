@@ -6,8 +6,12 @@ describe('Directive: rdPlayer', function () {
   var element;
 
   it('should make hidden element visible', inject(function ($rootScope, $compile) {
-    element = angular.element('<rd-player></rd-player>');
+    $rootScope.streams = [];
+    element = angular.element('<audio rd-player="streams"></audio>');
     element = $compile(element)($rootScope);
+    
+    $rootScope.$digest();
+    
     expect(element.text()).toBe('this is the rdPlayer directive');
   }));
 });
