@@ -7,12 +7,15 @@ angular.module('ladioApp')
       scope: true,
       link: function postLink(scope, element, attrs) {
         var maxReconnects = parseInt(attrs.maxreconnects, 10);
+
         var reconnectCnt = 0;
         var stalled = false;
+        var wasPlaying = false;
 
         scope.$watch(attrs.rdPlayer, function(streams) {
-          stalled = false;
           reconnectCnt = 0;
+          stalled = false;
+          wasPlaying = false;
           
           element.children().remove();
 
@@ -62,6 +65,7 @@ angular.module('ladioApp')
         element.bind('playing', function() {
           console.debug('Playing started.');
           reconnectCnt = 0;
+          wasPlaying = true;
           scope.$apply(attrs.onplayingstarted);
         });
         element.bind('error', function() {
@@ -81,7 +85,9 @@ angular.module('ladioApp')
           if (stalled) {
             console.debug('Playing progress.');
             stalled = false;
-            scope.$apply(attrs.onplayingresumed);
+            if (wasPlaying) {
+              scope.$apply(attrs.onplayingresumed);
+            }
           }
         });
 
