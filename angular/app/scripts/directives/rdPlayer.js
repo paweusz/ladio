@@ -6,10 +6,14 @@ angular.module('ladioApp')
       restrict: 'A',
       scope: true,
       link: function postLink(scope, element, attrs) {
+        var maxReconnects = parseInt(attrs.maxreconnects, 10);
+        var reconnectCnt = 0;
         var stalled = false;
 
         scope.$watch(attrs.rdPlayer, function(streams) {
           stalled = false;
+          reconnectCnt = 0;
+          
           element.children().remove();
 
           if (!streams || streams.length === 0) {
@@ -37,6 +41,20 @@ angular.module('ladioApp')
           element[0].load();
           
         }, true);
+        
+        function reconnect() {
+          reconnectCnt++;
+          console.debug('Reconnecting (' + reconnectCnt + ').');
+          element[0].load();
+        }
+        
+        function handleError() {
+          if (reconnectCnt === maxReconnects) {
+            scope.$apply(attrs.onplayingerror);
+          } else {
+            reconnect();
+          }
+        }
 
         //Audio tag event handlers        
         element.bind('canplay', function() {
@@ -45,15 +63,16 @@ angular.module('ladioApp')
         });
         element.bind('playing', function() {
           console.debug('Playing started.');
+          reconnectCnt = 0;
           scope.$apply(attrs.onplayingstarted);
         });
         element.bind('error', function() {
           console.debug('Playing error.');
-          scope.$apply(attrs.onplayingerror);
+          handleError();
         });
         element.bind('ended', function() {
           console.debug('Playing ended.');
-          scope.$apply(attrs.onplayingerror);
+          handleError();
         });
         element.bind('stalled', function() {
           console.debug('Playing stalled.');
