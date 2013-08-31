@@ -100,4 +100,34 @@ describe('Directive: rdPlayer', function () {
 
   }));
 
+  it('should handle stalled streams', 
+      inject(function ($rootScope, rdPlayerDirective) {
+      
+    $rootScope.playingStarted = jasmine.createSpy('playingStarted');
+    $rootScope.playingStalled = jasmine.createSpy('playingStalled');
+    $rootScope.playingResumed = jasmine.createSpy('playingResumed');
+    
+    $rootScope.streams = ['stream1', 'stream2', 'stream3'];
+    rdPlayerDirective[0].link($rootScope, element, attrs);
+    $rootScope.$digest();
+
+    element.callbacks['progress']();
+    expect(element[0].load.calls.length).toEqual(1);
+    element.callbacks['canplay']();
+    element.callbacks['progress']();
+    expect(element[0].play.calls.length).toEqual(1);
+    expect($rootScope.playingStarted).not.toHaveBeenCalled();
+    element.callbacks['playing']();
+    expect($rootScope.playingStarted.calls.length).toEqual(1);
+    
+    expect($rootScope.playingStalled).not.toHaveBeenCalled();
+    element.callbacks['stalled']();
+    
+    element.callbacks['progress']();
+    expect($rootScope.playingResumed.calls.length).toEqual(1);
+    element.callbacks['progress']();
+    expect($rootScope.playingResumed.calls.length).toEqual(1);
+
+  }));
+
 });
