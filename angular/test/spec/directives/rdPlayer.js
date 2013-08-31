@@ -1,13 +1,14 @@
 'use strict';
 
 describe('Directive: rdPlayer', function () {
+
   beforeEach(module('ladioApp'));
+
+  var element;
+  var attrs;
   
-  it('should reset buffer to empty if no streams are provided', 
-      inject(function ($rootScope, rdPlayerDirective) {
-    var streams = [];
-    var scope = $rootScope;
-    var element = {
+  beforeEach(function() {
+    element = {
       callbacks: {},
       0: {
         loadCalled: false,
@@ -25,19 +26,24 @@ describe('Directive: rdPlayer', function () {
         }
       }
     };
-    var attrs = {
-      rdPlayer: streams,
+    attrs = {
+      rdPlayer: "streams",
       onplayingstarted: "playingStarted()",
       onplayingerror: "playingError()",
       onplayingstalled: "playingStalled()",
       onplayingresumed: "playingResumed()",
       maxreconnects: "3"
     };
-    
-    rdPlayerDirective[0].link(scope, element, attrs);
+  });
+  
+  it('should reset buffer to empty if no streams are provided', 
+      inject(function ($rootScope, rdPlayerDirective) {
 
+    $rootScope.streams = [];
+    rdPlayerDirective[0].link($rootScope, element, attrs);
     $rootScope.$digest();
-    
+
     expect(element[0].loadCalled).toBe(true);
+
   }));
 });
