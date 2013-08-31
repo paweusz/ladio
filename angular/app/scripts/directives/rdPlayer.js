@@ -65,7 +65,7 @@ angular.module('ladioApp')
           scope.$apply(attrs.onplayingstarted);
         });
         element.bind('error', function() {
-          console.debug('Playing error.');
+          console.debug('Playing error. Reason ' + element[0].error.code + '.');
           handleError();
         });
         element.bind('ended', function() {
