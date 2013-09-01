@@ -284,7 +284,56 @@ ul {
   .separator {
     color: $ruler-sep-color;
   }
+  
+}
 
+#breadcrumbs-ruler {
+
+  .container {
+    position: relative;
+  }
+
+  .search-box {
+    position: absolute;
+    right: 0;
+    top: -5px;
+  }
+
+}
+
+.search-box {
+
+  * {
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+  }
+  
+  .search-icon {
+    width: 35px;
+    height: 30px;
+    border-radius: 15px 0 0 15px;
+    background-color: rgb(76,107,150);
+    float: left;
+  }
+  
+  input {
+    width: 200px;
+    height: 30px;
+    outline: 0;
+    padding: 0 5px;
+    float: left;
+  }
+
+  button {  
+    height: 30px;
+    background-color: white;
+    display: block;
+    float: right;
+    border-radius: 0 15px 15px 0;
+    padding-right: 10px;
+  }
+  
 }
 
 .spinner {
