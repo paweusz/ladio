@@ -52,6 +52,10 @@ menu {
   list-style-type:none;
 }
 
+button {
+  cursor: pointer;
+}
+
 #header {
   background-color: $header-color;
   box-shadow: 0 0 40px 10px #000;
@@ -70,7 +74,7 @@ menu {
     top: 15px;
     right: 100px;
     font-size: 16px;
-    color: white;
+    color: $ruler-color;
     text-shadow: 0 0 0.5em #FFF;
     cursor: pointer;
     
@@ -83,7 +87,7 @@ menu {
         white-space: nowrap;
       }
       &.playing #ctrl {
-        background-color: white;
+        background-color: $ruler-color;
         width: 19px;
         height: 19px;
 
@@ -97,14 +101,14 @@ menu {
         -webkit-animation-timing-function: linear;
       }
       &.stopped #ctrl {
-        border-color: transparent transparent transparent white;
+        border-color: transparent transparent transparent $ruler-color;
         border-width: 9px 0 10px 19px;
         border-style: solid;
       }
       &.connecting #ctrl {
         width: 15px;
         height: 15px;
-        border: 2px solid white;
+        border: 2px solid $ruler-color;
 
         animation-name: rotate;
         animation-duration: 1s;
@@ -312,8 +316,9 @@ ul {
   .search-icon {
     width: 35px;
     height: 30px;
-    border-radius: 15px 0 0 15px;
-    background-color: rgb(76,107,150);
+    border-radius: 5px 0 0 5px;
+    background-color: $station-color;
+    opacity: 1.0;
     float: left;
   }
   
@@ -321,17 +326,29 @@ ul {
     width: 200px;
     height: 30px;
     outline: 0;
-    padding: 0 5px;
+    padding-left: 5px;
     float: left;
   }
 
   button {  
     height: 30px;
-    background-color: white;
+    width: 24px;
+    background-color: $ruler-color;
     display: block;
     float: right;
-    border-radius: 0 15px 15px 0;
-    padding-right: 10px;
+    border-radius: 0 5px 5px 0;
+    padding: 8px 5px;
+    
+    polygon {
+      fill: $ruler-bg-color;
+    }
+
+    &:after {
+      clear: both;
+      content: "";
+      display: block;
+    }
+
   }
   
 }
