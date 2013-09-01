@@ -11,8 +11,9 @@ files = [
   'app/bower_components/angular-mocks/angular-mocks.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
-  'test/mock/**/*.js',
-  'test/spec/**/*.js'
+  //'test/mock/**/*.js',
+  //'test/spec/**/*.js'
+  'test/spec/directives/rdPlayer.js'
 ];
 
 // list of files to exclude

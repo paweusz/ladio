@@ -6,10 +6,17 @@ angular.module('ladioApp')
       restrict: 'A',
       scope: true,
       link: function postLink(scope, element, attrs) {
+        var maxReconnects = parseInt(attrs.maxreconnects, 10);
+
+        var reconnectCnt = 0;
         var stalled = false;
+        var wasPlaying = false;
 
         scope.$watch(attrs.rdPlayer, function(streams) {
+          reconnectCnt = 0;
           stalled = false;
+          wasPlaying = false;
+          
           element.children().remove();
 
           if (!streams || streams.length === 0) {
@@ -20,15 +27,13 @@ angular.module('ladioApp')
           
           console.debug('Playing streams ' + streams);
           
-          var streamErrCnt = 0;
           angular.forEach(streams, function(stream) {
             element.append('<source src="' + stream + '"></source>');
           });
 
           element.children().bind('error', function() {
             console.debug('Playing stream error.');
-            streamErrCnt++;
-            if (streamErrCnt === streams.length) {
+            if (element[0].networkState === 3) { //HTMLMediaElement.NETWORK_NO_SOURCE
               console.debug('All streams failed to play');
               scope.$apply(attrs.onplayingerror);
             }
@@ -37,6 +42,20 @@ angular.module('ladioApp')
           element[0].load();
           
         }, true);
+        
+        function reconnect() {
+          reconnectCnt++;
+          console.debug('Reconnecting (' + reconnectCnt + ').');
+          element[0].load();
+        }
+        
+        function handleError() {
+          if (reconnectCnt === maxReconnects) {
+            scope.$apply(attrs.onplayingerror);
+          } else {
+            reconnect();
+          }
+        }
 
         //Audio tag event handlers        
         element.bind('canplay', function() {
@@ -45,15 +64,18 @@ angular.module('ladioApp')
         });
         element.bind('playing', function() {
           console.debug('Playing started.');
+          reconnectCnt = 0;
+          wasPlaying = true;
           scope.$apply(attrs.onplayingstarted);
         });
         element.bind('error', function() {
-          console.debug('Playing error.');
-          scope.$apply(attrs.onplayingerror);
+          console.debug('Playing error. Reason ' + element[0].error.code + '.');
+          handleError();
         });
         element.bind('ended', function() {
           console.debug('Playing ended.');
-          scope.$apply(attrs.onplayingerror);
+          scope.$apply(attrs.onplayingstalled);
+          handleError();
         });
         element.bind('stalled', function() {
           console.debug('Playing stalled.');
@@ -64,7 +86,9 @@ angular.module('ladioApp')
           if (stalled) {
             console.debug('Playing progress.');
             stalled = false;
-            scope.$apply(attrs.onplayingresumed);
+            if (wasPlaying) {
+              scope.$apply(attrs.onplayingresumed);
+            }
           }
         });
 

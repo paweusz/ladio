@@ -27,7 +27,8 @@
     "connect-livereload": "~0.2.0",
     "grunt-google-cdn": "~0.2.0",
     "grunt-ngmin": "~0.0.2",
-    "grunt-replace": "~0.4.0"
+    "grunt-replace": "~0.4.0",
+    "phantomjs": "~1.9.1-8"
   },
   "engines": {
     "node": ">=0.8.0"
