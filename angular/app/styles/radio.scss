@@ -334,6 +334,15 @@ ul {
       margin: auto;
       width: 22px;
       height: 22px;
+      
+      circle {
+        stroke: $ruler-color;
+      }
+      
+      path {
+        stroke: $ruler-color;
+        fill: $ruler-color;
+      }
     }
   }
   
