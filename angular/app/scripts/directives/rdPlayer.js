@@ -74,6 +74,7 @@ angular.module('ladioApp')
         });
         element.bind('ended', function() {
           console.debug('Playing ended.');
+          scope.$apply(attrs.onplayingstalled);
           handleError();
         });
         element.bind('stalled', function() {
