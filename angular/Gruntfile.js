@@ -51,7 +51,7 @@ module.exports = function (grunt) {
           livereload: LIVERELOAD_PORT
         },
         files: [
-          '<%= yeoman.app %>/{,views/{,partials/}}*.html'
+          '<%= yeoman.app %>/{,views/{,*/}}*.html'
         ],
         tasks: ['replace:dev']
       },
@@ -319,7 +319,7 @@ module.exports = function (grunt) {
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.js',
+            'scripts/{,*/}*.{js,html}',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}
@@ -336,7 +336,7 @@ module.exports = function (grunt) {
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.js',
+            'scripts/{,*/}*.{js,html}',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}

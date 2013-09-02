@@ -13,7 +13,7 @@ files = [
   'app/scripts/**/*.js',
   //'test/mock/**/*.js',
   //'test/spec/**/*.js'
-  'test/spec/directives/rdPlayer.js'
+  'test/spec/directives/*.js'
 ];
 
 // list of files to exclude
