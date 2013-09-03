@@ -4,12 +4,12 @@ describe('Directive: rdSearch', function () {
 
   // load the directive's module
   beforeEach(module('ladioApp'));
+  beforeEach(module('scripts/directives/rdSearch.html'));
   
   var element, scope;
 
   beforeEach(inject(function ($rootScope, $httpBackend) {
     scope = $rootScope.$new();
-    $httpBackend.whenGET('scripts/directives/rdSearch.html').passThrough();
   }));
 
   it('should have attributes of input', inject(function ($compile) {
