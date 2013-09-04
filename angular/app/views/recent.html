@@ -1,7 +1,12 @@
 <div id="content">
 
   <div class="ruler">
-    <div class="container">Recently played stations</div>
+    <div class="container">
+      <span>Recently played stations</span>
+      <input type="text" placeholder="Filter stations" maxlength="20" 
+        ng-model="filter" ng-change="filterChanged()" ard-search></input>
+      <div ng-bind="filter"></div>
+    </div>
   </div>
 
   <ng-include src="'/views/partials/stations.html'" ng-show="stations.length != 0"></ng-include>
