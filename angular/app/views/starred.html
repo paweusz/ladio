@@ -1,13 +1,20 @@
 <div id="content">
 
   <div class="ruler">
-    <div class="container">Favourite stations</div>
+    <div class="container">
+      <span>Favourite stations</span>
+      <rd-search placeholder="Filter stations" 
+                 model="filtering.filterValue" 
+                 change="filtering.filterChanged()">
+      </rd-search>
+    </div>
   </div>
 
   <ng-include src="'/views/partials/stations.html'" ng-show="stations.length != 0"></ng-include>
 
-  <div class="container" ng-show="stations.length == 0">
-    <div class="msg">Nothing here yet. To make station favourite click its star icon.</div>
+  <div class="container" ng-show="stations.length == 0" ng-switch on="!!filtering.filterValue">
+    <div class="msg" ng-switch-when="false">Nothing here yet. To make station favourite click its star icon.</div>
+    <div class="msg" ng-switch-when="true">No stations matching "{{filtering.filterValue.trim()}}" has been found.</div>
   </div>
 
 </div>
