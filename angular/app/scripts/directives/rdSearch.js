@@ -13,6 +13,11 @@ angular.module('ladioApp')
             var templInput = element.find('input');
             templInput.replaceWith(clone);
           });
+          var inputElem = element.find('input');
+          var buttonElem = element.find('button');
+          buttonElem.bind('click', function() {
+            inputElem.val('');
+          });
         };
       }
     };
