@@ -12,14 +12,18 @@ function doGetJson(url, res, filter) {
   if (cached) {
     res.json(cached);
   } else {
-    var errHandler = function(e) {
+    var errHandler = function(e, rspCode) {
       var msg = 'Error processing catalog request (URL: ' + apiUrl + url.replace(apiKey, '...') + ', msg: ' + e.message + ')';
       console.log(msg); 
       console.log(e.stack);
-      res.send(503, msg);
+      
+      if (!rspCode) {
+        rspCode = 503;
+      }
+      res.send(rspCode, msg);
     };
     http.get(apiUrl + url, function (http_res) {
-      var data = "";
+      var data = '';
 
       http_res.on("data", function (chunk) {
         data += chunk;
@@ -36,7 +40,16 @@ function doGetJson(url, res, filter) {
         res.json(rspJson);
       }
       
-      http_res.on("end", function () {
+      http_res.on('end', function () {
+        var statusCode = http_res.statusCode;
+        if (statusCode !== 200 && statusCode !== 404) {
+          errHandler({
+            message: 'Dirble API response ' + statusCode,
+            stack: 'doGetJson(url, res, filter)'
+          }, statusCode);
+          return;
+        }
+        
         try {
           processRsp(data);
         } catch (e) {
