@@ -12,7 +12,6 @@ angular.module('ladioApp')
         change: '=change'
       },
       link: function(scope, element) {
-        console.log(scope.ngModel);
         var buttonElem = element.find('button');
         buttonElem.bind('click', function() {
           scope.model = '';
