@@ -1,11 +1,11 @@
 'use strict';
 
-var http = require("http");
-var cache = require("./cache");
-var _ = require("underscore");
+var http = require('http'),
+  cache = require('./cache'),
+  _ = require('underscore');
 
 var apiKey = 'b4c059a7383415cb5295c9faec124b151213a788';
-var apiUrl = 'http://dirble.com/dirapi'
+var apiUrl = 'http://dirble.com/dirapi';
 
 function doGetJson(url, res, filter) {
   var cached = cache.get(url);
@@ -14,7 +14,7 @@ function doGetJson(url, res, filter) {
   } else {
     var errHandler = function(e, rspCode) {
       var msg = 'Error processing catalog request (URL: ' + apiUrl + url.replace(apiKey, '...') + ', msg: ' + e.message + ')';
-      console.log(msg); 
+      console.log(msg);
       console.log(e.stack);
       
       if (!rspCode) {
@@ -22,14 +22,14 @@ function doGetJson(url, res, filter) {
       }
       res.send(rspCode, msg);
     };
-    http.get(apiUrl + url, function (http_res) {
+    http.get(apiUrl + url, function (httpRsp) {
       var data = '';
 
-      http_res.on("data", function (chunk) {
+      httpRsp.on('data', function (chunk) {
         data += chunk;
       });
       
-      http_res.on('error', errHandler);
+      httpRsp.on('error', errHandler);
       
       function processRsp(rspData) {
         var rspJson = JSON.parse(rspData);
@@ -40,8 +40,8 @@ function doGetJson(url, res, filter) {
         res.json(rspJson);
       }
       
-      http_res.on('end', function () {
-        var statusCode = http_res.statusCode;
+      httpRsp.on('end', function () {
+        var statusCode = httpRsp.statusCode;
         if (statusCode !== 200 && statusCode !== 404) {
           errHandler({
             message: 'Dirble API response ' + statusCode,

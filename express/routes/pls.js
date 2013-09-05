@@ -1,4 +1,6 @@
-var http = require("http");
+'use strict';
+
+var http = require('http');
 
 function parsePls(pls) {
   var result = [];
@@ -16,18 +18,18 @@ function parsePls(pls) {
 function doGetPls(ref, res) {
   var errHandler = function(e) {
     var msg = 'Error processing pls request (URL: ' + ref + ', msg: ' + e.message + ')';
-    console.log(msg); 
+    console.log(msg);
     console.log(e.stack);
     res.send(503, msg);
   };
-  http.get(ref, function (http_res) {
-    var data = "";
+  http.get(ref, function (httpRsp) {
+    var data = '';
 
-    http_res.on("data", function (chunk) {
+    httpRsp.on('data', function (chunk) {
       data += chunk;
     });
       
-    http_res.on("end", function () {
+    httpRsp.on('end', function () {
       var streams = parsePls(data);
       var obj = [];
       for (var i = 0; i < streams.length; i++) {
@@ -36,7 +38,7 @@ function doGetPls(ref, res) {
       res.json(obj);
     });
 
-    http_res.on('error', errHandler);
+    httpRsp.on('error', errHandler);
     
   }).on('error', errHandler);
 }
