@@ -30,7 +30,7 @@ $alert-color: #900000;
 
 body {
   background: #000 url("/images/radio-bg.jpg") no-repeat fixed right bottom;
-  font-family: Gill Sans,sans-serif;
+  font-family: 'Droid Sans', sans-serif;
   font-size: 18px;
   margin: 0;
   padding: 0;
@@ -243,6 +243,7 @@ ul {
   &#navigation {
     font-size: 16px;
     font-weight: bold;
+    text-transform: uppercase;
     color: $ruler-color;
 
     li {
@@ -478,7 +479,7 @@ ul {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   position: fixed;
   left: calc(50% - 430px/2);
-  top: 80px;
+  top: 120px;
   width: 445px;
   z-index: 10;
   font-size: 14px;
