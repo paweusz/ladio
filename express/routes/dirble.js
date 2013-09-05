@@ -27,13 +27,21 @@ function doGetJson(url, res, filter) {
       
       http_res.on('error', errHandler);
       
-      http_res.on("end", function () {
-        var resJson = JSON.parse(data);
+      function processRsp(rspData) {
+        var rspJson = JSON.parse(rspData);
         if (filter) {
-          resJson = _.filter(resJson, filter);
+          rspJson = _.filter(rspJson, filter);
         }
-        cache.put(url, resJson);
-        res.json(resJson);
+        cache.put(url, rspJson);
+        res.json(rspJson);
+      }
+      
+      http_res.on("end", function () {
+        try {
+          processRsp(data);
+        } catch (e) {
+          errHandler(e);
+        }
       });
     }).on('error', errHandler);
   }
