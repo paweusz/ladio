@@ -14,6 +14,13 @@
         <a ng-show="!subGenre && subGenreId">&hellip;</a>
       </li>
     </ul>
+    <div ng-switch on="!!subGenre">
+      <rd-search ng-switch-when="true"
+                 placeholder="Filter stations" 
+                 model="filtering.filterValue" 
+                 change="filtering.filterChanged()">
+      </rd-search>
+    </div>
   </div>
 </div>
 

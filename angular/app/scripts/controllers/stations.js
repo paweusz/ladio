@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('StationsCtrl', function ($scope, $routeParams, $filter, Genres) {
+  .controller('StationsCtrl', function ($scope, $routeParams, $filter, Genres, StationSearch) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);
 
@@ -24,16 +24,25 @@ angular.module('ladioApp')
       $scope.subGenreId = $scope.genreId;
       $scope.subGenre = {id: -1};
     }
-    
-    Genres.stations($scope.subGenreId).then(function(stations) {
+
+    var stations = [];
+    Genres.stations($scope.subGenreId).then(function(fetched) {
       console.debug('Stations fetched.');
-      $scope.stations = $filter('orderBy')(stations,
+      stations = $filter('orderBy')(fetched,
         function(station) {
           return station.name.trim();
         });
+      $scope.stations = stations;
     }, function(data) {
       console.error('Error fetching stations data. (' + data.status + ':' + data.data + ')');
       $scope.stations = [];
     });
+
+    $scope.filtering = {
+      filterChanged: function() {
+        $scope.stations = StationSearch.search(stations, this.filterValue);
+      },
+      filterValue: ''
+    };
 
   });
