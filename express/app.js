@@ -35,6 +35,7 @@ app.all('*', function (req, res, next) {
 
 var path = '/api';
 app.get(path + '/genres', dirble.genres);
+app.get(path + '/genres/stations', dirble.stations);
 app.get(path + '/genres/:genreId/subgenres', dirble.subGenres);
 app.get(path + '/genres/:genreId/stations', dirble.stations);
 app.get(path + '/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);

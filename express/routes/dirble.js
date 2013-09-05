@@ -1,3 +1,5 @@
+'use strict';
+
 var http = require("http");
 var cache = require("./cache");
 
@@ -43,9 +45,18 @@ exports.subGenres = function(req, res) {
 
 exports.stations = function(req, res) {
   var genreId = req.params.subgenreId;
+  var search = req.query.search;
   if (!genreId) {
     genreId = req.params.genreId;
   }
-  doGetJson('/stations/apikey/' + apiKey + '/id/' + genreId, res);
+  if (!search) {
+    doGetJson('/stations/apikey/' + apiKey + '/id/' + genreId, res);
+  } else {
+    var query = '';
+    if (!!genreId) {
+      query = '?genre=' + genreId;
+    }
+    doGetJson('/search/apikey/' + apiKey + '/search/' + search + query, res);
+  }
 };
 
