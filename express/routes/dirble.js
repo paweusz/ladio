@@ -2,11 +2,12 @@
 
 var http = require("http");
 var cache = require("./cache");
+var _ = require("underscore");
 
 var apiKey = 'b4c059a7383415cb5295c9faec124b151213a788';
 var apiUrl = 'http://dirble.com/dirapi'
 
-function doGetJson(url, res) {
+function doGetJson(url, res, filter) {
   var cached = cache.get(url);
   if (cached) {
     res.json(cached);
@@ -28,6 +29,9 @@ function doGetJson(url, res) {
       
       http_res.on("end", function () {
         var resJson = JSON.parse(data);
+        if (filter) {
+          resJson = _.filter(resJson, filter);
+        }
         cache.put(url, resJson);
         res.json(resJson);
       });
@@ -56,7 +60,10 @@ exports.stations = function(req, res) {
     if (!!genreId) {
       query = '?genre=' + genreId;
     }
-    doGetJson('/search/apikey/' + apiKey + '/search/' + search + query, res);
+    var regFilter = new RegExp(search.trim(), 'i');
+    doGetJson('/search/apikey/' + apiKey + '/search/' + search + query, res, function(station) {
+      return station.name.match(regFilter);
+    });
   }
 };
 
