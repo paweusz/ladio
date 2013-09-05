@@ -82,7 +82,7 @@ exports.stations = function(req, res) {
       query = '?genre=' + genreId;
     }
     var regFilter = new RegExp(search.trim(), 'i');
-    doGetJson('/search/apikey/' + apiKey + '/search/' + search + query, res, function(station) {
+    doGetJson('/search/apikey/' + apiKey + '/search/' + encodeURIComponent(search) + query, res, function(station) {
       return station.name.match(regFilter);
     });
   }
