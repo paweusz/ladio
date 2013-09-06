@@ -8,28 +8,14 @@ describe('Controller: GenresCtrl', function () {
   var GenresCtrl, scope, searchSvcRsp;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, GenresSvcMock) {
     scope = $rootScope.$new();
     
-    function SvcRsp() {
-      this.succCb = null;
-      this.success = function(succCb) {
-        this.succCb = succCb;
-        return {
-          error: function(errCb) {}
-        };
-      };
-    };
-
-    searchSvcRsp = new SvcRsp();    
-    var mockGenresSvc = {
-      genres: function() {return new SvcRsp();},
-      search: function() {return searchSvcRsp;}
-    };
+    searchSvcRsp = GenresSvcMock.searchSvcRsp;    
 
     GenresCtrl = $controller('GenresCtrl', {
       $scope: scope,
-      Genres: mockGenresSvc
+      Genres: GenresSvcMock
     });
   }));
 
