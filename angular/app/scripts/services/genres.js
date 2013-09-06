@@ -63,6 +63,16 @@ angular.module('ladioApp')
             }
             return result;
           });
+        },
+        
+        search: function(searchFor, genreId) {
+          var uri;
+          if (!genreId) {
+            uri = '/genres/stations?search=' + encodeURIComponent(searchFor);
+          } else {
+            uri = '/genres/' + genreId + '/stations?search=' + encodeURIComponent(searchFor);
+          }
+          return $http.get(url + uri, {cache: true});
         }
         
       };
