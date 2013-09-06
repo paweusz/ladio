@@ -21,6 +21,13 @@
                  change="filtering.filterChanged()">
       </rd-search>
     </div>
+    <div ng-switch on="!genre && !subGenre">
+      <rd-search ng-switch-when="true"
+                 placeholder="Search stations" 
+                 model="search.searchValue" 
+                 change="search.searchChanged()">
+      </rd-search>
+    </div>
   </div>
 </div>
 
