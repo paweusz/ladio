@@ -27,8 +27,20 @@ describe('Controller: GenresCtrl', function () {
     scope.search.searchValue = 'tezt';
     scope.search.searchChanged();
     
+    expect(scope.stations).not.toBeDefined();
     searchSvcRsp.succCb(result);
-    
-    expect(scope.stations).toBe(result);
+    expect(scope.stations).toEqual(result);
   });
+  
+  it('should search stations', function () {
+    scope.search.searchValue = 'tezt';
+    scope.search.searchChanged();
+    
+    expect(scope.stations).not.toBeDefined();
+    searchSvcRsp.errCb(404, "Not found");
+    expect(scope.stations).toEqual([]);
+  });
+  
+  
+  
 });
