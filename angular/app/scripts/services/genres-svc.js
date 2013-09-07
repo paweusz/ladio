@@ -1,9 +1,15 @@
 'use strict';
 
 angular.module('ladioApp')
-  .factory('Genres', function($http) {
+  .factory('Genres', function($http, $filter) {
 
       var url = '@@API_URL';
+      var enabledPredicate = function(station) {
+        return station.status === 1;
+      };
+      var orderPredicate = function(station) {
+        return station.name.trim();
+      };
 
       return {
 
@@ -64,7 +70,7 @@ angular.module('ladioApp')
             return result;
           });
         },
-        
+
         search: function(searchFor, genreId) {
           var uri;
           if (!genreId) {
@@ -72,8 +78,12 @@ angular.module('ladioApp')
           } else {
             uri = '/genres/' + genreId + '/stations?search=' + encodeURIComponent(searchFor);
           }
-          return $http.get(url + uri, {cache: true});
+          var prs = $http.get(url + uri, {cache: true});
+          return prs.then(function(data) {
+            var filtered = $filter('filter')(data.data, enabledPredicate);
+            return $filter('orderBy')(filtered, orderPredicate);
+          });
         }
-        
+
       };
     });

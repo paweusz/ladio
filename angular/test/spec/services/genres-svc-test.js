@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Service: Genres', function () {
+describe('Service Genres', function () {
 
   beforeEach(module('ladioApp'));
 
@@ -13,8 +13,16 @@ describe('Service: Genres', function () {
   beforeEach(inject(function ($injector, _Genres_) {
     Genres = _Genres_;
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.when('GET', globSearchURL).respond({name: searchFor});
-    $httpBackend.when('GET', genreSearchURL).respond({name: searchFor});
+    
+    var stations = [{
+      name: searchFor,
+      status: 1
+    }, {
+      name: searchFor + '-disabled',
+      status: 0
+    }];
+    $httpBackend.when('GET', globSearchURL).respond(stations);
+    $httpBackend.when('GET', genreSearchURL).respond(stations);
   }));
 
   afterEach(function() {
@@ -25,9 +33,9 @@ describe('Service: Genres', function () {
   it('should search stations in whole catalog', function () {
     $httpBackend.expectGET(globSearchURL);
     var rsp = Genres.search(searchFor);
-    rsp.success(function(data) {
-      expect(data.name).toBe(searchFor);
-    }).error(function(data, status) {
+    rsp.then(function(rsp) {
+      expect(rsp[0].name).toBe(searchFor);
+    }, function(data, status) {
       expect('No error').toBe(true);
     });
     $httpBackend.flush();
@@ -36,10 +44,20 @@ describe('Service: Genres', function () {
   it('should search stations in genre', function () {
     $httpBackend.expectGET(genreSearchURL);
     var rsp = Genres.search(searchFor, genreId);
-    rsp.success(function(data) {
-      expect(data.name).toBe(searchFor);
-    }).error(function(data, status) {
+    rsp.then(function(rsp) {
+      expect(rsp[0].name).toBe(searchFor);
+    }, function(data, status) {
       expect('No error').toBe(true);
+    });
+    $httpBackend.flush();
+  });
+
+  it('should filter disabled search stations', function () {
+    $httpBackend.expectGET(genreSearchURL);
+    var stations = Genres.search(searchFor, genreId).then(function(rsp) {
+      expect(rsp.length).toBe(1);
+      expect(rsp[0].name).toBe(searchFor);
+      expect(rsp[0].status).toBe(1);
     });
     $httpBackend.flush();
   });

@@ -21,10 +21,10 @@ angular.module('ladioApp')
         previousValue = this.searchValue;
         var searchValue = this.searchValue;
 
-        Genres.search(this.searchValue).success(function(data) {
+        Genres.search(this.searchValue).then(function(data) {
           $log.log('Catalog searched for \'' + searchValue + '\'.');
           $scope.stations = data;
-        }).error(function(data, status) {
+        }, function(data, status) {
           $log.log('Error fetching catalog search data. (' + status + ':' + data + ')');
           $scope.stations = [];
         });

@@ -5,14 +5,9 @@ angular.module('ladioApp').factory('GenresSvcMock', function() {
   function SvcRsp() {
     this.succCb = null;
     this.errCb = null;
-    this.success = function(succCb) {
+    this.then = function(succCb, errCb) {
       this.succCb = succCb;
-      var self = this;
-      return {
-        error: function(errCb) {
-          self.errCb = errCb;
-        }
-      };
+      this.errCb = errCb;
     };
   };
 
