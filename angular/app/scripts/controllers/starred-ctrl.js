@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('StarredCtrl', function ($scope, StarredSrv, $filter, StationSearch) {
+  .controller('StarredCtrl', function ($scope, StarredSrv, $filter) {
 
     var sorted = $filter('orderBy')(StarredSrv.starred(),
       function(station) {
@@ -10,10 +10,10 @@ angular.module('ladioApp')
     $scope.stations = sorted;
 
     $scope.filtering = {
-      filterChanged: function() {
-        $scope.stations = StationSearch.search(sorted, this.filterValue);
-      },
       filterValue: ''
     };
+    $scope.$watch('filtering.filterValue', function(search) {
+      $scope.stations = $filter('SearchFilter')(sorted, search);
+    });
 
   });

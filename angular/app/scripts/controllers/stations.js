@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('StationsCtrl', function ($scope, $routeParams, $filter, GenresSvc, StationSearch) {
+  .controller('StationsCtrl', function ($scope, $routeParams, $filter, GenresSvc) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);
 
@@ -39,10 +39,10 @@ angular.module('ladioApp')
     });
 
     $scope.filtering = {
-      filterChanged: function() {
-        $scope.stations = StationSearch.search(stations, this.filterValue);
-      },
       filterValue: ''
     };
+    $scope.$watch('filtering.filterValue', function(search) {
+      $scope.stations = $filter('SearchFilter')(stations, search);
+    });
 
   });

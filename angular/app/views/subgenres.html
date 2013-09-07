@@ -6,7 +6,7 @@
 
     <div class="genres" ng-switch-when="false">
       <div class="container">
-        <div class="genre" title="Stations in this genre" ng-click="stations(subgenre)"><div class="name">Stations</div></div>
+        <div class="genre" title="Stations in this genre" ng-click="selectStations(subgenre)"><div class="name">Stations</div></div>
         <div class="genre" ng-repeat="subgenre in subgenres" ng-click="select(subgenre)"><div class="name" title="{{subgenre.description}}">{{subgenre.name}}</div></div>
       </div>
       <ng-include src="'/views/partials/spinner.html'" ng-hide="subgenres != null"></ng-include>

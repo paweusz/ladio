@@ -20,7 +20,7 @@ angular.module('ladioApp')
       $scope.subgenres = [];
     });
 
-    $scope.stations = function() {
+    $scope.selectStations = function() {
       $location.path('/genres/' + $scope.genreId + '/stations');
     };
 
