@@ -11,7 +11,7 @@ angular.module('ladioApp')
     }, function(data) {
       console.debug('Error fetching genre. (' + data.status + ':' + data.data + ')');
     });
-    
+
     GenresSvc.subGenres($scope.genreId).success(function(data) {
       console.debug('Subgenres fetched.');
       $scope.subgenres = data;

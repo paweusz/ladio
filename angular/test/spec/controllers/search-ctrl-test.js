@@ -12,6 +12,7 @@ describe('Controller SearchCtrl', function () {
     scope = $rootScope.$new();
     
     genresSvc = GenresSvcMock;
+    spyOn(genresSvc, "search").andCallThrough();
 
     SearchCtrl = $controller('SearchCtrl', {
       $scope: scope,
@@ -19,7 +20,7 @@ describe('Controller SearchCtrl', function () {
     });
   }));
 
-  it('should search stations', function () {
+  it('should search stations in catalog', function () {
     var result = [{
       name: 'tezt'
     }];
@@ -27,6 +28,8 @@ describe('Controller SearchCtrl', function () {
     scope.search.searchValue = 'tezt';
     scope.search.searchChanged();
     
+    expect(genresSvc.search).toHaveBeenCalledWith('tezt', null);
+
     expect(scope.stations).toBe(null);
     genresSvc.searchSvcRsp.succCb(result);
     expect(scope.stations).toEqual(result);
@@ -42,18 +45,33 @@ describe('Controller SearchCtrl', function () {
   });
   
   it('should not search on first/empty event', function () {
-    spyOn(genresSvc, "search").andCallThrough();
     scope.search.searchChanged();
     expect(genresSvc.search).not.toHaveBeenCalled();
   });
-  
+
   it('should not search for the same conditions', function () {
-    spyOn(genresSvc, "search").andCallThrough();
     scope.search.searchValue = 'tezt';
     scope.search.searchChanged();
     expect(genresSvc.search.calls.length).toEqual(1);
     scope.search.searchChanged();
     expect(genresSvc.search.calls.length).toEqual(1);
+  });
+  
+  it('handles search in genre', function() {
+    inject(function ($controller, $rootScope, GenresSvcMock) {
+
+      var genreSearchCtrl = $controller('SearchCtrl', {
+        $scope: scope,
+        GenresSvc: GenresSvcMock,
+        $routeParams: {
+          genreId: 7
+        }
+      });
+      
+      scope.search.searchValue = 'tezt';
+      scope.search.searchChanged();
+      expect(genresSvc.search).toHaveBeenCalledWith('tezt', 7);
+    })
   });
   
 });
