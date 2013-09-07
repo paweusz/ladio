@@ -5,13 +5,13 @@ describe('Controller: SearchCtrl', function () {
   // load the controller's module
   beforeEach(module('ladioApp'));
 
-  var SearchCtrl, scope, searchSvcRsp;
+  var SearchCtrl, scope, genresSvc, searchSvcRsp;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, GenresSvcMock) {
     scope = $rootScope.$new();
     
-    searchSvcRsp = GenresSvcMock.searchSvcRsp;    
+    genresSvc = GenresSvcMock;
 
     SearchCtrl = $controller('SearchCtrl', {
       $scope: scope,
@@ -28,7 +28,7 @@ describe('Controller: SearchCtrl', function () {
     scope.search.searchChanged();
     
     expect(scope.stations).toBe(null);
-    searchSvcRsp.succCb(result);
+    genresSvc.searchSvcRsp.succCb(result);
     expect(scope.stations).toEqual(result);
   });
   
@@ -37,10 +37,23 @@ describe('Controller: SearchCtrl', function () {
     scope.search.searchChanged();
     
     expect(scope.stations).toBe(null);
-    searchSvcRsp.errCb(404, "Not found");
+    genresSvc.searchSvcRsp.errCb(404, "Not found");
     expect(scope.stations).toEqual([]);
   });
   
+  it('should not search on first/empty event', function () {
+    spyOn(genresSvc, "search").andCallThrough();
+    scope.search.searchChanged();
+    expect(genresSvc.search).not.toHaveBeenCalled();
+  });
   
+  it('should not search for the same conditions', function () {
+    spyOn(genresSvc, "search").andCallThrough();
+    scope.search.searchValue = 'tezt';
+    scope.search.searchChanged();
+    expect(genresSvc.search.calls.length).toEqual(1);
+    scope.search.searchChanged();
+    expect(genresSvc.search.calls.length).toEqual(1);
+  });
   
 });
