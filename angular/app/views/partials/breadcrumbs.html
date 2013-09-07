@@ -22,11 +22,12 @@
       </rd-search>
     </div>
     <div ng-switch on="!genre && !subGenre">
-      <rd-search ng-switch-when="true"
-                 placeholder="Search stations" 
-                 model="search.searchValue" 
-                 change="search.searchChanged()">
-      </rd-search>
+      <div ng-switch-when="true">
+        <rd-search placeholder="Search stations" 
+                   model="search.searchValue" 
+                   change="search.searchChanged()">
+        </rd-search>
+      </div>
     </div>
   </div>
 </div>

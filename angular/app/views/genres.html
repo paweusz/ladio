@@ -1,15 +1,17 @@
-<div id="content">
+<div id="content" ng-controller="SearchCtrl">
 
   <ng-include src="'/views/partials/breadcrumbs.html'"></ng-include>
-  <div class="genres">  
-    <div class="container">
-      <div class="genre" ng-repeat="genre in genres" ng-click="select(genre)"><div class="name" title="{{genre.description}}">{{genre.name}}</div></div>
-    </div>
-    <ng-include src="'/views/partials/spinner.html'" ng-hide="genres != null"></ng-include>
-  </div>
 
-  <div ng-show="stations">
-    <ng-include src="'/views/partials/stations.html'"></ng-include>
-  </div>
+  <div ng-switch on="!!stations">
+
+    <div class="genres" ng-switch-when="false">
+      <div class="container">
+        <div class="genre" ng-repeat="genre in genres" ng-click="select(genre)"><div class="name" title="{{genre.description}}">{{genre.name}}</div></div>
+      </div>
+      <ng-include src="'/views/partials/spinner.html'" ng-hide="genres != null"></ng-include>
+    </div>
+
+    <ng-include ng-switch-when="true" src="'/views/partials/stations.html'"></ng-include>
+  <div>
 
 </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('SearchCtrl', function ($scope, $location, Genres) {
+  .controller('SearchCtrl', function ($scope, $location, $log, Genres) {
 
     $scope.stations = null;
     var previousValue = '';
@@ -19,12 +19,13 @@ angular.module('ladioApp')
           return;
         }
         previousValue = this.searchValue;
+        var searchValue = this.searchValue;
 
         Genres.search(this.searchValue).success(function(data) {
-          console.debug('Catalog searched.');
+          $log.log('Catalog searched for \'' + searchValue + '\'.');
           $scope.stations = data;
         }).error(function(data, status) {
-          console.error('Error fetching catalog search data. (' + status + ':' + data + ')');
+          $log.log('Error fetching catalog search data. (' + status + ':' + data + ')');
           $scope.stations = [];
         });
       }
