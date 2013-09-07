@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('SubGenresCtrl', function ($scope, $routeParams, $location, Genres) {
+  .controller('SubGenresCtrl', function ($scope, $routeParams, $location, GenresSvc) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);
 
-    Genres.genre($scope.genreId).then(function(genre) {
+    GenresSvc.genre($scope.genreId).then(function(genre) {
       console.debug('Genre fetched. ' + genre.name);
       $scope.genre = genre;
     }, function(data) {
       console.debug('Error fetching genre. (' + data.status + ':' + data.data + ')');
     });
     
-    Genres.subGenres($scope.genreId).success(function(data) {
+    GenresSvc.subGenres($scope.genreId).success(function(data) {
       console.debug('Subgenres fetched.');
       $scope.subgenres = data;
     }).error(function(data, status) {

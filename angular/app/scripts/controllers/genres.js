@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('GenresCtrl', function ($scope, $location, Genres) {
+  .controller('GenresCtrl', function ($scope, $location, GenresSvc) {
 
-    Genres.genres().success(function(data) {
+    GenresSvc.genres().success(function(data) {
       console.debug('Genres fetched.');
       $scope.genres = data;
     }).error(function(data, status) {

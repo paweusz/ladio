@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('StationsCtrl', function ($scope, $routeParams, $filter, Genres, StationSearch) {
+  .controller('StationsCtrl', function ($scope, $routeParams, $filter, GenresSvc, StationSearch) {
 
     $scope.genreId = parseInt($routeParams.genreId, 10);
 
-    Genres.genre($scope.genreId).then(function(genre) {
+    GenresSvc.genre($scope.genreId).then(function(genre) {
       console.debug('Genre fetched. ' + genre.name);
       $scope.genre = genre;
     }, function(data) {
@@ -14,7 +14,7 @@ angular.module('ladioApp')
 
     if ($routeParams.subGenreId) {
       $scope.subGenreId = parseInt($routeParams.subGenreId, 10);
-      Genres.subGenre($scope.genreId, $scope.subGenreId).then(function(subGenre) {
+      GenresSvc.subGenre($scope.genreId, $scope.subGenreId).then(function(subGenre) {
         console.debug('Subgenre fetched. ' + subGenre.name);
         $scope.subGenre = subGenre;
       }, function(data) {
@@ -26,7 +26,7 @@ angular.module('ladioApp')
     }
 
     var stations = [];
-    Genres.stations($scope.subGenreId).then(function(fetched) {
+    GenresSvc.stations($scope.subGenreId).then(function(fetched) {
       console.debug('Stations fetched.');
       stations = $filter('orderBy')(fetched,
         function(station) {

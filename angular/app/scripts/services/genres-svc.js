@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .factory('Genres', function($http, $filter) {
+  .factory('GenresSvc', function($http, $filter) {
 
       var url = '@@API_URL';
       var enabledPredicate = function(station) {

@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('SearchCtrl', function ($scope, $location, $log, Genres) {
+  .controller('SearchCtrl', function ($scope, $routeParams, $log, GenresSvc) {
+
+    if ($routeParams.genreId) {
+      $scope.genreId = parseInt($routeParams.genreId, 10);
+    }
 
     $scope.stations = null;
     var previousValue = '';
@@ -21,7 +25,7 @@ angular.module('ladioApp')
         previousValue = this.searchValue;
         var searchValue = this.searchValue;
 
-        Genres.search(this.searchValue).then(function(data) {
+        GenresSvc.search(this.searchValue).then(function(data) {
           $log.log('Catalog searched for \'' + searchValue + '\'.');
           $scope.stations = data;
         }, function(data, status) {

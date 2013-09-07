@@ -15,7 +15,7 @@ describe('Controller SearchCtrl', function () {
 
     SearchCtrl = $controller('SearchCtrl', {
       $scope: scope,
-      Genres: GenresSvcMock
+      GenresSvc: GenresSvcMock
     });
   }));
 
