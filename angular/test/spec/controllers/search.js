@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: GenresCtrl', function () {
+describe('Controller: SearchCtrl', function () {
 
   // load the controller's module
   beforeEach(module('ladioApp'));
 
-  var GenresCtrl, scope, searchSvcRsp;
+  var SearchCtrl, scope, searchSvcRsp;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, GenresSvcMock) {
@@ -13,7 +13,7 @@ describe('Controller: GenresCtrl', function () {
     
     searchSvcRsp = GenresSvcMock.searchSvcRsp;    
 
-    GenresCtrl = $controller('GenresCtrl', {
+    SearchCtrl = $controller('SearchCtrl', {
       $scope: scope,
       Genres: GenresSvcMock
     });
@@ -27,16 +27,16 @@ describe('Controller: GenresCtrl', function () {
     scope.search.searchValue = 'tezt';
     scope.search.searchChanged();
     
-    expect(scope.stations).not.toBeDefined();
+    expect(scope.stations).toBe(null);
     searchSvcRsp.succCb(result);
     expect(scope.stations).toEqual(result);
   });
   
-  it('should search stations', function () {
+  it('should handle search stations errors', function () {
     scope.search.searchValue = 'tezt';
     scope.search.searchChanged();
     
-    expect(scope.stations).not.toBeDefined();
+    expect(scope.stations).toBe(null);
     searchSvcRsp.errCb(404, "Not found");
     expect(scope.stations).toEqual([]);
   });

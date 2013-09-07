@@ -15,9 +15,9 @@ module.exports = function(config) {
       'scripts/**/*.js',
       'scripts/directives/*.html',
       '../test/mock/**/*.js',
-      '../test/spec/controllers/genres.js'
-//      '../test/spec/services/genres.js',
-//      '../test/spec/directives/*.js'
+      '../test/spec/controllers/search.js',
+      '../test/spec/services/genres.js',
+      '../test/spec/directives/*.js'
     ],
 
     preprocessors: {
@@ -55,7 +55,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 15000,
