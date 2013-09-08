@@ -89,5 +89,15 @@ describe('Controller SearchCtrl', function () {
       expect(genresSvc.search).toHaveBeenCalledWith('tezt', 7);
     })
   });
+
+  it('should cancel previous search when new requested', function() {
+    scope.search.searchValue = 'tezt';
+    scope.$digest();
+    expect(browser.deferredFns.length).toEqual(1);
+
+    scope.search.searchValue = 'tezta';
+    scope.$digest();
+    expect(browser.deferredFns.length).toEqual(1);
+  });
   
 });

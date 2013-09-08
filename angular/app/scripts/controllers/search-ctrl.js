@@ -14,6 +14,7 @@ angular.module('ladioApp')
       searchValue: '',
     };
     
+    var toutPrms = null;
     $scope.$watch('search.searchValue', function(search) {
       if (search === '') {
         $scope.stations = null;
@@ -21,6 +22,7 @@ angular.module('ladioApp')
       }
 
       function svcSearch() {
+        $log.log('Search catalog request for \'' + search + '\'.');
         GenresSvc.search(search, genreId).then(function(data) {
           $log.log('Catalog searched for \'' + search + '\'.');
           $scope.stations = data;
@@ -30,7 +32,11 @@ angular.module('ladioApp')
         });
       }
 
-      $timeout(svcSearch, 0);
+      if (!!toutPrms) {
+        $timeout.cancel(toutPrms);
+      }
+
+      toutPrms = $timeout(svcSearch, 500);
     });
 
   });
