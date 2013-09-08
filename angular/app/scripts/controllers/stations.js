@@ -25,7 +25,7 @@ angular.module('ladioApp')
       $scope.subGenre = {id: -1};
     }
 
-    var stations = [];
+    var stations = null;
     GenresSvc.stations($scope.subGenreId).then(function(fetched) {
       $log.log('Stations fetched.');
       stations = $filter('orderBy')(fetched,

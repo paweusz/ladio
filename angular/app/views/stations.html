@@ -1,4 +1,9 @@
 <div id="content">
   <ng-include src="'/views/partials/breadcrumbs.html'"></ng-include>
+
   <ng-include src="'/views/partials/stations.html'"></ng-include>
+
+  <div class="container">
+    <div class="msg" ng-show="stations.length==0">No stations matching "{{filtering.filterValue.trim()}}" has been found.</div>
+  </div>
 </div>
