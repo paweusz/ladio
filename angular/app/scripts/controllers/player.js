@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('PlayerCtrl', function ($scope, Pls, Stat) {
+  .controller('PlayerCtrl', function ($scope, $log, Pls, Stat) {
 
     $scope.State = {
       STOPPED: 0,
@@ -30,12 +30,12 @@ angular.module('ladioApp')
       var streams = [];
       if (streamUrl.match(/.pls$/)) {
         Pls.streams(streamUrl).success(function(plsStreams) {
-          console.debug('Pls fetched.');
+          $log.log('Pls fetched.');
           angular.forEach(plsStreams, function(plsStream) {
             prepareStreams(streams, plsStream.url);
           });
         }).error(function(data, status) {
-          console.error('Error fetching pls data. (' + status + ':' + data + ')');
+          $log.error('Error fetching pls data. (' + status + ':' + data + ')');
           $scope.playingError();
         });
       } else {
