@@ -9,6 +9,14 @@ angular.module('ladioApp').factory('GenresSvcMock', function() {
       this.succCb = succCb;
       this.errCb = errCb;
     };
+    this.success = function(succCb) {
+      this.succCb = succCb;
+      return this;
+    };
+    this.error = function(errCb) {
+      this.errCb = errCb;
+      return this;
+    };
   };
 
   return {

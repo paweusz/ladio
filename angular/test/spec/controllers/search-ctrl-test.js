@@ -5,18 +5,21 @@ describe('Controller SearchCtrl', function () {
   // load the controller's module
   beforeEach(module('ladioApp'));
 
-  var SearchCtrl, scope, genresSvc, searchSvcRsp;
+  var SearchCtrl, scope, genresSvc, timeout;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, GenresSvcMock) {
+  beforeEach(inject(function($controller, $rootScope, $timeout, GenresSvcMock) {
     scope = $rootScope.$new();
     
     genresSvc = GenresSvcMock;
     spyOn(genresSvc, "search").andCallThrough();
 
+    timeout = $timeout;
+
     SearchCtrl = $controller('SearchCtrl', {
       $scope: scope,
-      GenresSvc: GenresSvcMock
+      GenresSvc: GenresSvcMock,
+      $timeout: timeout
     });
   }));
 
@@ -27,6 +30,7 @@ describe('Controller SearchCtrl', function () {
     
     scope.search.searchValue = 'tezt';
     scope.$digest();
+    timeout.flush();
     
     expect(genresSvc.search).toHaveBeenCalledWith('tezt', null);
 
@@ -38,6 +42,7 @@ describe('Controller SearchCtrl', function () {
   it('should handle search stations errors', function () {
     scope.search.searchValue = 'tezt';
     scope.$digest();
+    timeout.flush();
     
     expect(scope.stations).toBe(null);
     genresSvc.searchSvcRsp.errCb(404, "Not found");
@@ -46,14 +51,21 @@ describe('Controller SearchCtrl', function () {
   
   it('should not search on first/empty event', function () {
     scope.$digest();
+    //timeout.verifyNoPendingTasks();
     expect(genresSvc.search).not.toHaveBeenCalled();
   });
 
   it('should not search for the same conditions', function () {
     scope.search.searchValue = 'tezt';
+
     scope.$digest();
+    timeout.flush();
+
     expect(genresSvc.search.calls.length).toEqual(1);
+
     scope.$digest();
+    //timeout.verifyNoPendingTasks();
+
     expect(genresSvc.search.calls.length).toEqual(1);
   });
   
@@ -69,7 +81,10 @@ describe('Controller SearchCtrl', function () {
       });
       
       scope.search.searchValue = 'tezt';
+
       scope.$digest();
+      timeout.flush();
+
       expect(genresSvc.search).toHaveBeenCalledWith('tezt', 7);
     })
   });
