@@ -5,16 +5,17 @@ describe('Controller SearchCtrl', function () {
   // load the controller's module
   beforeEach(module('ladioApp'));
 
-  var SearchCtrl, scope, genresSvc, timeout;
+  var SearchCtrl, scope, genresSvc, timeout, browser;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope, $timeout, GenresSvcMock) {
+  beforeEach(inject(function($controller, $rootScope, $timeout, $browser, GenresSvcMock) {
     scope = $rootScope.$new();
     
     genresSvc = GenresSvcMock;
     spyOn(genresSvc, "search").andCallThrough();
 
     timeout = $timeout;
+    browser = $browser;
 
     SearchCtrl = $controller('SearchCtrl', {
       $scope: scope,
@@ -51,7 +52,7 @@ describe('Controller SearchCtrl', function () {
   
   it('should not search on first/empty event', function () {
     scope.$digest();
-    //timeout.verifyNoPendingTasks();
+    expect(browser.deferredFns.length).toEqual(0); //timeout.verifyNoPendingTasks();
     expect(genresSvc.search).not.toHaveBeenCalled();
   });
 
@@ -64,7 +65,7 @@ describe('Controller SearchCtrl', function () {
     expect(genresSvc.search.calls.length).toEqual(1);
 
     scope.$digest();
-    //timeout.verifyNoPendingTasks();
+    expect(browser.deferredFns.length).toEqual(0); //timeout.verifyNoPendingTasks();
 
     expect(genresSvc.search.calls.length).toEqual(1);
   });
