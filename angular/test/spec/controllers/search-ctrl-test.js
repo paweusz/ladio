@@ -26,7 +26,7 @@ describe('Controller SearchCtrl', function () {
     }];
     
     scope.search.searchValue = 'tezt';
-    scope.search.searchChanged();
+    scope.$digest();
     
     expect(genresSvc.search).toHaveBeenCalledWith('tezt', null);
 
@@ -37,7 +37,7 @@ describe('Controller SearchCtrl', function () {
   
   it('should handle search stations errors', function () {
     scope.search.searchValue = 'tezt';
-    scope.search.searchChanged();
+    scope.$digest();
     
     expect(scope.stations).toBe(null);
     genresSvc.searchSvcRsp.errCb(404, "Not found");
@@ -45,15 +45,15 @@ describe('Controller SearchCtrl', function () {
   });
   
   it('should not search on first/empty event', function () {
-    scope.search.searchChanged();
+    scope.$digest();
     expect(genresSvc.search).not.toHaveBeenCalled();
   });
 
   it('should not search for the same conditions', function () {
     scope.search.searchValue = 'tezt';
-    scope.search.searchChanged();
+    scope.$digest();
     expect(genresSvc.search.calls.length).toEqual(1);
-    scope.search.searchChanged();
+    scope.$digest();
     expect(genresSvc.search.calls.length).toEqual(1);
   });
   
@@ -69,7 +69,7 @@ describe('Controller SearchCtrl', function () {
       });
       
       scope.search.searchValue = 'tezt';
-      scope.search.searchChanged();
+      scope.$digest();
       expect(genresSvc.search).toHaveBeenCalledWith('tezt', 7);
     })
   });

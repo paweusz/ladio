@@ -9,31 +9,23 @@ angular.module('ladioApp')
     }
 
     $scope.stations = null;
-    var previousValue = '';
 
     $scope.search = {
-
-      searchValue: previousValue,
-
-      searchChanged: function() {
-        if (this.searchValue === previousValue) {
-          return;
-        }
-        if (this.searchValue === '') {
-          $scope.stations = null;
-          return;
-        }
-        previousValue = this.searchValue;
-        var searchValue = this.searchValue;
-
-        GenresSvc.search(this.searchValue, genreId).then(function(data) {
-          $log.log('Catalog searched for \'' + searchValue + '\'.');
-          $scope.stations = data;
-        }, function(data, status) {
-          $log.log('Error fetching catalog search data. (' + status + ':' + data + ')');
-          $scope.stations = [];
-        });
-      }
+      searchValue: '',
     };
+    
+    $scope.$watch('search.searchValue', function(search) {
+      if (search === '') {
+        $scope.stations = null;
+        return;
+      }
+      GenresSvc.search(search, genreId).then(function(data) {
+        $log.log('Catalog searched for \'' + search + '\'.');
+        $scope.stations = data;
+      }, function(data, status) {
+        $log.log('Error fetching catalog search data. (' + status + ':' + data + ')');
+        $scope.stations = [];
+      });
+    });
 
   });
