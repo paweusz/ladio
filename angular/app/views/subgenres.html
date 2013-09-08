@@ -12,7 +12,13 @@
       <ng-include src="'/views/partials/spinner.html'" ng-hide="subgenres != null"></ng-include>
     </div>
 
-    <ng-include ng-switch-when="true" src="'/views/partials/stations.html'"></ng-include>
+    <div ng-switch-when="true">
+      <ng-include src="'/views/partials/stations.html'"></ng-include>
+      <div class="container">
+        <div class="msg" ng-show="stations.length==0">No stations matching "{{search.searchValue.trim()}}" has been found.</div>
+      </div>
+    </div>
+
   <div>
   
 </div>

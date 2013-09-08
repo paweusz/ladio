@@ -100,4 +100,24 @@ describe('Controller SearchCtrl', function () {
     expect(browser.deferredFns.length).toEqual(1);
   });
   
+  it('should remember last search conditions', function() {
+    var result = [{
+      name: 'tezt'
+    }];
+
+    scope.search.searchValue = 'teztA';
+    scope.$digest();
+    expect(scope.search.lastValue).toEqual('');
+    timeout.flush();
+    genresSvc.searchSvcRsp.succCb(result);
+    expect(scope.search.lastValue).toEqual('teztA');
+
+    scope.search.searchValue = 'teztB';
+    scope.$digest();
+    expect(scope.search.lastValue).toEqual('teztA');
+    timeout.flush();
+    genresSvc.searchSvcRsp.succCb(result);
+    expect(scope.search.lastValue).toEqual('teztB');
+  });
+  
 });

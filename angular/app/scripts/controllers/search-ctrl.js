@@ -12,12 +12,14 @@ angular.module('ladioApp')
 
     $scope.search = {
       searchValue: '',
+      lastValue: ''
     };
     
     var toutPrms = null;
     $scope.$watch('search.searchValue', function(search) {
+      $scope.stations = null;
+
       if (search === '') {
-        $scope.stations = null;
         return;
       }
 
@@ -26,9 +28,11 @@ angular.module('ladioApp')
         GenresSvc.search(search, genreId).then(function(data) {
           $log.log('Catalog searched for \'' + search + '\'.');
           $scope.stations = data;
+          $scope.search.lastValue = search;
         }, function(data, status) {
           $log.error('Error fetching catalog search data. (' + status + ':' + data + ')');
           $scope.stations = [];
+          $scope.search.lastValue = search;
         });
       }
 
