@@ -3,15 +3,19 @@
     <ul id="breadcrumbs">
       <li><a href="#/genres"><span>Genres</span></a></li>
       <li class="separator" ng-show="genre || genreId">&raquo;</li>
-      <li>
+      <li ng-show="genre || genreId">
         <a ng-show="genre" href="#/genres/{{genre.id}}/subgenres"><span>{{genre.name}}</span></a>
         <a ng-show="!genre && genreId">&hellip;</a>
       </li>
       <li class="separator" ng-show="subGenre || subGenreId">&raquo;</li>
-      <li>
+      <li ng-show="subGenre || subGenreId">
         <a ng-show="subGenre && subGenre.id != -1" href="#/genres/{{genre.id}}/subgenres/{{subGenre.id}}/stations"><span>{{subGenre.name}}</span></a>
         <a ng-show="subGenre && subGenre.id == -1" href="#/genres/{{genre.id}}/stations"><span>Stations</span></a>
         <a ng-show="!subGenre && subGenreId">&hellip;</a>
+      </li>
+      <li class="separator" ng-show="search.searchValue && search.searchValue != ''">&raquo;</li>
+      <li ng-show="search.searchValue && search.searchValue != ''">
+        <span>Search results</span>
       </li>
     </ul>
     <div ng-switch on="!!subGenre">
@@ -24,7 +28,7 @@
     <div ng-switch on="!subGenre">
       <div ng-switch-when="true">
         <rd-search placeholder="Search stations" 
-                   model="search.searchValue">
+                   model="search.searchValue">`
         </rd-search>
       </div>
     </div>
