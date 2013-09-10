@@ -51,7 +51,7 @@ module.exports = function (grunt) {
           livereload: LIVERELOAD_PORT
         },
         files: [
-          '<%= yeoman.app %>/{,views/{,partials/}}*.html'
+          '<%= yeoman.app %>/{,views/{,*/}}*.html'
         ],
         tasks: ['replace:dev']
       },
@@ -272,7 +272,8 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: true,
+        browsers: ['PhantomJS']
       }
     },
     cdnify: {
@@ -319,7 +320,7 @@ module.exports = function (grunt) {
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.js',
+            'scripts/{,*/}*.{js,html}',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}
@@ -336,7 +337,7 @@ module.exports = function (grunt) {
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.js',
+            'scripts/{,*/}*.{js,html}',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}

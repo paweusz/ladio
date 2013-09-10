@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: rdPlayer', function () {
+describe('Directive rdPlayer', function () {
 
   beforeEach(module('ladioApp'));
 

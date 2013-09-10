@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .directive('rdPlayer', function () {
+  .directive('rdPlayer', function ($log) {
     return {
       restrict: 'A',
       scope: true,
@@ -20,21 +20,21 @@ angular.module('ladioApp')
           element.children().remove();
 
           if (!streams || streams.length === 0) {
-            console.debug('No streams. Playing stopped.');
+            $log.log('No streams. Playing stopped.');
             element[0].load(); //Reset buffer to empty
             return;
           }
           
-          console.debug('Playing streams ' + streams);
+          $log.log('Playing streams ' + streams);
           
           angular.forEach(streams, function(stream) {
             element.append('<source src="' + stream + '"></source>');
           });
 
           element.children().bind('error', function() {
-            console.debug('Playing stream error.');
+            $log.log('Playing stream error.');
             if (element[0].networkState === 3) { //HTMLMediaElement.NETWORK_NO_SOURCE
-              console.debug('All streams failed to play');
+              $log.log('All streams failed to play');
               scope.$apply(attrs.onplayingerror);
             }
           });
@@ -45,7 +45,7 @@ angular.module('ladioApp')
         
         function reconnect() {
           reconnectCnt++;
-          console.debug('Reconnecting (' + reconnectCnt + ').');
+          $log.log('Reconnecting (' + reconnectCnt + ').');
           element[0].load();
         }
         
@@ -59,32 +59,32 @@ angular.module('ladioApp')
 
         //Audio tag event handlers        
         element.bind('canplay', function() {
-          console.debug('Ready to play.');
+          $log.log('Ready to play.');
           element[0].play();
         });
         element.bind('playing', function() {
-          console.debug('Playing started.');
+          $log.log('Playing started.');
           reconnectCnt = 0;
           wasPlaying = true;
           scope.$apply(attrs.onplayingstarted);
         });
         element.bind('error', function() {
-          console.debug('Playing error. Reason ' + element[0].error.code + '.');
+          $log.log('Playing error. Reason ' + element[0].error.code + '.');
           handleError();
         });
         element.bind('ended', function() {
-          console.debug('Playing ended.');
+          $log.log('Playing ended.');
           scope.$apply(attrs.onplayingstalled);
           handleError();
         });
         element.bind('stalled', function() {
-          console.debug('Playing stalled.');
+          $log.log('Playing stalled.');
           stalled = true;
           scope.$apply(attrs.onplayingstalled);
         });
         element.bind('progress', function() {
           if (stalled) {
-            console.debug('Playing progress.');
+            $log.log('Playing progress.');
             stalled = false;
             if (wasPlaying) {
               scope.$apply(attrs.onplayingresumed);
@@ -93,21 +93,21 @@ angular.module('ladioApp')
         });
 
         /*element.bind('abort canplay canplaythrough durationchange emptied ended error loadeddata loadedmetadata loadstart pause play playing progress ratechange readystatechange seeked seeking stalled suspend Atimeupdate volumechange waiting', function(event) {
-          console.debug('Event debugger: ' + event.type);
+          $log.log('Event debugger: ' + event.type);
         });*/
 
         element.bind('abort emptied ended error pause play stalled suspend waiting', function(event) {
-          console.debug('Audio event debugger: ' + event.type);
+          $log.log('Audio event debugger: ' + event.type);
         });
 
         //Angular event handlers
         scope.$on('rd-player.pauseReq', function() {
           var audioTag = element[0];
           audioTag.pause();
-          console.debug('Playing stopped.');
+          $log.log('Playing stopped.');
         });
         scope.$on('rd-player.playReq', function() {
-          console.debug('Playing requested.');
+          $log.log('Playing requested.');
           var audioTag = element[0];
           audioTag.play();
         });

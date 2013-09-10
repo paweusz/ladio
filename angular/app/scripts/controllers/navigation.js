@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('NavigationCtrl', function ($scope, $location, State) {
+  .controller('NavigationCtrl', function ($scope, $location, $log, State) {
 
     $scope.items = [
       {label: 'Catalog', path: '/genres', currentPath: '/genres'},
@@ -22,7 +22,7 @@ angular.module('ladioApp')
     
     $scope.select = function(item) {
       var path = item.currentPath;
-      console.debug('reload ' + path);
+      $log.log('reload ' + path);
       $location.path(path);
     };
 

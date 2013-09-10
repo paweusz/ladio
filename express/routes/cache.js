@@ -1,3 +1,5 @@
+'use strict';
+
 var expirationTime = 30 * 60; //Cache expiration time (sec)
 
 var cacheHash = null;

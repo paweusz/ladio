@@ -1,13 +1,14 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var express = require('express')
-  , dirble = require('./routes/dirble')
-  , pls = require('./routes/pls')
-  , http = require('http')
-  , path = require('path');
+var express = require('express'),
+  dirble = require('./routes/dirble'),
+  pls = require('./routes/pls'),
+  http = require('http'),
+  path = require('path');
 
 var app = express();
 
@@ -26,20 +27,21 @@ app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Range, X-Requested-With');
-  if (req.method == "OPTIONS") {
+  if (req.method === 'OPTIONS') {
     res.send(200);
   } else {
     next();
   }
-})
+});
 
 var path = '/api';
 app.get(path + '/genres', dirble.genres);
+app.get(path + '/genres/stations', dirble.stations);
 app.get(path + '/genres/:genreId/subgenres', dirble.subGenres);
 app.get(path + '/genres/:genreId/stations', dirble.stations);
 app.get(path + '/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
 app.get(path + '/streams', pls.streams);
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
