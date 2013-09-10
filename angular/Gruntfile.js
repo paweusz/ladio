@@ -217,7 +217,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '.tmp',
-          src: ['{,views/{,partials/}}*.html'],
+          src: ['**/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -330,7 +330,7 @@ module.exports = function (grunt) {
         options: {
           variables: {
             'API_URL': 'http://ladio.herokuapp.com/api',
-            'VERSION': '&alpha;2',
+            'VERSION': '&alpha;3',
             'EMAIL': 'ladioteam@gmail.com'
           },
           force: true
