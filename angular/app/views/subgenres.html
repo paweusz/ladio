@@ -2,7 +2,7 @@
 
   <ng-include src="'/views/partials/breadcrumbs.html'"></ng-include>
   
-  <div ng-switch on="!!stations">
+  <div ng-switch on="search.searchValue != ''">
 
     <div class="genres" ng-switch-when="false">
       <div class="container">
