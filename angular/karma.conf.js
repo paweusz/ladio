@@ -13,7 +13,7 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'scripts/**/*.js',
-      'scripts/directives/*.html',
+      'views/directives/*.html',
       '../test/mock/**/*.js',
       '../test/spec/controllers/search-ctrl-test.js',
       '../test/spec/services/genres-svc-test.js',
@@ -21,7 +21,7 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-      'scripts/directives/*.html': ['html2js']
+      'views/directives/*.html': ['html2js']
     },
 
     // list of files to exclude

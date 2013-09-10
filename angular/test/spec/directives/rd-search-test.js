@@ -5,7 +5,7 @@ describe('Directive rdSearch', function () {
   beforeEach(module('ladioApp'));
 
   beforeEach(function() {
-  	module('scripts/directives/rd-search.html')	
+  	module('views/directives/rd-search.html')	
   });
 
   var element;

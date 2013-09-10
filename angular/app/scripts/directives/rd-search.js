@@ -3,7 +3,7 @@
 angular.module('ladioApp')
   .directive('rdSearch', function () {
     return {
-      templateUrl: 'scripts/directives/rd-search.html',
+      templateUrl: 'views/directives/rd-search.html',
       restrict: 'E',
       replace: true,
       scope: {
