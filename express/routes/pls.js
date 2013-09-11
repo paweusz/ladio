@@ -46,7 +46,14 @@ function doGetPls(ref, res) {
       
     httpRsp.on('end', function () {
       var statusCode = httpRsp.statusCode;
-      if (statusCode !== 200) {
+      
+      if (statusCode === 302) { //redirects
+        var redirectUrl = httpRsp.headers.location;
+        doGetPls(redirectUrl, res);
+        return;
+      }
+
+      if (statusCode !== 200) { //errors
         errHandler({
           message: 'Station pls response ' + statusCode,
           stack: 'doGetPls(ref, res)'
