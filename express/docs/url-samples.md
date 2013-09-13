@@ -15,5 +15,12 @@ http://dirble.com/dirapi/stations/apikey/b4c059a7383415cb5295c9faec124b151213a78
 http://dirble.com/dirapi/search/apikey/b4c059a7383415cb5295c9faec124b151213a788/search/chrom
 
 ChroniX
--------
+=======
+
 Redirect to http://www.chronixradio.com/stations/cxrmetal/listen/listen.pls?q=cxrmetal/listen/listen.pls
+
+Station status
+==============
+
+http://85.25.86.69:8100/7.html
+http://localhost:9001/api/info?stream=http://85.25.86.69:8100

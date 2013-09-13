@@ -7,6 +7,7 @@
 var express = require('express'),
   dirble = require('./routes/dirble'),
   pls = require('./routes/pls'),
+  info = require('./routes/info'),
   http = require('http'),
   path = require('path');
 
@@ -41,6 +42,7 @@ app.get(path + '/genres/:genreId/subgenres', dirble.subGenres);
 app.get(path + '/genres/:genreId/stations', dirble.stations);
 app.get(path + '/genres/:genreId/subgenres/:subgenreId/stations', dirble.stations);
 app.get(path + '/streams', pls.streams);
+app.get(path + '/info', info.info);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
