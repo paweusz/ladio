@@ -25,12 +25,12 @@ function doGetInfo(streamUrl, rsp) {
     clientReq.write('GET / HTTP/1.0\r\nIcy-MetaData:1\r\n\r\n');
   }).on('error', errHandler);
 
-  var toLoad = 8192 * 2,
-      data = '', 
+  var data = '', 
       metaintRegex = /^icy-metaint:\s*\d+$/m,
       contypeRegex = /^content-type:\s*\S+$/m,
       metaIdx, contype, metaLen, hdrOffset;
   clientReq.on('data', function(buff) {
+    console.log('Buffer ' + buff.length);
     
     var sbuff = buff.toString('ascii');
 
@@ -61,7 +61,7 @@ function doGetInfo(streamUrl, rsp) {
       metaLen = data.charCodeAt(metaIdx + hdrOffset) * 0x10;
     }
 
-    if (data.length > toLoad) {
+    if (!!metaLen && data.length > hdrOffset + metaIdx + metaLen + 1) {
       clientReq.destroy();
 
       var meta = data.substr(hdrOffset + metaIdx + 1, metaLen);
@@ -71,6 +71,11 @@ function doGetInfo(streamUrl, rsp) {
         'title': title,
         'content-type': contype
       });
+    }
+
+    if (data.length > 0xFFFF) {
+      clientReq.destroy();
+      errHandler({'msg': 'Buffer overflow'});
     }
 
   });
