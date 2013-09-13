@@ -1,6 +1,7 @@
 'use strict';
 
-var net = require('net');
+var net = require('net'),
+    url = require('url');
 
 function doGetInfo(streamUrl, rsp) {
 	var errHandler = function(e, rspCode) {
@@ -15,9 +16,10 @@ function doGetInfo(streamUrl, rsp) {
 	};
 
   console.log('Req stream ' + streamUrl);
+  var pStreamUrl = url.parse(streamUrl);
   var opts = {
-  	host: '85.25.86.69',
-  	port: 8100
+    'host': pStreamUrl.hostname,
+    'port': pStreamUrl.port
   };
   var clientReq = net.connect(opts, function () {
     clientReq.write('GET / HTTP/1.0\r\nIcy-MetaData:1\r\n\r\n');
