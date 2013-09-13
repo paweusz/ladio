@@ -26,11 +26,11 @@ function doGetInfo(streamUrl, rsp) {
   var toLoad = 8192 * 2,
       data = '', 
       metaintRegex = /^icy-metaint:\s*\d+$/m,
-      metaIdx, metaLen, hdrOffset;
+      contypeRegex = /^content-type:\s*\S+$/m,
+      metaIdx, contype, metaLen, hdrOffset;
   clientReq.on('data', function(buff) {
     
     var sbuff = buff.toString('ascii');
-    //console.log('Buff('+sbuff.length+')');
 
     data += sbuff;
 
@@ -38,7 +38,13 @@ function doGetInfo(streamUrl, rsp) {
       var metaint = metaintRegex.exec(data);
       if (metaint) {
         metaIdx = parseInt(metaint[0].match(/\d+/));
-        //console.log('metaIdx = ' + metaIdx);
+      }
+    }
+
+    if (!contype) {
+      var contypeSrch = contypeRegex.exec(data);
+      if (contypeSrch) {
+        contype = contypeSrch[0].split(':')[1].trim();
       }
     }
 
@@ -46,13 +52,11 @@ function doGetInfo(streamUrl, rsp) {
       var hdrIndex = data.indexOf('\r\n\r\n');
       if (hdrIndex != -1) {
         hdrOffset = hdrIndex + 4;
-        //console.log('hdrOffset = ' + hdrOffset);
       }
     }
 
     if (!metaLen && !!metaIdx && !!hdrOffset && data.length > metaIdx + hdrOffset) {
       metaLen = data.charCodeAt(metaIdx + hdrOffset) * 0x10;
-      //console.log('metaLen = ' + metaLen);
     }
 
     if (data.length > toLoad) {
@@ -62,7 +66,8 @@ function doGetInfo(streamUrl, rsp) {
       var title = meta.substring(12, meta.indexOf(';'));
 
       rsp.json({
-        'title': title
+        'title': title,
+        'content-type': contype
       });
     }
 
