@@ -15,14 +15,18 @@ function doGetInfo(streamUrl, rsp) {
 		rsp.send(rspCode, msg);
 	};
 
-  console.log('Req stream ' + streamUrl);
   var pStreamUrl = url.parse(streamUrl);
   var opts = {
     'host': pStreamUrl.hostname,
     'port': pStreamUrl.port
   };
   var clientReq = net.connect(opts, function () {
-    clientReq.write('GET / HTTP/1.0\r\nIcy-MetaData:1\r\n\r\n');
+    var icyReq = 'GET ' + pStreamUrl.path + ' HTTP/1.0\r\n' +
+                 'User-Agent: Ladio/0.1.3\r\n' +
+                 'Host: ' + pStreamUrl.host + '\r\n' +
+                 'Accept: */*\r\n' +
+                 'Icy-MetaData: 1\r\n\r\n';
+    clientReq.write(icyReq);
   }).on('error', errHandler);
 
   var data = '', 
@@ -30,7 +34,6 @@ function doGetInfo(streamUrl, rsp) {
       contypeRegex = /^content-type:\s*\S+$/m,
       metaIdx, contype, metaLen, hdrOffset;
   clientReq.on('data', function(buff) {
-    console.log('Buffer ' + buff.length);
     
     var sbuff = buff.toString('ascii');
 
