@@ -92,11 +92,6 @@ function doGetInfo(streamUrl, rsp) {
 
   });
   
-  clientReq.on('end', function () {
-    console.log('Disconnected');
-  });
-
-
 }
 
 
