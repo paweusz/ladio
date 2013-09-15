@@ -15,6 +15,7 @@
     "grunt-develop": "~0.0.2",
     "grunt-regarde": "~0.1.1",
     "grunt-contrib-livereload": "~0.1.2",
-    "grunt-contrib-jshint": "~0.6.4"
+    "grunt-contrib-jshint": "~0.6.4",
+    "node-inspector": "~0.4.0"
   }
 }

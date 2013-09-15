@@ -29,7 +29,8 @@ function doGetInfo(streamUrl, rsp) {
     clientReq.write(icyReq);
   }).on('error', errHandler);
 
-  var data = '', 
+  var data = '', is200,
+      is200Regex = /^ICY 200 OK$/m,
       metaintRegex = /^icy-metaint:\s*\d+$/m,
       contypeRegex = /^content-type:\s*\S+$/m,
       metaIdx, contype, metaLen, hdrOffset;
@@ -38,6 +39,14 @@ function doGetInfo(streamUrl, rsp) {
     var sbuff = buff.toString('ascii');
 
     data += sbuff;
+
+    if (!is200) {
+      is200 = data.match(is200Regex);
+      if (!is200) {
+        clientReq.destroy();
+        errHandler({'message': 'Invalid ICY response'});
+      }
+    }
 
     if (!metaIdx) {
       var metaint = metaintRegex.exec(data);
@@ -78,7 +87,7 @@ function doGetInfo(streamUrl, rsp) {
 
     if (data.length > 0xFFFF) {
       clientReq.destroy();
-      errHandler({'msg': 'Buffer overflow'});
+      errHandler({'message': 'No metadata found'});
     }
 
   });

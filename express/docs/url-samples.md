@@ -25,8 +25,8 @@ Station status
 http://localhost:9001/api/info?stream=http://85.25.86.69:8100
 http://localhost:9001/api/info?stream=http://173.192.45.18:10100
 http://localhost:9001/api/info?stream=http://gecko.1mix.co.uk:8016
+http://localhost:9001/api/info?stream=http://stream-01.shoutcast.com:8002/frisky_chill_mp3_128kbps
+http://localhost:9001/api/info?stream=http://stream-ice.mtgradio.com:8080/bandit_mp3
 
 Doesn't work:
-http://localhost:9001/api/info?stream=http://stream-ice.mtgradio.com:8080/bandit_mp3
-http://localhost:9001/api/info?stream=http://stream-01.shoutcast.com:8002/frisky_chill_mp3_128kbps
 http://localhost:9001/api/info?stream=http://radio.hbr1.com:19800/trance.ogg
