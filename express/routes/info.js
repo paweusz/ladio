@@ -78,6 +78,9 @@ function doGetInfo(streamUrl, rsp) {
 
       var meta = data.substr(hdrOffset + metaIdx + 1, metaLen);
       var title = meta.substring(12, meta.indexOf(';'));
+      if (title.length > 2 && title.charAt(0) === '\'' && title.charAt(title.length - 1) === '\'') {
+        title = title.substring(1, title.length - 1);
+      }
 
       rsp.json({
         'title': title,
