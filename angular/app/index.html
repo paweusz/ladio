@@ -55,12 +55,12 @@
             </div>
             <div id="station-info-details" class="hovering" ng-cloak>
               <div>
-                <span class="label">Currently playing</span>
-                <span>{{stationDetails.title}}</span>
+                <div class="label">Currently playing</div>
+                <div><a href="{{stationDetails.titleLink}}" target="_blank">{{stationDetails.title}}</a></div>
               </div>
               <div class="website">
                 <span class="label">Station site</span>
-                <span><a href="{{currentStation.station.website}}">{{currentStation.station.website}}</a></span>
+                <span><a href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a></span>
               </div>
               <div class="bitrate">
                 <span class="label">Bitrate</span>
