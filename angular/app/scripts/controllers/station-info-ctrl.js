@@ -10,7 +10,7 @@ angular.module('ladioApp')
 
     this.updateStationDetails = function() {
       if (!$scope.currentStation.streams) {
-        $scope.stationDetails.title = '';
+        $scope.stationDetails.title = 'Unknown';
         $scope.stationDetails.titleLink = '';
         return;
       }
@@ -27,7 +27,7 @@ angular.module('ladioApp')
         $scope.stationDetails.titleLink = 'http://www.google.com/search?q=' + encodeURIComponent(streamInfo.title);
       }).error(function(data, status) {
         $log.error('Error fetching station details data. (' + status + ':' + data + ')');
-        $scope.stationDetails.title = '';
+        $scope.stationDetails.title = 'Unknown';
         $scope.stationDetails.titleLink = '';
       });
     };

@@ -35,7 +35,7 @@ describe('Controller: StationInfoCtrl', function () {
     scope.currentStation = {streams: ['stream1']};
     StationInfoCtrl.updateStationDetails();
     streamInfoSvcMock.getStreamInfoRsp.errCb('Error', 503);
-    expect(scope.stationDetails.title).toBe('');
+    expect(scope.stationDetails.title).toBe('Unknown');
     expect(scope.stationDetails.titleLink).toBe('');
     expect(log.error.logs[0]).toMatch(/503:Error/);
   });
@@ -43,7 +43,7 @@ describe('Controller: StationInfoCtrl', function () {
   it('should return quietly when no streams are defined', function () {
     scope.currentStation = {streams: null};
     StationInfoCtrl.updateStationDetails();
-    expect(scope.stationDetails.title).toBe('');
+    expect(scope.stationDetails.title).toBe('Unknown');
     expect(scope.stationDetails.titleLink).toBe('');
   });
 
