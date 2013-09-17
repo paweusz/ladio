@@ -4,7 +4,8 @@ angular.module('ladioApp')
   .controller('StationInfoCtrl', function ($scope, $log, StreamInfoSvc) {
 
     $scope.stationDetails = {
-      title: null
+      title: null,
+      titleLink: null
     };
 
     $scope.updateStationDetails = function() {
@@ -13,6 +14,11 @@ angular.module('ladioApp')
         $scope.stationDetails.titleLink = '';
         return;
       }
+
+      $scope.stationDetails = {
+        title: null,
+        titleLink: null
+      };
 
       var streamUrl = $scope.currentStation.streams[0];
       var rsp = StreamInfoSvc.getStreamInfo(streamUrl);

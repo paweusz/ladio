@@ -26,6 +26,7 @@ describe('Controller: StationInfoCtrl', function () {
   it('should provide current stream info', function () {
     scope.currentStation = {streams: ['stream1']};
     scope.updateStationDetails();
+    expect(scope.stationDetails.title).toBe(null);
     streamInfoSvcMock.getStreamInfoRsp.succCb({title: 'The title'});
     expect(scope.stationDetails.title).toBe('The title');
   });
@@ -49,6 +50,7 @@ describe('Controller: StationInfoCtrl', function () {
   it('should produce title search links', function () {
     scope.currentStation = {streams: ['stream1']};
     scope.updateStationDetails();
+    expect(scope.stationDetails.titleLink).toBe(null);
     streamInfoSvcMock.getStreamInfoRsp.succCb({title: 'The title'});
     expect(scope.stationDetails.titleLink).toBe('http://www.google.com/search?q=The%20title');
   });
