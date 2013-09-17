@@ -481,6 +481,7 @@ ul {
   .label {
     color: $ruler-sep-color;
     font-size: 12px;
+    text-transform: none;
   }
 
   & > div {
@@ -504,6 +505,10 @@ ul {
 
   .country {
     float: right;
+  }
+
+  .stream-title {
+    text-transform: uppercase;
   }
 
 }
