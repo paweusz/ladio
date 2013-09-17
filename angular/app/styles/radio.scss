@@ -513,11 +513,11 @@ ul {
 
   .stream-title, .website {
     .label {
-      margin-bottom: 3px;
+      margin-top: 3px;
+      border-top: 1px solid $ruler-sep-color;
     }
     .value {
       text-transform: uppercase;
-      font-weight: bold;
     }
   }
 
