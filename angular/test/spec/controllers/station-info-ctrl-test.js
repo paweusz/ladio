@@ -5,15 +5,15 @@ describe('Controller: StationInfoCtrl', function () {
   // load the controller's module
   beforeEach(module('ladioApp'));
 
-  var StationInfoCtrl, stationInfoSvcMock, scope;
+  var StationInfoCtrl, streamInfoSvcMock, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, StationInfoSvcMock) {
+  beforeEach(inject(function ($controller, $rootScope, StreamInfoSvcMock) {
     scope = $rootScope.$new();
-    stationInfoSvcMock = StationInfoSvcMock;
+    streamInfoSvcMock = StreamInfoSvcMock;
     StationInfoCtrl = $controller('StationInfoCtrl', {
       $scope: scope,
-      StationInfoSvc: StationInfoSvcMock
+      StreamInfoSvc: StreamInfoSvcMock
     });
   }));
 
@@ -24,7 +24,7 @@ describe('Controller: StationInfoCtrl', function () {
   it('should provide current stream info', function () {
     scope.currentStation = {streams: ['stream1']};
     scope.updateStationDetails();
-    stationInfoSvcMock.getStationInfoRsp.succCb({title: 'The title'});
+    streamInfoSvcMock.getStreamInfoRsp.succCb({title: 'The title'});
     expect(scope.stationDetails.title).toBe('The title');
   });
 

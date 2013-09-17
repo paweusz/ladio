@@ -16,8 +16,7 @@ module.exports = function(config) {
       'views/directives/*.html',
       '../test/mock/**/*.js',
       '../test/spec/controllers/*.js',
-      '../test/spec/services/genres-svc-test.js',
-      '../test/spec/services/station-info-svc-test.js',
+      '../test/spec/services/*.js',
       '../test/spec/directives/*.js'
     ],
 

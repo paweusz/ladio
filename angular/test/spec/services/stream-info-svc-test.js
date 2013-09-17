@@ -1,15 +1,15 @@
 'use strict';
 
-describe('Service: StationInfoSvc', function () {
+describe('Service: StreamInfoSvc', function () {
 
   beforeEach(module('ladioApp'));
 
-  var StationInfoSvc, $httpBackend;
+  var StreamInfoSvc, $httpBackend;
   var expectedUrl = '@@API_URL/info?stream=http%3A%2F%2Fstream.com%3A8081';
   var streamUrl = 'http://stream.com:8081';
 
-  beforeEach(inject(function ($injector, _StationInfoSvc_) {
-    StationInfoSvc = _StationInfoSvc_;
+  beforeEach(inject(function ($injector, _StreamInfoSvc_) {
+    StreamInfoSvc = _StreamInfoSvc_;
     $httpBackend = $injector.get('$httpBackend');
     $httpBackend.when('GET', expectedUrl).respond({
       title: 'Sunny song'
@@ -21,9 +21,9 @@ describe('Service: StationInfoSvc', function () {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should fetch station information', function () {
+  it('should fetch stream information', function () {
     $httpBackend.expectGET(expectedUrl);
-    var rsp = StationInfoSvc.getStationInfo(streamUrl);
+    var rsp = StreamInfoSvc.getStreamInfo(streamUrl);
     rsp.success(function(streamInfo) {
       expect(streamInfo.title).toEqual('Sunny song');
     }).error(function(data, status) {

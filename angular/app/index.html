@@ -44,7 +44,7 @@
             onPlayingResumed="playingResumed()"
             maxReconnects="3"></audio>
 
-          <div id="station-info">
+          <div id="station-info" ng-controller="StationInfoCtrl">
             <div id="station-info-text" class="ng-class:stateCss()" ng-click="play()">
               <div id="ctrl"></div>
               <div id="name" ng-cloak>{{currentStation.station.name}}</div>
@@ -52,6 +52,9 @@
             <div class="alert hovering" ng-show="alertVisible" ng-cloak>
               <div>Error connecting to station.</div>
               <div>Please try again later.</div>
+            </div>
+            <div id="station-info-details" class="hovering" ng-mouseover="updateStationDetails()" ng-cloak>
+
             </div>
           </div>
           
@@ -120,7 +123,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/services/genres-svc.js"></script>
     <script src="scripts/services/pls.js"></script>
-    <script src="scripts/services/station-info.js"></script>
+    <script src="scripts/services/stream-info.js"></script>
     <script src="scripts/services/stat.js"></script>
     <script src="scripts/services/state.js"></script>
     <script src="scripts/services/starred.js"></script>
@@ -136,6 +139,7 @@
     <script src="scripts/controllers/subgenres.js"></script>
     <script src="scripts/controllers/stations.js"></script>
     <script src="scripts/controllers/star.js"></script>
+    <script src="scripts/controllers/station-info-ctrl.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/modules.js -->

@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('ladioApp')
-  .factory('StationInfoSvc', function($http) {
+  .factory('StreamInfoSvc', function($http) {
     return {
 
-      getStationInfo: function(stream) {
+      getStreamInfo: function(stream) {
         return $http.get('@@API_URL/info', {
           params: {'stream': stream},
         });
