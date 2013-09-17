@@ -45,7 +45,7 @@
             maxReconnects="3"></audio>
 
           <div id="station-info" ng-controller="StationInfoCtrl">
-            <div id="station-info-text" class="ng-class:stateCss()" ng-click="play()">
+            <div id="station-info-text" class="ng-class:stateCss()" ng-click="play()" ng-mouseover="updateStationDetails()">
               <div id="ctrl"></div>
               <div id="name" ng-cloak>{{currentStation.station.name}}</div>
             </div>
@@ -53,8 +53,23 @@
               <div>Error connecting to station.</div>
               <div>Please try again later.</div>
             </div>
-            <div id="station-info-details" class="hovering" ng-mouseover="updateStationDetails()" ng-cloak>
-
+            <div id="station-info-details" class="hovering" ng-cloak>
+              <div>
+                <span class="label">Currently playing</span>
+                <span>{{stationDetails.title}}</span>
+              </div>
+              <div class="website">
+                <span class="label">Station site</span>
+                <span><a href="{{currentStation.station.website}}">{{currentStation.station.website}}</a></span>
+              </div>
+              <div class="bitrate">
+                <span class="label">Bitrate</span>
+                <span>{{currentStation.station.bitrate}}</span>
+              </div>
+              <div class="country">
+                <span class="label">Country</span>
+                <span>{{currentStation.station.country}}</span>
+              </div>
             </div>
           </div>
           
@@ -123,7 +138,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/services/genres-svc.js"></script>
     <script src="scripts/services/pls.js"></script>
-    <script src="scripts/services/stream-info.js"></script>
+    <script src="scripts/services/stream-info-svc.js"></script>
     <script src="scripts/services/stat.js"></script>
     <script src="scripts/services/state.js"></script>
     <script src="scripts/services/starred.js"></script>

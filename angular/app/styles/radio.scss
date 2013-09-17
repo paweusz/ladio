@@ -469,6 +469,44 @@ ul {
 
 }
 
+#station-info-details {
+  background-color: $ruler-bg-color;
+  text-shadow: none;
+  min-width: 200px;
+  padding: 15px;
+  top: 26px;
+  font-size: 14px;
+
+  .label {
+    color: $ruler-sep-color;
+    font-size: 12px;
+  }
+
+  & > div {
+    margin-top: 15px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  a {
+    color: $ruler-color;
+  }
+
+  .website, .bitrate, .country {
+    white-space: nowrap;
+  }
+
+  .bitrate {
+    float: left;
+  }
+
+  .country {
+    float: right;
+  }
+
+}
+
 .hovering {
   position: absolute;
   right: 0;
