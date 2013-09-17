@@ -85,6 +85,9 @@ button {
       }
       #name {
         white-space: nowrap;
+        & > .value {
+          height: 28px;
+        }
       }
       &.playing #ctrl {
         background-color: $ruler-color;

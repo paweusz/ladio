@@ -48,7 +48,7 @@
             <div id="station-info-text" class="ng-class:stateCss()">
               <div id="ctrl" ng-click="play()"></div>
               <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
-                <span ng-click="play()">{{currentStation.station.name}}</span>
+                <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
                 <div id="station-info-details" ng-show="infoDetailsVisible" class="hovering" ng-cloak>
                   <div class="stream-title">
                     <div class="label">Currently playing</div>
