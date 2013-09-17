@@ -56,14 +56,17 @@
             <div id="station-info-details" class="hovering" ng-cloak>
               <div>
                 <div class="label">Currently playing</div>
-                <div ng-switch on="!!stationDetails.title">
+                <div ng-switch on="stationDetails.title != null">
                   <a ng-switch-when="true" href="{{stationDetails.titleLink}}" target="_blank">{{stationDetails.title}}</a>
                   <a ng-switch-default>&hellip;</a>
                 </div>
               </div>
               <div class="website">
                 <span class="label">Station site</span>
-                <span><a href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a></span>
+                <span ng-switch on="!!currentStation.station.website">
+                  <a ng-switch-when="true" href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a>
+                  <a ng-switch-default>Unknown</a>
+                </span>
               </div>
               <div class="bitrate">
                 <span class="label">Bitrate</span>
