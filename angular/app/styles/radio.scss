@@ -1,10 +1,11 @@
 $playing-color: #FF802E;
 $hover-color: #00AFEE;
-$header-color: #3C3C3C;
+$header-bg-color: #3C3C3C;
 $station-color: rgba(76,107,150,0.95);
 $ruler-color: #FAFAFA;
 $ruler-sep-color: #202020;
 $ruler-bg-color: #6C6C6C;
+$ruler-bg-color-t: rgba(108, 108, 108, 0.95);
 $alert-bg-color: #ff7070;
 $alert-color: #900000;
 
@@ -57,7 +58,7 @@ button {
 }
 
 #header {
-  background-color: $header-color;
+  background-color: $header-bg-color;
   box-shadow: 0 0 40px 10px #000;
   position: fixed;
   top: 0;
@@ -326,7 +327,7 @@ ul {
   .search-icon {
     width: 35px;
     border-radius: 5px 0 0 5px;
-    background-color: $header-color;
+    background-color: $header-bg-color;
     float: left;
     position: relative;
     
@@ -448,7 +449,7 @@ ul {
   }
 
   #prefs-ddown {
-    background-color: $ruler-bg-color;
+    background-color: $ruler-bg-color-t;
     padding: 0 10px;
     min-width: 100px;
     text-align: center;
@@ -473,7 +474,7 @@ ul {
 }
 
 #station-info-details {
-  background-color: $ruler-bg-color;
+  background-color: $ruler-bg-color-t;
   text-shadow: none;
   min-width: 250px;
   padding: 15px;
@@ -481,7 +482,6 @@ ul {
   cursor: initial;
   white-space: normal;
   color: $ruler-color;
-  opacity: 0.9;
 
   .label {
     color: $ruler-sep-color;
@@ -511,13 +511,14 @@ ul {
     float: right;
   }
 
+  .stream-title .value {
+    text-transform: uppercase;
+  }
+
   .stream-title, .website {
     .label {
       margin-top: 3px;
       border-top: 1px solid $ruler-sep-color;
-    }
-    .value {
-      text-transform: uppercase;
     }
   }
 

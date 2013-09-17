@@ -58,7 +58,7 @@
                     <div class="label">currently playing</div>
                   </div>
                   <div class="website">
-                    <div ng-switch on="!!currentStation.station.website">
+                    <div class="value" ng-switch on="!!currentStation.station.website">
                       <a ng-switch-when="true" href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a>
                       <a ng-switch-default>Unknown</a>
                     </div>
@@ -66,11 +66,11 @@
                   </div>
                   <div class="bitrate">
                     <span class="label">bitrate</span>
-                    <span>{{currentStation.station.bitrate}}</span>
+                    <span class="value">{{currentStation.station.bitrate}}</span>
                   </div>
                   <div class="country">
                     <span class="label">country</span>
-                    <span>{{currentStation.station.country}}</span>
+                    <span class="value">{{currentStation.station.country}}</span>
                   </div>
                 </div>
               </div>
