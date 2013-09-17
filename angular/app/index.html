@@ -49,7 +49,7 @@
               <div id="ctrl" ng-click="play()"></div>
               <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
                 <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
-                <div id="station-info-details" ng-show="infoDetailsVisible" class="hovering" ng-cloak>
+                <div id="station-info-details" ng-show="true" class="hovering" ng-cloak>
                   <div class="stream-title">
                     <div class="label">Currently playing</div>
                     <div class="value" ng-switch on="stationDetails.title != null">
@@ -58,11 +58,11 @@
                     </div>
                   </div>
                   <div class="website">
-                    <span class="label">Station site</span>
-                    <span ng-switch on="!!currentStation.station.website">
+                    <div class="label">Station site</div>
+                    <div ng-switch on="!!currentStation.station.website">
                       <a ng-switch-when="true" href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a>
                       <a ng-switch-default>Unknown</a>
-                    </span>
+                    </div>
                   </div>
                   <div class="bitrate">
                     <span class="label">Bitrate</span>

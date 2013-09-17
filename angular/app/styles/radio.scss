@@ -86,7 +86,7 @@ button {
       #name {
         white-space: nowrap;
         & > .value {
-          height: 28px;
+          height: 26px;
         }
       }
       &.playing #ctrl {
@@ -475,7 +475,7 @@ ul {
 #station-info-details {
   background-color: $ruler-bg-color;
   text-shadow: none;
-  min-width: 200px;
+  min-width: 250px;
   padding: 15px;
   font-size: 14px;
   cursor: initial;
@@ -510,7 +510,7 @@ ul {
     float: right;
   }
 
-  .stream-title {
+  .stream-title, .website {
     .label {
       margin-bottom: 3px;
     }
