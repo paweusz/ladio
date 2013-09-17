@@ -474,14 +474,14 @@ ul {
   text-shadow: none;
   min-width: 200px;
   padding: 15px;
-  top: 26px;
   font-size: 14px;
   cursor: initial;
+  white-space: normal;
+  color: $ruler-color;
 
   .label {
     color: $ruler-sep-color;
     font-size: 12px;
-    text-transform: none;
   }
 
   & > div {
@@ -508,7 +508,13 @@ ul {
   }
 
   .stream-title {
-    text-transform: uppercase;
+    .label {
+      margin-bottom: 3px;
+    }
+    .value {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
   }
 
 }

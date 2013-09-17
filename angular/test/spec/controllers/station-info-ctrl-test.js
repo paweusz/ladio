@@ -25,7 +25,7 @@ describe('Controller: StationInfoCtrl', function () {
 
   it('should provide current stream info', function () {
     scope.currentStation = {streams: ['stream1']};
-    scope.updateStationDetails();
+    StationInfoCtrl.updateStationDetails();
     expect(scope.stationDetails.title).toBe(null);
     streamInfoSvcMock.getStreamInfoRsp.succCb({title: 'The title'});
     expect(scope.stationDetails.title).toBe('The title');
@@ -33,7 +33,7 @@ describe('Controller: StationInfoCtrl', function () {
 
   it('should handle service errors', function () {
     scope.currentStation = {streams: ['stream1']};
-    scope.updateStationDetails();
+    StationInfoCtrl.updateStationDetails();
     streamInfoSvcMock.getStreamInfoRsp.errCb('Error', 503);
     expect(scope.stationDetails.title).toBe('');
     expect(scope.stationDetails.titleLink).toBe('');
@@ -42,17 +42,32 @@ describe('Controller: StationInfoCtrl', function () {
 
   it('should return quietly when no streams are defined', function () {
     scope.currentStation = {streams: null};
-    scope.updateStationDetails();
+    StationInfoCtrl.updateStationDetails();
     expect(scope.stationDetails.title).toBe('');
     expect(scope.stationDetails.titleLink).toBe('');
   });
 
   it('should produce title search links', function () {
     scope.currentStation = {streams: ['stream1']};
-    scope.updateStationDetails();
+    StationInfoCtrl.updateStationDetails();
     expect(scope.stationDetails.titleLink).toBe(null);
     streamInfoSvcMock.getStreamInfoRsp.succCb({title: 'The title'});
     expect(scope.stationDetails.titleLink).toBe('http://www.google.com/search?q=The%20title');
+  });
+
+  it('should handle info popup visibility', function() {
+    scope.currentStation = {streams: ['stream1']};
+    spyOn(StationInfoCtrl, 'updateStationDetails').andCallThrough();
+    scope.showStationDetails();
+
+    expect(scope.infoDetailsVisible).toBe(true);
+    expect(StationInfoCtrl.updateStationDetails).toHaveBeenCalled();
+
+    scope.hideStationDetails();
+
+    expect(scope.infoDetailsVisible).toBe(false);
+    expect(StationInfoCtrl.updateStationDetails.calls.length).toBe(1);
+
   });
 
 });

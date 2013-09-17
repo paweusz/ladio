@@ -8,7 +8,7 @@ angular.module('ladioApp')
       titleLink: null
     };
 
-    $scope.updateStationDetails = function() {
+    this.updateStationDetails = function() {
       if (!$scope.currentStation.streams) {
         $scope.stationDetails.title = '';
         $scope.stationDetails.titleLink = '';
@@ -30,6 +30,20 @@ angular.module('ladioApp')
         $scope.stationDetails.title = '';
         $scope.stationDetails.titleLink = '';
       });
+    };
+
+    var self = this;
+    $scope.showStationDetails = function() {
+      if ($scope.alertVisible) {
+        return;
+      }
+
+      self.updateStationDetails();
+      $scope.infoDetailsVisible = true;
+    };
+
+    $scope.hideStationDetails = function() {
+      $scope.infoDetailsVisible = false;
     };
 
   });
