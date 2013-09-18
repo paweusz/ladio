@@ -488,6 +488,10 @@ ul {
     font-size: 12px;
   }
 
+  .value {
+    text-align: right;
+  }
+
   & > div {
     margin-top: 15px;
     &:first-child {
