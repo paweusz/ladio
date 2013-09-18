@@ -93,23 +93,42 @@ function fetchStreamInfo(streamUrl) {
 
 
 exports.info = function(req, rsp) {
-  var streamUrl = req.query.stream;
-  if (!streamUrl) {
+  var streamUrls = req.query.stream;
+  if (!streamUrls) {
     rsp.send(400);
     return;
   }
+  if (typeof streamUrls === 'string') {
+    streamUrls = [streamUrls];
+  }
+
+  var streamIdx = 0;
+
+  function processStream() {
+    var streamUrl = streamUrls[streamIdx];
+    var prms = fetchStreamInfo(streamUrl);
+    prms.then(succCb, errCb);
+  }
   
-  var prms = fetchStreamInfo(streamUrl);
-  prms.then(function succCb(result) {
+  function succCb(result) {
     rsp.json(result);
-  }, function errCb(e) {
-    var msg = 'Error processing info request (URL: ' + streamUrl + ', msg: ' + e.message + ')';
+  }
+
+  function errCb(e) {
+    var msg = 'Error processing info request (URL: ' + streamUrls[streamIdx] + ', msg: ' + e.message + ')';
     console.log(msg);
     if (!!e.stack) {
       console.log(e.stack);
     }
 
-    rsp.send(503, msg);
-  });
+    streamIdx++;
+    if (streamIdx >= streamUrls.length) {
+      rsp.send(503, msg);
+    } else {
+      processStream();
+    }
+  }
+
+  processStream();
 
 };
