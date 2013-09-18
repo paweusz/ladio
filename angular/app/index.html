@@ -50,28 +50,20 @@
               <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
                 <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
                 <div id="station-info-details" ng-show="infoDetailsVisible" class="hovering" ng-cloak>
-                  <div class="stream-title">
-                    <div class="value" ng-switch on="stationDetails.title != null">
+                  <p>
+                    <span>Currently playing</span>
+                    <span class="stream-title" ng-switch on="stationDetails.title != null">
                       <a ng-switch-when="true" href="{{stationDetails.titleLink}}" target="_blank">{{stationDetails.title}}</a>
                       <a ng-switch-default>&hellip;</a>
-                    </div>
-                    <div class="label">currently playing</div>
-                  </div>
-                  <div class="website">
-                    <div class="value" ng-switch on="!!currentStation.station.website">
+                    </span>
+                    <span>from website</span>
+                    <span ng-switch on="!!currentStation.station.website">
                       <a ng-switch-when="true" href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a>
-                      <a ng-switch-default>Unknown</a>
-                    </div>
-                    <div class="label">station site</div>
-                  </div>
-                  <div class="bitrate">
-                    <span class="label">bitrate</span>
-                    <span class="value">{{currentStation.station.bitrate}}</span>
-                  </div>
-                  <div class="country">
-                    <span class="label">country</span>
-                    <span class="value">{{currentStation.station.country}}</span>
-                  </div>
+                      <a ng-switch-default>unknown</a>
+                    </span>
+                    <span>at {{currentStation.station.bitrate}}.</span>
+                  </p>
+                  <p>Territory {{currentStation.station.country}}.</p>
                 </div>
               </div>
             </div>

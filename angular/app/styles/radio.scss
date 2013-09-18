@@ -5,7 +5,6 @@ $station-color: rgba(76,107,150,0.95);
 $ruler-color: #FAFAFA;
 $ruler-sep-color: #202020;
 $ruler-bg-color: #6C6C6C;
-$ruler-bg-color-t: rgba(108, 108, 108, 0.95);
 $alert-bg-color: #ff7070;
 $alert-color: #900000;
 
@@ -449,7 +448,7 @@ ul {
   }
 
   #prefs-ddown {
-    background-color: $ruler-bg-color-t;
+    background-color: $ruler-bg-color;
     padding: 0 10px;
     min-width: 100px;
     text-align: center;
@@ -474,56 +473,32 @@ ul {
 }
 
 #station-info-details {
-  background-color: $ruler-bg-color-t;
+  background-color: $ruler-bg-color;
   text-shadow: none;
   min-width: 250px;
   padding: 15px;
-  font-size: 14px;
+  font-size: 15px;
   cursor: initial;
   white-space: normal;
   color: $ruler-color;
+  line-height: 2.5ex;
+  text-align: justify;
 
-  .label {
-    color: $ruler-sep-color;
-    font-size: 12px;
+  a {
+    color: $ruler-color;
+    text-decoration: underline;
   }
 
-  .value {
-    text-align: right;
-  }
-
-  & > div {
-    margin-top: 15px;
+  & > p {
+    margin-top: 10px;
     &:first-child {
       margin-top: 0;
     }
   }
 
-  a {
-    color: $ruler-color;
-  }
-
-  .website, .bitrate, .country {
-    white-space: nowrap;
-  }
-
-  .bitrate {
-    float: left;
-  }
-
-  .country {
-    float: right;
-  }
-
-  .stream-title .value {
-    text-transform: uppercase;
-  }
-
-  .stream-title, .website {
-    .label {
-      margin-top: 3px;
-      border-top: 1px solid $ruler-sep-color;
-    }
+  .stream-title {
+    text-transform: lowercase;
+    font-weight: bold;
   }
 
 }
@@ -542,7 +517,7 @@ ul {
   top: 120px;
   width: 445px;
   z-index: 10;
-  font-size: 14px;
+  font-size: 15px;
   text-align: justify;
 
   .head {
