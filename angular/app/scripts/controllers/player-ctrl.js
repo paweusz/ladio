@@ -12,7 +12,8 @@ angular.module('ladioApp')
 
     $scope.Events = {
       STREAMS_CHANGED: 'STREAMS_CHANGED',
-      PLAYING_STARTED: 'PLAYING_STARTED'
+      PLAYING_STARTED: 'PLAYING_STARTED',
+      HIDE_POPUPS_REQ: 'HIDE_POPUPS_REQ'
     };
 
     $scope.currentStation = {
@@ -138,6 +139,11 @@ angular.module('ladioApp')
         classes.push('error');
       }
       return classes.join(' ');
+    };
+
+    $scope.hidePopups = function() {
+      $scope.alertVisible = false;
+      $scope.$broadcast($scope.Events.HIDE_POPUPS_REQ);
     };
     
   });

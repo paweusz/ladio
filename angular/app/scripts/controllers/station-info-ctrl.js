@@ -43,13 +43,17 @@ angular.module('ladioApp')
       }, 3800);
     };
 
-    $scope.showStationDetails = function() {
-      if ($scope.alertVisible) {
-        return;
-      }
+    this.cancelBlinkIfAny = function() {
       if (!!self.blinkPrms) {
         $timeout.cancel(self.blinkPrms);
         self.blinkPrms = null;
+      }
+    };
+
+    $scope.showStationDetails = function() {
+      self.cancelBlinkIfAny();
+      if ($scope.alertVisible) {
+        return;
       }
 
       self.updateStationDetails();
@@ -66,6 +70,11 @@ angular.module('ladioApp')
 
     $scope.$on($scope.Events.PLAYING_STARTED, function() {
       self.blinkPopup();
+    });
+
+    $scope.$on($scope.Events.HIDE_POPUPS_REQ, function() {
+      self.cancelBlinkIfAny();
+      $scope.hideStationDetails();
     });
 
   });
