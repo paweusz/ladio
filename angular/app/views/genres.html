@@ -8,7 +8,9 @@
       <div class="container">
         <div class="genre" ng-repeat="genre in genres" ng-click="select(genre)"><div class="name" title="{{genre.description}}">{{genre.name}}</div></div>
       </div>
-      <ng-include src="'/views/partials/spinner.html'" ng-hide="genres != null"></ng-include>
+      <div ng-hide="!!genres">
+        <ng-include src="'/views/partials/spinner.html'"></ng-include>
+      </div>
     </div>
 
     <div ng-switch-when="true">

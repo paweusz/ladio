@@ -16,30 +16,20 @@ angular.module('ladioApp')
       state: $scope.State.STOPPED
     };
 
-    function prepareStreams(streams, stream) {
-      streams.push(stream);
-      //Shoutcast server trick
-      if (stream.match(/\/$/)) {
-        streams.push(stream + ';');
-      } else {
-        streams.push(stream + '/;');
-      }
-    }
-    
     function playStreams(streamUrl) {
       var streams = [];
       if (streamUrl.match(/.pls$/)) {
         Pls.streams(streamUrl).success(function(plsStreams) {
           $log.log('Pls fetched.');
           angular.forEach(plsStreams, function(plsStream) {
-            prepareStreams(streams, plsStream.url);
+            streams.push(plsStream.url);
           });
         }).error(function(data, status) {
           $log.error('Error fetching pls data. (' + status + ':' + data + ')');
           $scope.playingError();
         });
       } else {
-        prepareStreams(streams, streamUrl);
+        streams.push(streamUrl);
       }
       return streams;
     }

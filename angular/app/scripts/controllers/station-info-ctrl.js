@@ -20,8 +20,7 @@ angular.module('ladioApp')
         titleLink: null
       };
 
-      var streamUrl = $scope.currentStation.streams[0];
-      var rsp = StreamInfoSvc.getStreamInfo(streamUrl);
+      var rsp = StreamInfoSvc.getStreamInfo($scope.currentStation.streams);
       rsp.success(function(streamInfo) {
         $scope.stationDetails.title = streamInfo.title;
         $scope.stationDetails.titleLink = 'http://www.google.com/search?q=' + encodeURIComponent(streamInfo.title);

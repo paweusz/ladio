@@ -28,7 +28,18 @@ angular.module('ladioApp')
           $log.log('Playing streams ' + streams);
           
           angular.forEach(streams, function(stream) {
-            element.append('<source src="' + stream + '"></source>');
+            function appendStreamElem(streamSrc) {
+              element.append('<source src="' + streamSrc + '"></source>');
+            }
+            appendStreamElem(stream);
+            //Shoutcast server trick
+            if (stream.match(/\/$/)) {
+              appendStreamElem(stream + ';');
+            } else {
+              if (!stream.match(/;$/)) {
+                appendStreamElem(stream + '/;');
+              }
+            }
           });
 
           element.children().bind('error', function() {

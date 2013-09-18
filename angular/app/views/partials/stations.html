@@ -16,6 +16,8 @@
       </div>
 
     </div>
-    <ng-include src="'/views/partials/spinner.html'" ng-hide="!!stations"></ng-include>
+    <div ng-hide="!!stations">
+      <ng-include src="'/views/partials/spinner.html'"></ng-include>
+    </div>
   </div>
 

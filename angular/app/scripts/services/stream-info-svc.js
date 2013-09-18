@@ -4,9 +4,9 @@ angular.module('ladioApp')
   .factory('StreamInfoSvc', function($http) {
     return {
 
-      getStreamInfo: function(stream) {
+      getStreamInfo: function(streams) {
         return $http.get('@@API_URL/info', {
-          params: {'stream': stream},
+          params: {'stream': streams},
         });
       }
 

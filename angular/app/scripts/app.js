@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ladioApp', [])
+angular.module('ladioApp', ['ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

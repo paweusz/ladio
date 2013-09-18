@@ -10,6 +10,7 @@ describe('Directive rdPlayer', function () {
   
   beforeEach(function() {
     streamsElem = {
+      elems: [],
       callbacks: {},
       remove: function() {},
       bind: function(name, fn) {
@@ -31,7 +32,9 @@ describe('Directive rdPlayer', function () {
       children: function() {
         return streamsElem;
       },
-      append: function(childElem) {}
+      append: function(childElem) {
+        streamsElem.elems.push(childElem);
+      }
     };
     spyOn(element[0], 'load');
     spyOn(element[0], 'play');
@@ -55,6 +58,21 @@ describe('Directive rdPlayer', function () {
     expect(element[0].load.calls.length).toEqual(1);
     expect(element[0].play).not.toHaveBeenCalled();
 
+  }));
+
+  it('should prepare streams for shoutcast', 
+      inject(function ($rootScope, rdPlayerDirective) {
+
+    $rootScope.streams = ['stream1', 'stream2/', 'stream3/;'];
+    rdPlayerDirective[0].link($rootScope, element, attrs);
+    $rootScope.$digest();
+    
+    expect(streamsElem.elems.length).toBe(5);
+    expect(streamsElem.elems[0]).toMatch(/"stream1"/);
+    expect(streamsElem.elems[1]).toMatch(/"stream1\/;"/);
+    expect(streamsElem.elems[2]).toMatch(/"stream2\/"/);
+    expect(streamsElem.elems[3]).toMatch(/"stream2\/;"/);
+    expect(streamsElem.elems[4]).toMatch(/"stream3\/;"/);
   }));
 
   it('should invoke error callback when all streams failed to play', 
