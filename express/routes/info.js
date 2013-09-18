@@ -1,19 +1,11 @@
 'use strict';
 
 var net = require('net'),
-    url = require('url');
+    url = require('url'),
+    Q = require('q');
 
-function doGetInfo(streamUrl, rsp) {
-	var errHandler = function(e, rspCode) {
-		var msg = 'Error processing info request (URL: ' + streamUrl + ', msg: ' + e.message + ')';
-		console.log(msg);
-		console.log(e.stack);
-
-		if (!rspCode) {
-		  rspCode = 503;
-		}
-		rsp.send(rspCode, msg);
-	};
+function fetchStreamInfo(streamUrl) {
+  var d = Q.defer();
 
   var pStreamUrl = url.parse(streamUrl);
   var opts = {
@@ -27,7 +19,11 @@ function doGetInfo(streamUrl, rsp) {
                  'Accept: */*\r\n' +
                  'Icy-MetaData: 1\r\n\r\n';
     clientReq.write(icyReq);
-  }).on('error', errHandler);
+  })
+
+  clientReq.on('error', function(err) {
+    d.reject(err);
+  });
 
   var data = '', is200,
       is200Regex = /^ICY 200 OK$/m,
@@ -44,7 +40,7 @@ function doGetInfo(streamUrl, rsp) {
       is200 = data.match(is200Regex);
       if (!is200) {
         clientReq.destroy();
-        errHandler({'message': 'Invalid ICY response'});
+        d.reject({'message': 'Invalid ICY response'});
       }
     }
 
@@ -82,19 +78,17 @@ function doGetInfo(streamUrl, rsp) {
         title = title.substring(1, title.length - 1);
       }
 
-      rsp.json({
-        'title': title,
-        'content-type': contype
-      });
+      d.resolve({title: title, contype: contype});
     }
 
     if (data.length > 0xFFFF) {
       clientReq.destroy();
-      errHandler({'message': 'No metadata found'});
+      d.reject({'message': 'No metadata found'});
     }
 
   });
   
+  return d.promise;
 }
 
 
@@ -105,5 +99,17 @@ exports.info = function(req, rsp) {
     return;
   }
   
-  doGetInfo(streamUrl, rsp);
+  var prms = fetchStreamInfo(streamUrl);
+  prms.then(function succCb(result) {
+    rsp.json(result);
+  }, function errCb(e) {
+    var msg = 'Error processing info request (URL: ' + streamUrl + ', msg: ' + e.message + ')';
+    console.log(msg);
+    if (!!e.stack) {
+      console.log(e.stack);
+    }
+
+    rsp.send(503, msg);
+  });
+
 };
