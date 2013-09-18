@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .service('Stat', function() {
+  .service('StatSvc', function() {
     var recentKey = 'com.padio.recent';
     
     var recentStat = localStorage[recentKey];

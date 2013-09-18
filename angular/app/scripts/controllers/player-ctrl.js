@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('PlayerCtrl', function ($scope, $log, $timeout, Pls, Stat) {
+  .controller('PlayerCtrl', function ($scope, $log, $timeout, Pls, StatSvc) {
 
     $scope.State = {
       STOPPED: 0,
@@ -18,7 +18,8 @@ angular.module('ladioApp')
     $scope.currentStation = {
       station: null,
       streams: null,
-      state: $scope.State.STOPPED
+      state: $scope.State.STOPPED,
+      wasPlayed: false
     };
 
     function playStreams(streamUrl) {
@@ -69,14 +70,22 @@ angular.module('ladioApp')
 
       //Prepare playing of new station
       cs.station = station;
+      cs.wasPlayed = false;
       cs.state = $scope.State.CONNECTING;
       cs.streams = playStreams(station.streamurl);
     }
     
     $scope.playingStarted = function() {
-      $scope.currentStation.state = $scope.State.PLAYING;
-      Stat.stationPlayed($scope.currentStation.station);
-      $scope.$broadcast($scope.Events.PLAYING_STARTED);
+      var cs = $scope.currentStation;
+
+      cs.state = $scope.State.PLAYING;
+
+      if (!cs.wasPlayed) {
+        StatSvc.stationPlayed(cs.station);
+        $scope.$broadcast($scope.Events.PLAYING_STARTED);
+        cs.wasPlayed = true;
+      }
+
       $scope.alertVisible = false;
     };
     
