@@ -20,8 +20,14 @@ describe('Directive rdPlayer', function () {
     element = {
       callbacks: {},
       0: {
+        paused: true,
         load: function() {},
-        play: function() {},
+        play: function() {
+          this.paused = false;
+        },
+        pause: function() {
+          this.paused = true;
+        },
         error: {
           code: 3
         }
@@ -34,10 +40,13 @@ describe('Directive rdPlayer', function () {
       },
       append: function(childElem) {
         streamsElem.elems.push(childElem);
+      },
+      attr: function(name) {
+        return element.attrs[name];
       }
     };
     spyOn(element[0], 'load');
-    spyOn(element[0], 'play');
+    spyOn(element[0], 'play').andCallThrough();
     attrs = {
       rdPlayer: "streams",
       onplayingstarted: "playingStarted()",
@@ -163,7 +172,7 @@ describe('Directive rdPlayer', function () {
     expect($rootScope.playingStalled).not.toHaveBeenCalled();
 
     element.callbacks['stalled']();
-    expect($rootScope.playingStalled.calls.length).toEqual(1);
+    expect($rootScope.playingStalled).not.toHaveBeenCalled();
 
     element.callbacks['progress']();
     expect($rootScope.playingResumed).not.toHaveBeenCalled();
@@ -179,6 +188,26 @@ describe('Directive rdPlayer', function () {
 
   }));
 
+  it('should not invoke playingResumed when paused', 
+      inject(function ($rootScope, rdPlayerDirective) {
+    $rootScope.playingStalled = jasmine.createSpy('playingStalled');
+    $rootScope.playingResumed = jasmine.createSpy('playingResumed');
+
+    $rootScope.streams = ['stream1'];
+    rdPlayerDirective[0].link($rootScope, element, attrs);
+    $rootScope.$digest();
+
+    element.callbacks['canplay']();
+    element.callbacks['playing']();
+    element[0].pause();
+
+    element.callbacks['stalled']();
+    element.callbacks['progress']();
+
+    expect($rootScope.playingStalled).not.toHaveBeenCalled();
+    expect($rootScope.playingResumed).not.toHaveBeenCalled();
+  }));
+      
   it('should reconnect when playing stream has ended', 
       inject(function ($rootScope, rdPlayerDirective) {
       
