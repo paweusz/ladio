@@ -5,17 +5,25 @@ describe('Controller: StationInfoCtrl', function () {
   // load the controller's module
   beforeEach(module('ladioApp'));
 
-  var StationInfoCtrl, streamInfoSvcMock, scope, log;
+  var StationInfoCtrl, streamInfoSvcMock, scope, log, timeout;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, StreamInfoSvcMock, $log) {
+  beforeEach(inject(function ($controller, $rootScope, StreamInfoSvcMock, $log, $timeout) {
     scope = $rootScope.$new();
+    scope.Events = {
+      STREAMS_CHANGED: 'STREAMS_CHANGED',
+      PLAYING_STARTED: 'PLAYING_STARTED'
+    };
+
     streamInfoSvcMock = StreamInfoSvcMock;
-    log = $log
+    log = $log;
+    timeout = $timeout;
+
     StationInfoCtrl = $controller('StationInfoCtrl', {
       $scope: scope,
       StreamInfoSvc: StreamInfoSvcMock,
-      $log: log
+      $log: log,
+      $timeout: timeout
     });
   }));
 
@@ -67,7 +75,35 @@ describe('Controller: StationInfoCtrl', function () {
 
     expect(scope.infoDetailsVisible).toBe(false);
     expect(StationInfoCtrl.updateStationDetails.calls.length).toBe(1);
+  });
 
+  it('should load stream info on STREAMS_CHANGED event', function() {
+    spyOn(StationInfoCtrl, 'updateStationDetails');
+    scope.$broadcast(scope.Events.STREAMS_CHANGED);
+    expect(StationInfoCtrl.updateStationDetails).toHaveBeenCalled();
+  });
+
+  it('should show stream info on PLAYING_STARTED event', function() {
+    spyOn(StationInfoCtrl, 'blinkPopup');
+    scope.$broadcast(scope.Events.PLAYING_STARTED);
+    expect(StationInfoCtrl.blinkPopup).toHaveBeenCalled();
+  });
+
+  it('should handle popup binking', function() {
+    expect(scope.infoDetailsVisible).toBe(false);
+    StationInfoCtrl.blinkPopup();
+    expect(scope.infoDetailsVisible).toBe(true);
+    timeout.flush();
+    expect(scope.infoDetailsVisible).toBe(false);
+  });
+
+  it('should cancel popup binking when popup has been triggered externally', function() {
+    scope.currentStation = {streams: ['stream1']};
+    StationInfoCtrl.blinkPopup();
+    expect(scope.infoDetailsVisible).toBe(true);
+    scope.showStationDetails();
+    timeout.verifyNoPendingTasks();
+    expect(scope.infoDetailsVisible).toBe(true);
   });
 
 });

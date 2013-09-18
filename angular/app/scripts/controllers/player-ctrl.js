@@ -1,13 +1,18 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('PlayerCtrl', function ($scope, $log, Pls, Stat) {
+  .controller('PlayerCtrl', function ($scope, $log, $timeout, Pls, Stat) {
 
     $scope.State = {
       STOPPED: 0,
       CONNECTING: 1,
       PLAYING: 2,
       ERROR: 3
+    };
+
+    $scope.Events = {
+      STREAMS_CHANGED: 'STREAMS_CHANGED',
+      PLAYING_STARTED: 'PLAYING_STARTED'
     };
 
     $scope.currentStation = {
@@ -24,12 +29,16 @@ angular.module('ladioApp')
           angular.forEach(plsStreams, function(plsStream) {
             streams.push(plsStream.url);
           });
+          $scope.$broadcast($scope.Events.STREAMS_CHANGED);
         }).error(function(data, status) {
           $log.error('Error fetching pls data. (' + status + ':' + data + ')');
           $scope.playingError();
         });
       } else {
         streams.push(streamUrl);
+        $timeout(function() {
+          $scope.$broadcast($scope.Events.STREAMS_CHANGED);
+        });
       }
       return streams;
     }
@@ -40,7 +49,7 @@ angular.module('ladioApp')
         station = cs.station;
       }
 
-      if (cs.station && cs.station.id === station.id) {//Clicked the same station
+      if (!!cs.station && cs.station.id === station.id) {//Clicked the same station
         switch (cs.state) {
         case $scope.State.CONNECTING:
           cs.streams = [];
@@ -67,6 +76,7 @@ angular.module('ladioApp')
     $scope.playingStarted = function() {
       $scope.currentStation.state = $scope.State.PLAYING;
       Stat.stationPlayed($scope.currentStation.station);
+      $scope.$broadcast($scope.Events.PLAYING_STARTED);
       $scope.alertVisible = false;
     };
     

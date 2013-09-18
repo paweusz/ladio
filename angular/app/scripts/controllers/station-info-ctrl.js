@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('StationInfoCtrl', function ($scope, $log, StreamInfoSvc) {
+  .controller('StationInfoCtrl', function ($scope, $log, $timeout, StreamInfoSvc) {
 
     $scope.stationDetails = {
       title: null,
       titleLink: null
     };
+    $scope.infoDetailsVisible = false;
+    this.blinkPrms = null;
 
     this.updateStationDetails = function() {
       if (!$scope.currentStation.streams) {
@@ -32,9 +34,22 @@ angular.module('ladioApp')
     };
 
     var self = this;
+
+    this.blinkPopup = function() {
+      $scope.infoDetailsVisible = true;
+      self.blinkPrms = $timeout(function() {
+        self.blinkPrms = null;
+        $scope.hideStationDetails();
+      }, 3800);
+    };
+
     $scope.showStationDetails = function() {
       if ($scope.alertVisible) {
         return;
+      }
+      if (!!self.blinkPrms) {
+        $timeout.cancel(self.blinkPrms);
+        self.blinkPrms = null;
       }
 
       self.updateStationDetails();
@@ -44,5 +59,13 @@ angular.module('ladioApp')
     $scope.hideStationDetails = function() {
       $scope.infoDetailsVisible = false;
     };
+
+    $scope.$on($scope.Events.STREAMS_CHANGED, function() {
+      self.updateStationDetails();
+    });
+
+    $scope.$on($scope.Events.PLAYING_STARTED, function() {
+      self.blinkPopup();
+    });
 
   });
