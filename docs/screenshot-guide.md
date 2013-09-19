@@ -2,7 +2,7 @@
 
 ## Preparation:
 
-Take screenshot with printscreen button of Chrome at resolution 1440x900
+Take screenshot of Chrome _(with printscreen button)_ at resolution 1440x900.
 
 Guidelines:
 * with hover
