@@ -8,7 +8,7 @@
         </div>
         <div class="desc">
           <span>{{station.bitrate}}</span>
-          <span class="flag us" title="{{station.country}}"></span>
+          <span class="flag" ng-class="station.country.toLowerCase()" title="{{station.country}}"></span>
         </div>
 
         <div class="fav-star ng-class:starCss(station)" ng-click="star(station); $event.stopPropagation();">
