@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('PlayerCtrl', function ($scope, $log, Pls, Stat) {
+  .controller('PlayerCtrl', function ($scope, $log, $timeout, Pls, StatSvc) {
 
     $scope.State = {
       STOPPED: 0,
@@ -10,36 +10,37 @@ angular.module('ladioApp')
       ERROR: 3
     };
 
+    $scope.Events = {
+      STREAMS_CHANGED: 'STREAMS_CHANGED',
+      PLAYING_STARTED: 'PLAYING_STARTED',
+      HIDE_POPUPS_REQ: 'HIDE_POPUPS_REQ'
+    };
+
     $scope.currentStation = {
       station: null,
       streams: null,
-      state: $scope.State.STOPPED
+      state: $scope.State.STOPPED,
+      wasPlayed: false
     };
 
-    function prepareStreams(streams, stream) {
-      streams.push(stream);
-      //Shoutcast server trick
-      if (stream.match(/\/$/)) {
-        streams.push(stream + ';');
-      } else {
-        streams.push(stream + '/;');
-      }
-    }
-    
     function playStreams(streamUrl) {
       var streams = [];
       if (streamUrl.match(/.pls$/)) {
         Pls.streams(streamUrl).success(function(plsStreams) {
           $log.log('Pls fetched.');
           angular.forEach(plsStreams, function(plsStream) {
-            prepareStreams(streams, plsStream.url);
+            streams.push(plsStream.url);
           });
+          $scope.$broadcast($scope.Events.STREAMS_CHANGED);
         }).error(function(data, status) {
           $log.error('Error fetching pls data. (' + status + ':' + data + ')');
           $scope.playingError();
         });
       } else {
-        prepareStreams(streams, streamUrl);
+        streams.push(streamUrl);
+        $timeout(function() {
+          $scope.$broadcast($scope.Events.STREAMS_CHANGED);
+        });
       }
       return streams;
     }
@@ -50,7 +51,7 @@ angular.module('ladioApp')
         station = cs.station;
       }
 
-      if (cs.station && cs.station.id === station.id) {//Clicked the same station
+      if (!!cs.station && cs.station.id === station.id) {//Clicked the same station
         switch (cs.state) {
         case $scope.State.CONNECTING:
           cs.streams = [];
@@ -70,13 +71,22 @@ angular.module('ladioApp')
 
       //Prepare playing of new station
       cs.station = station;
+      cs.wasPlayed = false;
       cs.state = $scope.State.CONNECTING;
       cs.streams = playStreams(station.streamurl);
     }
     
     $scope.playingStarted = function() {
-      $scope.currentStation.state = $scope.State.PLAYING;
-      Stat.stationPlayed($scope.currentStation.station);
+      var cs = $scope.currentStation;
+
+      cs.state = $scope.State.PLAYING;
+
+      if (!cs.wasPlayed) {
+        StatSvc.stationPlayed(cs.station);
+        $scope.$broadcast($scope.Events.PLAYING_STARTED);
+        cs.wasPlayed = true;
+      }
+
       $scope.alertVisible = false;
     };
     
@@ -129,6 +139,11 @@ angular.module('ladioApp')
         classes.push('error');
       }
       return classes.join(' ');
+    };
+
+    $scope.hidePopups = function() {
+      $scope.alertVisible = false;
+      $scope.$broadcast($scope.Events.HIDE_POPUPS_REQ);
     };
     
   });

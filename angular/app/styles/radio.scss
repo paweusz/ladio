@@ -1,6 +1,6 @@
 $playing-color: #FF802E;
 $hover-color: #00AFEE;
-$header-color: #3C3C3C;
+$header-bg-color: #3C3C3C;
 $station-color: rgba(76,107,150,0.95);
 $ruler-color: #FAFAFA;
 $ruler-sep-color: #202020;
@@ -57,7 +57,7 @@ button {
 }
 
 #header {
-  background-color: $header-color;
+  background-color: $header-bg-color;
   box-shadow: 0 0 40px 10px #000;
   position: fixed;
   top: 0;
@@ -85,6 +85,9 @@ button {
       }
       #name {
         white-space: nowrap;
+        & > .value {
+          height: 26px;
+        }
       }
       &.playing #ctrl {
         background-color: $ruler-color;
@@ -323,7 +326,7 @@ ul {
   .search-icon {
     width: 35px;
     border-radius: 5px 0 0 5px;
-    background-color: $header-color;
+    background-color: $header-bg-color;
     float: left;
     position: relative;
     
@@ -469,6 +472,37 @@ ul {
 
 }
 
+#station-info-details {
+  background-color: $ruler-bg-color;
+  text-shadow: none;
+  min-width: 400px;
+  padding: 15px;
+  font-size: 15px;
+  cursor: initial;
+  white-space: normal;
+  color: $ruler-color;
+  line-height: 2.5ex;
+  text-align: justify;
+
+  a {
+    color: $ruler-color;
+    text-decoration: underline;
+  }
+
+  & > p {
+    margin-top: 10px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .stream-title {
+    text-transform: lowercase;
+    font-weight: bold;
+  }
+
+}
+
 .hovering {
   position: absolute;
   right: 0;
@@ -483,7 +517,7 @@ ul {
   top: 120px;
   width: 445px;
   z-index: 10;
-  font-size: 14px;
+  font-size: 15px;
   text-align: justify;
 
   .head {

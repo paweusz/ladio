@@ -28,7 +28,7 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <div ng-controller="PlayerCtrl" ng-click="alertVisible = false">
+    <div ng-controller="PlayerCtrl" ng-click="hidePopups()">
       <div id="header">
         <div class="container">
 
@@ -44,10 +44,28 @@
             onPlayingResumed="playingResumed()"
             maxReconnects="3"></audio>
 
-          <div id="station-info">
-            <div id="station-info-text" class="ng-class:stateCss()" ng-click="play()">
-              <div id="ctrl"></div>
-              <div id="name" ng-cloak>{{currentStation.station.name}}</div>
+          <div id="station-info" ng-controller="StationInfoCtrl">
+            <div id="station-info-text" class="ng-class:stateCss()">
+              <div id="ctrl" ng-click="play()"></div>
+              <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
+                <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
+                <div id="station-info-details" ng-show="infoDetailsVisible" class="hovering" ng-cloak>
+                  <p>
+                    <span>Currently playing</span>
+                    <span class="stream-title" ng-switch on="stationDetails.title != null">
+                      <a ng-switch-when="true" href="{{stationDetails.titleLink}}" target="_blank">{{stationDetails.title}}</a>
+                      <a ng-switch-default>&hellip;</a>
+                    </span>
+                    <span>from website</span>
+                    <span ng-switch on="!!currentStation.station.website">
+                      <a ng-switch-when="true" href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a>
+                      <a ng-switch-default>unknown</a>
+                    </span>
+                    <span>at {{currentStation.station.bitrate}}.</span>
+                  </p>
+                  <p>Territory {{currentStation.station.country}}.</p>
+                </div>
+              </div>
             </div>
             <div class="alert hovering" ng-show="alertVisible" ng-cloak>
               <div>Error connecting to station.</div>
@@ -120,13 +138,14 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/services/genres-svc.js"></script>
     <script src="scripts/services/pls.js"></script>
-    <script src="scripts/services/stat.js"></script>
+    <script src="scripts/services/stream-info-svc.js"></script>
+    <script src="scripts/services/stat-svc.js"></script>
     <script src="scripts/services/state.js"></script>
     <script src="scripts/services/starred.js"></script>
-    <script src="scripts/directives/rdPlayer.js"></script>
+    <script src="scripts/directives/rd-player.js"></script>
     <script src="scripts/directives/rd-search.js"></script>
     <script src="scripts/filters/search-fltr.js"></script>
-    <script src="scripts/controllers/player.js"></script>
+    <script src="scripts/controllers/player-ctrl.js"></script>
     <script src="scripts/controllers/search-ctrl.js"></script>
     <script src="scripts/controllers/navigation.js"></script>
     <script src="scripts/controllers/recent.js"></script>
@@ -135,12 +154,11 @@
     <script src="scripts/controllers/subgenres.js"></script>
     <script src="scripts/controllers/stations.js"></script>
     <script src="scripts/controllers/star.js"></script>
+    <script src="scripts/controllers/station-info-ctrl.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/modules.js -->
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbuild -->
 
 </body>

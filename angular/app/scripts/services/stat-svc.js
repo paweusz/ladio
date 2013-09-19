@@ -1,18 +1,25 @@
 'use strict';
 
 angular.module('ladioApp')
-  .service('Stat', function() {
+  .service('StatSvc', function() {
     var recentKey = 'com.padio.recent';
     
     var recentStat = localStorage[recentKey];
     if (!recentStat) {
       recentStat = [];
     } else {
-      recentStat = JSON.parse(recentStat);
+      //(PP)2013-09-18: Protection agains angular hash values in local storage, replace with angular.fromJson after couple of months
+      recentStat = JSON.parse(recentStat, function(k, v) {
+        var val = v;
+        if (/^\$+/.test(k)) {
+          val = undefined;
+        }
+        return val;
+      });
     }
-    
+
     function updateStorage() {
-      localStorage[recentKey] = JSON.stringify(recentStat);
+      localStorage[recentKey] = angular.toJson(recentStat);
     }
     
     function findStation(station) {

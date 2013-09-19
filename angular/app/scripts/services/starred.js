@@ -8,11 +8,18 @@ angular.module('ladioApp')
     if (!starred) {
       starred = {};
     } else {
-      starred = JSON.parse(starred);
+      //(PP)2013-09-18: Protection agains angular hash values in local storage, replace with angular.fromJson after couple of months
+      starred = JSON.parse(starred, function(k, v) {
+        var val = v;
+        if (/^\$+/.test(k)) {
+          val = undefined;
+        }
+        return val;
+      });
     }
     
     function updateStorage() {
-      localStorage[starredKey] = JSON.stringify(starred);
+      localStorage[starredKey] = angular.toJson(starred);
     }
     
     return {

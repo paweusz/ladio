@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('RecentCtrl', function ($scope, Stat, $filter) {
+  .controller('RecentCtrl', function ($scope, StatSvc, $filter) {
 
-    var recent = Stat.recentStations();
+    var recent = StatSvc.recentStations();
     $scope.stations = recent;
     
     $scope.filtering = {

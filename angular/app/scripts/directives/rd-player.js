@@ -10,12 +10,10 @@ angular.module('ladioApp')
 
         var reconnectCnt = 0;
         var stalled = false;
-        var wasPlaying = false;
 
         scope.$watch(attrs.rdPlayer, function(streams) {
           reconnectCnt = 0;
           stalled = false;
-          wasPlaying = false;
           
           element.children().remove();
 
@@ -28,7 +26,18 @@ angular.module('ladioApp')
           $log.log('Playing streams ' + streams);
           
           angular.forEach(streams, function(stream) {
-            element.append('<source src="' + stream + '"></source>');
+            function appendStreamElem(streamSrc) {
+              element.append('<source src="' + streamSrc + '"></source>');
+            }
+            appendStreamElem(stream);
+            //Shoutcast server trick
+            if (stream.match(/\/$/)) {
+              appendStreamElem(stream + ';');
+            } else {
+              if (!stream.match(/;$/)) {
+                appendStreamElem(stream + '/;');
+              }
+            }
           });
 
           element.children().bind('error', function() {
@@ -65,7 +74,6 @@ angular.module('ladioApp')
         element.bind('playing', function() {
           $log.log('Playing started.');
           reconnectCnt = 0;
-          wasPlaying = true;
           scope.$apply(attrs.onplayingstarted);
         });
         element.bind('error', function() {
@@ -78,17 +86,17 @@ angular.module('ladioApp')
           handleError();
         });
         element.bind('stalled', function() {
-          $log.log('Playing stalled.');
-          stalled = true;
-          scope.$apply(attrs.onplayingstalled);
+          if (!element[0].paused) {
+            $log.log('Playing stalled.');
+            stalled = true;
+            scope.$apply(attrs.onplayingstalled);
+          }
         });
         element.bind('progress', function() {
           if (stalled) {
             $log.log('Playing progress.');
             stalled = false;
-            if (wasPlaying) {
-              scope.$apply(attrs.onplayingresumed);
-            }
+            scope.$apply(attrs.onplayingresumed);
           }
         });
 
