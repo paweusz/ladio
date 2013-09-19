@@ -191,11 +191,6 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>',
-          src: ['**/*.html'],
-          dest: '<%= yeoman.dist %>'
-        }, {
-          expand: true,
           cwd: '.tmp',
           src: ['**/*.html'],
           dest: '<%= yeoman.dist %>'
@@ -296,7 +291,8 @@ module.exports = function (grunt) {
             'API_URL': 'http://ladio.herokuapp.com/api',
             'VERSION': '&alpha;5',
             'EMAIL': 'ladioteam@gmail.com'
-          }
+          },
+          force: true
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
