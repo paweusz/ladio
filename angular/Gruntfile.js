@@ -69,7 +69,8 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               lrSnippet,
-              mountFolder(connect, '.tmp')
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'app')
             ];
           }
         }
@@ -79,6 +80,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'app'),
               mountFolder(connect, 'test')
             ];
           }
@@ -197,17 +199,6 @@ module.exports = function (grunt) {
     },
     // Put files not handled in other tasks here
     copy: {
-      dev: {
-        files: [
-          {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            'bower_components/**/*',
-            'images/{,*/}*.{png,jpg,svg}',
-            'styles/fonts/*'
-          ], dest: '.tmp'}
-        ]
-      },
       dist: {
         files: [{
           expand: true,
@@ -233,7 +224,7 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'replace:dev', 'compass', 'copy:dev'
+        'replace:dev', 'compass'
       ],
       dist: [
         'imagemin', 'replace:dist', 'compass'
@@ -285,12 +276,11 @@ module.exports = function (grunt) {
             'API_URL': 'http://localhost:9001/api',
             'VERSION': '&alpha;5',
             'EMAIL': 'ladioteam@gmail.com'
-          },
-          force: true
+          }
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.{js,html}',
+            'scripts/{,*/}*.js',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}
@@ -302,12 +292,11 @@ module.exports = function (grunt) {
             'API_URL': 'http://ladio.herokuapp.com/api',
             'VERSION': '&alpha;5',
             'EMAIL': 'ladioteam@gmail.com'
-          },
-          force: true
+          }
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.{js,html}',
+            'scripts/{,*/}*.js',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}
