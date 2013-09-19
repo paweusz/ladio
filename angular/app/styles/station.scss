@@ -1,0 +1,168 @@
+$ruler-color: #FAFAFA;
+$ruler-sep-color: #202020;
+$station-color: rgba(76,107,150,0.95);
+$hover-color: #00AFEE;
+$playing-color: #FF802E;
+
+@mixin selection {
+    background-image: -webkit-linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-image: -moz-linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-image: linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+    background-position: 0 100%;
+}
+
+@mixin hover {
+    background-image: -webkit-linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-image: -moz-linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-image: linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 5px;
+    background-position: 0 100%;
+}
+
+.genre, .station {
+  color: $ruler-color;
+  background-color: $station-color;
+  float: left;    
+  font-size: 16px;
+  margin: 0px 1px 1px 0px;
+  width: 159px;
+  height: 80px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
+
+  .name {
+    padding: 10px;
+
+    & > div {
+      height: 38px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      word-break: break-word;
+      text-transform: uppercase;
+    }
+  }
+
+  .desc {
+    margin: 0 10px 10px 10px;
+    font-size: 9px;
+    position: absolute;
+    bottom: 0;
+    color: $ruler-sep-color;
+  }
+
+}
+
+.genre {
+  &:hover {
+    @include hover;
+  }
+}
+
+.station {
+  height: 97px;
+  background-image: linear-gradient(0deg,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.15) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 39px;
+  background-position: 0 100%;
+  
+  &.disabled {
+    background-color: #d6d6d6;
+    .name {
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
+  &.playing {
+    
+    background-image: linear-gradient(0deg,rgba(250,250,250,0.15) 0,rgba( 250,250,250,0.15) 100%);
+    
+    .name {
+      @include selection;
+    }
+    .desc {
+      color: $ruler-color;
+    }
+    .fav-star polygon {
+      stroke: $ruler-color;
+    }
+  }
+
+  &.connecting .name {
+    @include selection;
+    animation-name: connecting;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: connecting;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+  }
+  
+  &:hover {
+    .name {
+      @include hover;
+    }
+    &.playing, &.connecting {
+      .name {
+        @include selection;
+      }
+    }
+    .desc {
+      color: $ruler-color;
+    }
+    .fav-star polygon {
+      stroke: $ruler-color;
+    }
+    .fav-star:hover polygon {
+      stroke: $hover-color;
+    }
+
+  }
+
+}
+
+.msg {
+  color: $ruler-color;
+  background-color: $station-color;
+  padding: 30px 10px;
+  text-align: center;
+  margin: 10px 0;
+  a {
+    text-decoration: underline;
+    color: $ruler-color;
+  }
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
+}
+
+.fav-star {
+  width: 21px;
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  
+  svg {
+    width: 21px;
+    height: 20px;
+  }
+  
+  polygon {
+    stroke: $ruler-sep-color;
+    stroke-width: 5;
+    fill: none;
+  }
+  
+  &.starred {
+    polygon {
+      fill: $ruler-color;
+      stroke: $ruler-color;
+    }
+  }
+
+}

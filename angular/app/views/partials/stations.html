@@ -3,7 +3,9 @@
 
       <div ng-click="play(station)" class="station ng-class:stationCss()" ng-repeat="station in stations">
 
-        <div class="name" title="{{station.name}}">{{station.name}}</div>
+        <div class="name">
+          <div title="{{station.name}}">{{station.name}}</div>
+        </div>
         <div class="desc">{{station.bitrate}}&nbsp;{{station.country}}</div>
 
         <div class="fav-star ng-class:starCss(station)" ng-click="star(station); $event.stopPropagation();">
