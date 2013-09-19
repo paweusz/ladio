@@ -1,4 +1,4 @@
-  <div class="stations" ng-controller="StarCtrl">
+  <div class="stations f16" ng-controller="StarCtrl">
     <div class="container">
 
       <div ng-click="play(station)" class="station ng-class:stationCss()" ng-repeat="station in stations">
@@ -6,7 +6,10 @@
         <div class="name">
           <div title="{{station.name}}">{{station.name}}</div>
         </div>
-        <div class="desc">{{station.bitrate}}&nbsp;{{station.country}}</div>
+        <div class="desc">
+          <span>{{station.bitrate}}</span>
+          <span class="flag us" title="{{station.country}}"></span>
+        </div>
 
         <div class="fav-star ng-class:starCss(station)" ng-click="star(station); $event.stopPropagation();">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
