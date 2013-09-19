@@ -1,5 +1,6 @@
 // Generated on 2013-07-02 using generator-angular 0.3.0
 'use strict';
+
 var LIVERELOAD_PORT = 35728;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
 var mountFolder = function (connect, dir) {
@@ -29,14 +30,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
-        tasks: ['coffee:test']
-      },
       js: {
         options: {
           livereload: LIVERELOAD_PORT
@@ -127,26 +120,6 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js'
       ]
-    },
-    coffee: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
-      }
     },
     // not used since Uglify task does concat,
     // but still available if needed
@@ -260,13 +233,10 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist', 'replace:dev', 'compass', 'copy:dev'
-      ],
-      test: [
-        'coffee'
+        'replace:dev', 'compass', 'copy:dev'
       ],
       dist: [
-        'coffee', 'imagemin', 'replace:dist', 'compass'
+        'imagemin', 'replace:dist', 'compass'
       ]
     },
     karma: {
