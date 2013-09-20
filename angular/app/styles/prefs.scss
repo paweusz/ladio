@@ -1,0 +1,47 @@
+$ruler-color: #FAFAFA;
+$ruler-bg-color: #6C6C6C;
+$ruler-sep-color: #202020;
+
+#prefs {
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 0;
+  padding-left: 10px;
+
+  #prefs-btn {
+    cursor: pointer;
+    width: 24px;
+    height: 28px;
+    svg {
+      width: 24px;
+      height: 28px;
+    }
+    rect {
+      fill: $ruler-color;
+    }
+  }
+
+  #prefs-ddown {
+    background-color: $ruler-bg-color;
+    padding: 0 10px;
+    min-width: 100px;
+    text-align: center;
+    display: none;
+    
+    li:first-child {
+      border-top: 0px none;
+    }
+    li {
+      padding: 10px 0;
+      border-top: 1px solid $ruler-sep-color;
+    }
+    a {
+      color: $ruler-color;
+    }
+  }
+  
+  &:hover #prefs-ddown {
+    display: block;
+  }
+
+}
