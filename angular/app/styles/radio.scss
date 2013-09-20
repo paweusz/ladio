@@ -3,8 +3,8 @@ $hover-color: #00AFEE;
 $station-color: rgba(76,107,150,0.95);
 $header-bg-color: #3C3C3C;
 $ruler-color: #FAFAFA;
-$ruler-sep-color: #202020;
 $ruler-bg-color: #6C6C6C;
+$ruler-sep-color: #202020;
 
 @mixin selection {
     background-image: linear-gradient(0deg, $playing-color 0%, $playing-color 100%);
@@ -51,6 +51,10 @@ menu {
 
 button {
   cursor: pointer;
+}
+
+input {
+  font-size: 14px;
 }
 
 #header {
@@ -163,81 +167,6 @@ ul {
     top: -3px;
   }
 
-}
-
-.search-box {
-
-  height: 26px;
-
-  * {
-    padding: 0;
-    margin: 0;
-    border: 0 none;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 100%;
-  }
-  
-  .search-icon {
-    width: 35px;
-    border-radius: 5px 0 0 5px;
-    background-color: $header-bg-color;
-    float: left;
-    position: relative;
-    
-    svg {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      width: 22px;
-      height: 22px;
-      
-      circle {
-        stroke: $ruler-color;
-      }
-      
-      path {
-        stroke: $ruler-color;
-        fill: $ruler-color;
-      }
-    }
-  }
-  
-  input {
-    width: 200px;
-    outline: 0;
-    padding-left: 5px;
-    float: left;
-    background-color: $ruler-color;
-  }
-
-  button {  
-    width: 24px;
-    background-color: $ruler-color;
-    float: right;
-    border-radius: 0 5px 5px 0;
-    padding: 6px 5px;
-
-    svg {
-      width: 14px;
-      height: 14px;
-    }
-      
-    polygon {
-      fill: $ruler-bg-color;
-    }
-
-  }
-
-  &:after {
-    clear: both;
-    content: "";
-    display: block;
-  }
-  
 }
 
 .spinner {

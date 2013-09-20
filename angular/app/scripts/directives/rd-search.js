@@ -12,8 +12,8 @@ angular.module('ladioApp')
         disabled: '=disabled'
       },
       link: function(scope, element) {
-        var buttonElem = element.find('button');
-        buttonElem.bind('click', function() {
+        var crossElem = element.find('.cross');
+        crossElem.bind('click', function() {
           scope.model = '';
         });
 
