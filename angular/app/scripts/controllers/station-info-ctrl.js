@@ -6,7 +6,7 @@ angular.module('ladioApp')
     var self = this;
     self.Popups = {
       DETAILS: 'StationInfoCtrl.DETAILS',
-      ALERT: 'PlayerCtrl.ALERT' //deliberatelly PlayerCtrl - should show the same popup
+      ALERT: 'StationInfoCtrl.ALERT'
     };
 
     $scope.stationDetails = {

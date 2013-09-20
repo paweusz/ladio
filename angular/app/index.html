@@ -65,14 +65,17 @@
                   </div>
                 </div>
               </div>
-              <div class="alert hovering drop-down" ng-show="popups.isVisible('PlayerCtrl.ALERT')" ng-cloak>
-                <p>Error connecting to station. Please try again later.</p>
+              <div class="alert with-cross hovering drop-down" ng-show="popups.isVisible('PlayerCtrl.ALERT')" ng-cloak>
+                <p>{{currentStation.errorMsg}}</p>
                 <div class="cross" ng-click="popups.hide('PlayerCtrl.ALERT')">
                   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 14 14">
                     <polygon 
                       points="3,0 7,4 11,0 14,3 10,7 14,11 11,14 7,10 3,14 0,11 4,7 0,3"></polygon>
                   </svg>
                 </div>
+              </div>
+              <div class="alert hovering drop-down" ng-show="popups.isVisible('StationInfoCtrl.ALERT')" ng-cloak>
+                <p>{{currentStation.errorMsg}}</p>
               </div>
               <div id="station-info-connecting" class="hovering drop-down" ng-show="popups.isVisible('PlayerCtrl.CONNECTING')" ng-cloak>
                 <div>Connecting&hellip;</div>

@@ -102,9 +102,13 @@ $alert-bg-color: #ff7070;
 
 .alert {
   min-width: 12em;
-  padding: 15px 30px 15px 15px;
+  padding: 15px;
   color: $alert-color;
   background-color: $alert-bg-color;
+
+  &.with-cross {
+    padding: 15px 30px 15px 15px;
+  }
   
   .cross {
     position: absolute;

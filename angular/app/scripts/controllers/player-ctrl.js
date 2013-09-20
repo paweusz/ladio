@@ -19,7 +19,8 @@ angular.module('ladioApp')
       station: null,
       streams: null,
       state: $scope.State.STOPPED,
-      wasPlayed: false
+      wasPlayed: false,
+      errorMsg: 'Error connecting to station. Please try again later.'
     };
 
     var self = this;
