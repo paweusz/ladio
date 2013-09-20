@@ -5,6 +5,7 @@ $ruler-sep-color: #202020;
 #prefs {
   position: absolute;
   top: calc(50% - 12px);
+  top: -webkit-calc(50% - 12px);
   right: 0;
   padding-left: 10px;
 
