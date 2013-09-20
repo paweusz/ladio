@@ -9,18 +9,14 @@ $alert-bg-color: #ff7070;
 $alert-color: #900000;
 
 @mixin selection {
-    background-image: -webkit-linear-gradient(top, $playing-color 0%, $playing-color 100%);
-    background-image: -moz-linear-gradient(top, $playing-color 0%, $playing-color 100%);
-    background-image: linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-image: linear-gradient(0deg, $playing-color 0%, $playing-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
 }
 
 @mixin hover {
-    background-image: -webkit-linear-gradient(top, $hover-color 0%, $hover-color 100%);
-    background-image: -moz-linear-gradient(top, $hover-color 0%, $hover-color 100%);
-    background-image: linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-image: linear-gradient(0deg, $hover-color 0%, $hover-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;

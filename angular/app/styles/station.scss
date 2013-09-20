@@ -3,20 +3,18 @@ $ruler-sep-color: #202020;
 $station-color: rgba(76,107,150,0.95);
 $hover-color: #00AFEE;
 $playing-color: #FF802E;
+$station-bottom-bg-color: rgba(0,0,0,0.15);
+$station-selected-bottom-bg-color: rgba(250,250,250,0.15);
 
 @mixin selection {
-    background-image: -webkit-linear-gradient(top, $playing-color 0%, $playing-color 100%);
-    background-image: -moz-linear-gradient(top, $playing-color 0%, $playing-color 100%);
-    background-image: linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-image: linear-gradient(0deg, $playing-color 0%, $playing-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
 }
 
 @mixin hover {
-    background-image: -webkit-linear-gradient(top, $hover-color 0%, $hover-color 100%);
-    background-image: -moz-linear-gradient(top, $hover-color 0%, $hover-color 100%);
-    background-image: linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-image: linear-gradient(0deg, $hover-color 0%, $hover-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
@@ -64,7 +62,7 @@ $playing-color: #FF802E;
 
 .station {
   height: 97px;
-  background-image: linear-gradient(0deg,rgba(0,0,0,0.15) 0,rgba(0,0,0,0.15) 100%);
+  background-image: linear-gradient(0deg, $station-bottom-bg-color 0, $station-bottom-bg-color 100%);
   background-repeat: no-repeat;
   background-size: 100% 39px;
   background-position: 0 100%;
@@ -79,7 +77,7 @@ $playing-color: #FF802E;
 
   &.playing {
     
-    background-image: linear-gradient(0deg,rgba(250,250,250,0.15) 0,rgba( 250,250,250,0.15) 100%);
+    background-image: linear-gradient(0deg, $station-selected-bottom-bg-color 0, $station-selected-bottom-bg-color 100%);
     
     .name {
       @include selection;
