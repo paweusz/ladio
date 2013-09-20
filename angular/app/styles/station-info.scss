@@ -97,19 +97,24 @@ $alert-bg-color: #ff7070;
 
 #station-info-connecting {
   background-color: $ruler-bg-color;
-  padding: 20px;
+  padding: 15px;
 }
 
 .alert {
-  width: 12em;
-  padding: 20px;
+  min-width: 12em;
+  padding: 15px 30px 15px 15px;
   color: $alert-color;
   background-color: $alert-bg-color;
   
-  div:first-child {
-    margin-top: 0;
+  .cross {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    polygon {
+      fill: $alert-color;
+    }
   }
-  div {
-    margin-top: 5px;
-  }
+
 }
+
