@@ -49,7 +49,7 @@
                 <div id="ctrl" ng-click="play()"></div>
                 <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
                   <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
-                  <div id="station-info-details" ng-show="popups.isVisible('StationInfoCtrl.DETAILS')" class="hovering drop-down" ng-cloak>
+                  <div id="station-info-details" ng-show="popups.isVisible('StationInfoCtrl.DETAILS')" class="hovering drop-down" ng-cloak >
                     <p>
                       <span>currently playing</span>
                       <span class="stream-title" ng-switch on="stationDetails.title != null">
@@ -151,7 +151,7 @@
     <script src="scripts/filters/search-fltr.js"></script>
     <script src="scripts/controllers/player-ctrl.js"></script>
     <script src="scripts/controllers/search-ctrl.js"></script>
-    <script src="scripts/controllers/navigation.js"></script>
+    <script src="scripts/controllers/navigation-ctrl.js"></script>
     <script src="scripts/controllers/recent.js"></script>
     <script src="scripts/controllers/starred-ctrl.js"></script>
     <script src="scripts/controllers/genres.js"></script>
