@@ -57,4 +57,14 @@ describe('Controller: PopupsCtrl', function () {
     expect(scope.popups.isVisible('C')).toBe(false);
   });
 
+  it('should hide other popups when showing new exclusively', function () {
+    scope.popups.showExclusive('A');
+    scope.popups.showExclusive('B');
+    scope.popups.showExclusive('C');
+
+    expect(scope.popups.isVisible('A')).toBe(false);
+    expect(scope.popups.isVisible('B')).toBe(false);
+    expect(scope.popups.isVisible('C')).toBe(true);
+  });
+
 });

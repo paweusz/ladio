@@ -24,6 +24,10 @@ angular.module('ladioApp')
       delete prms.id;
     };
 
+    module.isVisible = function(id) {
+      return !!popups[id];
+    };
+
     module.hideAll = function() {
       angular.forEach(popups, function(v, k) {
         if (v) {
@@ -32,8 +36,9 @@ angular.module('ladioApp')
       });
     };
 
-    module.isVisible = function(id) {
-      return !!popups[id];
+    module.showExclusive = function(id, tout) {
+      module.hideAll();
+      module.show(id, tout);
     };
 
     module.cancelAutohide = function(id) {

@@ -8,9 +8,17 @@ describe('Controller PlayerCtrl', function () {
   var PlayerCtrl, scope, timeout;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope, $timeout, StatSvcMock) {
+  beforeEach(inject(
+    function($controller, $rootScope, $timeout, 
+      StatSvcMock) {
+    
     scope = $rootScope.$new();
     timeout = $timeout;
+
+    $controller('PopupsCtrl', {
+      $scope: scope,
+      $timeout: timeout
+    });
 
     PlayerCtrl = $controller('PlayerCtrl', {
       $scope: scope,
@@ -40,11 +48,11 @@ describe('Controller PlayerCtrl', function () {
 
   it('should display and hide _connecting_ popup when connecting', function() {
     var station = {id: 1, streamurl: 'stream1'};
-    expect(scope.playerPopups.connecting).toBe(false);
+    expect(scope.popups.isVisible(PlayerCtrl.Popups.CONNECTING)).toBe(false);
     scope.play(station);
-    expect(scope.playerPopups.connecting).toBe(true);
+    expect(scope.popups.isVisible(PlayerCtrl.Popups.CONNECTING)).toBe(true);
     timeout.flush();
-    expect(scope.playerPopups.connecting).toBe(false);
+    expect(scope.popups.isVisible(PlayerCtrl.Popups.CONNECTING)).toBe(false);
   });
 
 });

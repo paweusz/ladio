@@ -14,13 +14,15 @@ describe('Controller: StationInfoCtrl', function () {
       STREAMS_CHANGED: 'STREAMS_CHANGED',
       PLAYING_STARTED: 'PLAYING_STARTED'
     };
-    scope.playerPopups = {
-      alert: false
-    };
 
     streamInfoSvcMock = StreamInfoSvcMock;
     log = $log;
     timeout = $timeout;
+
+    $controller('PopupsCtrl', {
+      $scope: scope,
+      $timeout: timeout
+    });
 
     StationInfoCtrl = $controller('StationInfoCtrl', {
       $scope: scope,
@@ -71,12 +73,12 @@ describe('Controller: StationInfoCtrl', function () {
     spyOn(StationInfoCtrl, 'updateStationDetails').andCallThrough();
     scope.showStationDetails();
 
-    expect(scope.stationPopups.details).toBe(true);
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(true);
     expect(StationInfoCtrl.updateStationDetails).toHaveBeenCalled();
 
     scope.hideStationDetails();
 
-    expect(scope.stationPopups.details).toBe(false);
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(false);
     expect(StationInfoCtrl.updateStationDetails.calls.length).toBe(1);
   });
 
@@ -87,26 +89,8 @@ describe('Controller: StationInfoCtrl', function () {
   });
 
   it('should show stream info on PLAYING_STARTED event', function() {
-    spyOn(StationInfoCtrl, 'blinkPopup');
     scope.$broadcast(scope.Events.PLAYING_STARTED);
-    expect(StationInfoCtrl.blinkPopup).toHaveBeenCalled();
-  });
-
-  it('should handle popup show/hide cycle', function() {
-    expect(scope.stationPopups.details).toBe(false);
-    StationInfoCtrl.blinkPopup();
-    expect(scope.stationPopups.details).toBe(true);
-    timeout.flush();
-    expect(scope.stationPopups.details).toBe(false);
-  });
-
-  it('should revoke popup hiding when popup has been triggered externally', function() {
-    scope.currentStation = {streams: ['stream1']};
-    StationInfoCtrl.blinkPopup();
-    expect(scope.stationPopups.details).toBe(true);
-    scope.showStationDetails();
-    timeout.verifyNoPendingTasks();
-    expect(scope.stationPopups.details).toBe(true);
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(true);
   });
 
 });

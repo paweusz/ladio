@@ -3,16 +3,17 @@
 angular.module('ladioApp')
   .controller('StationInfoCtrl', function ($scope, $log, $timeout, StreamInfoSvc) {
 
+    var self = this;
+    self.Popups = {
+      DETAILS: 'StationInfoCtrl.DETAILS',
+    };
+
     $scope.stationDetails = {
       title: null,
       titleLink: null
     };
-    $scope.stationPopups = {
-      details: false
-    };
-    this.blinkPrms = null;
 
-    this.updateStationDetails = function() {
+    self.updateStationDetails = function() {
       if (!$scope.currentStation.streams) {
         $scope.stationDetails.title = 'Unknown';
         $scope.stationDetails.titleLink = '';
@@ -35,39 +36,14 @@ angular.module('ladioApp')
       });
     };
 
-    var self = this;
 
-    this.blinkPopup = function() {
-      setDetailsVisible(true);
-      self.blinkPrms = $timeout(function() {
-        self.blinkPrms = null;
-        $scope.hideStationDetails();
-      }, 3800);
-    };
-
-    this.cancelBlinkIfAny = function() {
-      if (!!self.blinkPrms) {
-        $timeout.cancel(self.blinkPrms);
-        self.blinkPrms = null;
-      }
-    };
-
-    function setDetailsVisible(visible) {
-      $scope.stationPopups.details = visible;
-    }
-    
     $scope.showStationDetails = function() {
-      self.cancelBlinkIfAny();
-      if ($scope.playerPopups.alert) {
-        return;
-      }
-
       self.updateStationDetails();
-      setDetailsVisible(true);
+      $scope.popups.showExclusive(self.Popups.DETAILS);
     };
 
     $scope.hideStationDetails = function() {
-      setDetailsVisible(false);
+      $scope.popups.hide(self.Popups.DETAILS);
     };
 
     $scope.$on($scope.Events.STREAMS_CHANGED, function() {
@@ -75,12 +51,7 @@ angular.module('ladioApp')
     });
 
     $scope.$on($scope.Events.PLAYING_STARTED, function() {
-      self.blinkPopup();
-    });
-
-    $scope.$on($scope.Events.HIDE_POPUPS_REQ, function() {
-      self.cancelBlinkIfAny();
-      $scope.hideStationDetails();
+      $scope.popups.showExclusive(self.Popups.DETAILS, 3800);
     });
 
   });
