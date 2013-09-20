@@ -6,6 +6,7 @@ angular.module('ladioApp')
     var self = this;
     self.Popups = {
       DETAILS: 'StationInfoCtrl.DETAILS',
+      ALERT: 'PlayerCtrl.ALERT' //deliberatelly PlayerCtrl - should show the same popup
     };
 
     $scope.stationDetails = {
@@ -38,12 +39,16 @@ angular.module('ladioApp')
 
 
     $scope.showStationDetails = function() {
-      self.updateStationDetails();
-      $scope.popups.showExclusive(self.Popups.DETAILS);
+      if ($scope.currentStation.state === $scope.State.ERROR) {
+        $scope.popups.showExclusive(self.Popups.ALERT);
+      } else {
+        self.updateStationDetails();
+        $scope.popups.showExclusive(self.Popups.DETAILS);
+      }
     };
 
     $scope.hideStationDetails = function() {
-      $scope.popups.hide(self.Popups.DETAILS);
+      $scope.popups.hideAll();
     };
 
     $scope.$on($scope.Events.STREAMS_CHANGED, function() {
