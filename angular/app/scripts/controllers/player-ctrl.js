@@ -23,6 +23,11 @@ angular.module('ladioApp')
       wasPlayed: false
     };
 
+    $scope.playerPopups = {
+      alert: false,
+      connecting: false
+    };
+
     function playStreams(streamUrl) {
       var streams = [];
       if (streamUrl.match(/.pls$/)) {
@@ -74,6 +79,19 @@ angular.module('ladioApp')
       cs.wasPlayed = false;
       cs.state = $scope.State.CONNECTING;
       cs.streams = playStreams(station.streamurl);
+
+      setConnectingVisible(true);
+      $timeout(function() {
+        setConnectingVisible(false);
+      }, 1500);
+    }
+
+    function setAlertVisible(visible) {
+      $scope.playerPopups.alert = visible;
+    }
+    
+    function setConnectingVisible(visible) {
+      $scope.playerPopups.connecting = visible;
     }
     
     $scope.playingStarted = function() {
@@ -87,13 +105,13 @@ angular.module('ladioApp')
         cs.wasPlayed = true;
       }
 
-      $scope.alertVisible = false;
+      setAlertVisible(false);
     };
     
     $scope.playingError = function() {
       $scope.currentStation.state = $scope.State.ERROR;
       $scope.currentStation.streams = null;
-      $scope.alertVisible = true;
+      setAlertVisible(true);
     };
     
     $scope.playingStalled = function() {
@@ -142,7 +160,7 @@ angular.module('ladioApp')
     };
 
     $scope.hidePopups = function() {
-      $scope.alertVisible = false;
+      setAlertVisible(false);
       $scope.$broadcast($scope.Events.HIDE_POPUPS_REQ);
     };
     

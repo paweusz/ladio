@@ -14,6 +14,9 @@ describe('Controller: StationInfoCtrl', function () {
       STREAMS_CHANGED: 'STREAMS_CHANGED',
       PLAYING_STARTED: 'PLAYING_STARTED'
     };
+    scope.playerPopups = {
+      alert: false
+    };
 
     streamInfoSvcMock = StreamInfoSvcMock;
     log = $log;
@@ -68,12 +71,12 @@ describe('Controller: StationInfoCtrl', function () {
     spyOn(StationInfoCtrl, 'updateStationDetails').andCallThrough();
     scope.showStationDetails();
 
-    expect(scope.infoDetailsVisible).toBe(true);
+    expect(scope.stationPopups.details).toBe(true);
     expect(StationInfoCtrl.updateStationDetails).toHaveBeenCalled();
 
     scope.hideStationDetails();
 
-    expect(scope.infoDetailsVisible).toBe(false);
+    expect(scope.stationPopups.details).toBe(false);
     expect(StationInfoCtrl.updateStationDetails.calls.length).toBe(1);
   });
 
@@ -89,21 +92,21 @@ describe('Controller: StationInfoCtrl', function () {
     expect(StationInfoCtrl.blinkPopup).toHaveBeenCalled();
   });
 
-  it('should handle popup binking', function() {
-    expect(scope.infoDetailsVisible).toBe(false);
+  it('should handle popup show/hide cycle', function() {
+    expect(scope.stationPopups.details).toBe(false);
     StationInfoCtrl.blinkPopup();
-    expect(scope.infoDetailsVisible).toBe(true);
+    expect(scope.stationPopups.details).toBe(true);
     timeout.flush();
-    expect(scope.infoDetailsVisible).toBe(false);
+    expect(scope.stationPopups.details).toBe(false);
   });
 
-  it('should cancel popup binking when popup has been triggered externally', function() {
+  it('should revoke popup hiding when popup has been triggered externally', function() {
     scope.currentStation = {streams: ['stream1']};
     StationInfoCtrl.blinkPopup();
-    expect(scope.infoDetailsVisible).toBe(true);
+    expect(scope.stationPopups.details).toBe(true);
     scope.showStationDetails();
     timeout.verifyNoPendingTasks();
-    expect(scope.infoDetailsVisible).toBe(true);
+    expect(scope.stationPopups.details).toBe(true);
   });
 
 });

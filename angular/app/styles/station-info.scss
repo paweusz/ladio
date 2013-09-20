@@ -1,0 +1,115 @@
+$ruler-color: #FAFAFA;
+$ruler-bg-color: #6C6C6C;
+$alert-color: #900000;
+$alert-bg-color: #ff7070;
+
+#station-info {
+  position: absolute;
+  top: 15px;
+  right: 100px;
+  font-size: 16px;
+  color: $ruler-color;
+  
+  #station-info-text {
+    text-shadow: 0 0 0.5em #FFF;
+    cursor: pointer;
+
+    #ctrl {
+      position: absolute;
+      left: -30px;
+    }
+    #name {
+      white-space: nowrap;
+      & > .value {
+        height: 26px;
+      }
+    }
+    &.playing #ctrl {
+      background-color: $ruler-color;
+      width: 19px;
+      height: 19px;
+
+      animation-name: bump;
+      animation-duration: 6s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      -webkit-animation-name: bump;
+      -webkit-animation-duration: 6s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+    }
+    &.stopped #ctrl {
+      border-color: transparent transparent transparent $ruler-color;
+      border-width: 9px 0 10px 19px;
+      border-style: solid;
+    }
+    &.connecting #ctrl {
+      width: 15px;
+      height: 15px;
+      border: 2px solid $ruler-color;
+
+      animation-name: rotate;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      -webkit-animation-name: rotate;
+      -webkit-animation-duration: 1s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+    }
+    &.error {
+      color: $alert-bg-color;
+      text-shadow: 0 0 0.5em $alert-bg-color;
+    }
+  }
+}
+
+#station-info-details {
+  background-color: $ruler-bg-color;
+  text-shadow: none;
+  min-width: 400px;
+  padding: 15px;
+  font-size: 15px;
+  cursor: initial;
+  white-space: normal;
+  color: $ruler-color;
+  line-height: 2.5ex;
+  text-align: justify;
+
+  a {
+    color: $ruler-color;
+    text-decoration: underline;
+  }
+
+  & > p {
+    margin-top: 10px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .stream-title {
+    text-transform: lowercase;
+    font-weight: bold;
+  }
+
+}
+
+#station-info-connecting {
+  background-color: $ruler-bg-color;
+  padding: 20px;
+}
+
+.alert {
+  width: 12em;
+  padding: 20px;
+  color: $alert-color;
+  background-color: $alert-bg-color;
+  
+  div:first-child {
+    margin-top: 0;
+  }
+  div {
+    margin-top: 5px;
+  }
+}

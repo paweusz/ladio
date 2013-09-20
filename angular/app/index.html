@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/flags16.css">
     <link rel="stylesheet" href="css/prefs.css">
+    <link rel="stylesheet" href="css/station-info.css">
     <!-- endbuild -->
 </head>
   <body ng-app="ladioApp">
@@ -47,7 +48,7 @@
               <div id="ctrl" ng-click="play()"></div>
               <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
                 <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
-                <div id="station-info-details" ng-show="infoDetailsVisible" class="hovering drop-down" ng-cloak>
+                <div id="station-info-details" ng-show="stationPopups.details" class="hovering drop-down" ng-cloak>
                   <p>
                     <span>currently playing</span>
                     <span class="stream-title" ng-switch on="stationDetails.title != null">
@@ -63,9 +64,12 @@
                 </div>
               </div>
             </div>
-            <div class="alert hovering drop-down" ng-show="alertVisible" ng-cloak>
+            <div class="alert hovering drop-down" ng-show="playerPopups.alert" ng-cloak>
               <div>Error connecting to station.</div>
               <div>Please try again later.</div>
+            </div>
+            <div id="station-info-connecting" class="hovering drop-down" ng-show="playerPopups.connecting" ng-cloak>
+              <div>Connecting&hellip;</div>
             </div>
           </div>
           

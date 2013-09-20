@@ -7,7 +7,9 @@ angular.module('ladioApp')
       title: null,
       titleLink: null
     };
-    $scope.infoDetailsVisible = false;
+    $scope.stationPopups = {
+      details: false
+    };
     this.blinkPrms = null;
 
     this.updateStationDetails = function() {
@@ -36,7 +38,7 @@ angular.module('ladioApp')
     var self = this;
 
     this.blinkPopup = function() {
-      $scope.infoDetailsVisible = true;
+      setDetailsVisible(true);
       self.blinkPrms = $timeout(function() {
         self.blinkPrms = null;
         $scope.hideStationDetails();
@@ -50,18 +52,22 @@ angular.module('ladioApp')
       }
     };
 
+    function setDetailsVisible(visible) {
+      $scope.stationPopups.details = visible;
+    }
+    
     $scope.showStationDetails = function() {
       self.cancelBlinkIfAny();
-      if ($scope.alertVisible) {
+      if ($scope.playerPopups.alert) {
         return;
       }
 
       self.updateStationDetails();
-      $scope.infoDetailsVisible = true;
+      setDetailsVisible(true);
     };
 
     $scope.hideStationDetails = function() {
-      $scope.infoDetailsVisible = false;
+      setDetailsVisible(false);
     };
 
     $scope.$on($scope.Events.STREAMS_CHANGED, function() {
