@@ -10,8 +10,10 @@ Guidelines:
 * playing station selection visible
 
 * catalog when playing some station 
-* genres -> electronic -> Dance when playing some other station
-* starred stations during playing one of those
+* genres -> electronic -> Dance 
+  - when playing some other station
+  - with station info popup visible
+* starred stations when connecting to one of those
 
 ## To create screenshot with resolution 1280x800
 
