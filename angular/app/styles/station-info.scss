@@ -1,5 +1,6 @@
 $ruler-color: #FAFAFA;
 $ruler-bg-color: #6C6C6C;
+$ruler-sep-color: #202020;
 $alert-color: #900000;
 $alert-bg-color: #ff7070;
 
@@ -96,8 +97,30 @@ $alert-bg-color: #ff7070;
 }
 
 #station-info-connecting {
+  $height: 24px;
   background-color: $ruler-bg-color;
   padding: 15px;
+
+  .text {
+    padding-left: 58px;
+    line-height: $height;
+    height: $height;
+  }
+
+  .icon {
+    float: left;
+    width: 48px;
+    height: $height;
+
+    svg {
+      width: 48px;
+      height: $height;
+      * {
+        stroke: $ruler-sep-color;
+      }
+    }
+
+  }
 }
 
 .alert {
