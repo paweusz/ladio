@@ -1,0 +1,79 @@
+$ruler-color: #FAFAFA;
+$ruler-bg-color: #6C6C6C;
+$header-bg-color: #3C3C3C;
+
+.search-box {
+
+  height: 26px;
+
+  * {
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 100%;
+  }
+  
+  .search-icon {
+    width: 35px;
+    border-radius: 5px 0 0 5px;
+    background-color: $header-bg-color;
+    float: left;
+    position: relative;
+    
+    svg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 22px;
+      height: 22px;
+      
+      circle {
+        stroke: $ruler-color;
+      }
+      
+      path {
+        stroke: $ruler-color;
+        fill: $ruler-color;
+      }
+    }
+  }
+  
+  input {
+    width: 200px;
+    outline: 0;
+    padding-left: 5px;
+    float: left;
+    background-color: $ruler-color;
+  }
+
+  .clearbox {  
+    width: 24px;
+    background-color: $ruler-color;
+    float: right;
+    border-radius: 0 5px 5px 0;
+    padding: 5px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+      
+    polygon {
+      fill: $ruler-bg-color;
+    }
+
+  }
+
+  &:after {
+    clear: both;
+    content: "";
+    display: block;
+  }
+  
+}
+

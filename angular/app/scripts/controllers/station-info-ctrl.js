@@ -3,14 +3,18 @@
 angular.module('ladioApp')
   .controller('StationInfoCtrl', function ($scope, $log, $timeout, StreamInfoSvc) {
 
+    var self = this;
+    self.Popups = {
+      DETAILS: 'StationInfoCtrl.DETAILS',
+      ALERT: 'StationInfoCtrl.ALERT'
+    };
+
     $scope.stationDetails = {
       title: null,
       titleLink: null
     };
-    $scope.infoDetailsVisible = false;
-    this.blinkPrms = null;
 
-    this.updateStationDetails = function() {
+    self.updateStationDetails = function() {
       if (!$scope.currentStation.streams) {
         $scope.stationDetails.title = 'Unknown';
         $scope.stationDetails.titleLink = '';
@@ -33,35 +37,18 @@ angular.module('ladioApp')
       });
     };
 
-    var self = this;
-
-    this.blinkPopup = function() {
-      $scope.infoDetailsVisible = true;
-      self.blinkPrms = $timeout(function() {
-        self.blinkPrms = null;
-        $scope.hideStationDetails();
-      }, 3800);
-    };
-
-    this.cancelBlinkIfAny = function() {
-      if (!!self.blinkPrms) {
-        $timeout.cancel(self.blinkPrms);
-        self.blinkPrms = null;
-      }
-    };
 
     $scope.showStationDetails = function() {
-      self.cancelBlinkIfAny();
-      if ($scope.alertVisible) {
-        return;
+      if ($scope.currentStation.state === $scope.State.ERROR) {
+        $scope.popups.showExclusive(self.Popups.ALERT);
+      } else {
+        self.updateStationDetails();
+        $scope.popups.showExclusive(self.Popups.DETAILS);
       }
-
-      self.updateStationDetails();
-      $scope.infoDetailsVisible = true;
     };
 
     $scope.hideStationDetails = function() {
-      $scope.infoDetailsVisible = false;
+      $scope.popups.hideAll();
     };
 
     $scope.$on($scope.Events.STREAMS_CHANGED, function() {
@@ -69,12 +56,7 @@ angular.module('ladioApp')
     });
 
     $scope.$on($scope.Events.PLAYING_STARTED, function() {
-      self.blinkPopup();
-    });
-
-    $scope.$on($scope.Events.HIDE_POPUPS_REQ, function() {
-      self.cancelBlinkIfAny();
-      $scope.hideStationDetails();
+      $scope.popups.showExclusive(self.Popups.DETAILS, 3800);
     });
 
   });

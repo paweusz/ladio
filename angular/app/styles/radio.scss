@@ -1,24 +1,20 @@
 $playing-color: #FF802E;
 $hover-color: #00AFEE;
-$header-bg-color: #3C3C3C;
 $station-color: rgba(76,107,150,0.95);
+$header-bg-color: #3C3C3C;
 $ruler-color: #FAFAFA;
-$ruler-sep-color: #202020;
 $ruler-bg-color: #6C6C6C;
-$alert-bg-color: #ff7070;
-$alert-color: #900000;
+$ruler-sep-color: #202020;
 
 @mixin selection {
-    background-image: -webkit-linear-gradient(top, $playing-color 0%, $playing-color 100%);
-    background-image: -moz-linear-gradient(top, $playing-color 0%, $playing-color 100%);
+    background-image: linear-gradient(0deg, $playing-color 0%, $playing-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
 }
 
 @mixin hover {
-    background-image: -webkit-linear-gradient(top, $hover-color 0%, $hover-color 100%);
-    background-image: -moz-linear-gradient(top, $hover-color 0%, $hover-color 100%);
+    background-image: linear-gradient(0deg, $hover-color 0%, $hover-color 100%);
     background-repeat: no-repeat;
     background-size: 100% 5px;
     background-position: 0 100%;
@@ -34,7 +30,8 @@ body {
   font-size: 18px;
   margin: 0;
   padding: 0;
-  min-width: calc(160px * 6)
+  min-width: calc(160px * 6);
+  min-width: -webkit-calc(160px * 6);
 }
 
 a {
@@ -56,6 +53,10 @@ button {
   cursor: pointer;
 }
 
+input {
+  font-size: 14px;
+}
+
 #header {
   background-color: $header-bg-color;
   box-shadow: 0 0 40px 10px #000;
@@ -68,71 +69,12 @@ button {
   .container {
     position: relative;
   }
-  
-  #station-info {
-    position: absolute;
-    top: 15px;
-    right: 100px;
-    font-size: 16px;
-    color: $ruler-color;
-    text-shadow: 0 0 0.5em #FFF;
-    cursor: pointer;
-    
-    #station-info-text {
-      #ctrl {
-        position: absolute;
-        left: -30px;
-      }
-      #name {
-        white-space: nowrap;
-        & > .value {
-          height: 26px;
-        }
-      }
-      &.playing #ctrl {
-        background-color: $ruler-color;
-        width: 19px;
-        height: 19px;
 
-        animation-name: bump;
-        animation-duration: 6s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        -webkit-animation-name: bump;
-        -webkit-animation-duration: 6s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-      }
-      &.stopped #ctrl {
-        border-color: transparent transparent transparent $ruler-color;
-        border-width: 9px 0 10px 19px;
-        border-style: solid;
-      }
-      &.connecting #ctrl {
-        width: 15px;
-        height: 15px;
-        border: 2px solid $ruler-color;
-
-        animation-name: rotate;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        -webkit-animation-name: rotate;
-        -webkit-animation-duration: 1s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-      }
-      &.error {
-        color: $alert-bg-color;
-        text-shadow: 0 0 0.5em $alert-bg-color;
-      }
-    }
-
-  }
 }
 
 .container {
   width: calc(160px * 6);
+  width: -webkit-calc(160px * 6);
   margin-left: auto;
   margin-right: auto;
 }
@@ -146,89 +88,6 @@ button {
   &:after {
     clear: both;
     content: "";
-    display: block;
-  }
-}
-
-.genre, .station {
-  color: $ruler-color;
-  background-color: $station-color;
-  float: left;    
-  font-size: 16px;
-  margin: 0px 1px 1px 0px;
-  width: 159px;
-  height: 80px;
-  cursor: pointer;
-  position: relative;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
-
-  &:hover {
-    @include hover;
-  }
-
-}
-
-.msg {
-  color: $ruler-color;
-  background-color: $station-color;
-  padding: 30px 10px;
-  text-align: center;
-  margin: 10px 0;
-  a {
-    text-decoration: underline;
-    color: $ruler-color;
-  }
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
-}
-
-.name {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  margin: 10px 10px 0 10px;
-  word-break: break-word;
-  max-height: 38px;
-  text-transform: uppercase;
-}
-
-.desc {
-  margin: 0 10px 10px 10px;
-  font-size: 9px;
-  position: absolute;
-  bottom: 0;
-  color: $ruler-sep-color;
-}
-
-.station {
-  
-  &.disabled {
-    background-color: #d6d6d6;
-    .name {
-      pointer-events: none;
-      cursor: default;
-    }
-  }
-
-  &.playing {
-    @include selection;
-  }
-
-  &.connecting {
-    @include selection;
-    animation-name: connecting;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -webkit-animation-name: connecting;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-  }
-  
-  & .fav-star {
-    display: none;
-  }
-  
-  &:hover .fav-star {
     display: block;
   }
 }
@@ -310,85 +169,12 @@ ul {
 
 }
 
-.search-box {
-
-  height: 26px;
-
-  * {
-    padding: 0;
-    margin: 0;
-    border: 0 none;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 100%;
-  }
-  
-  .search-icon {
-    width: 35px;
-    border-radius: 5px 0 0 5px;
-    background-color: $header-bg-color;
-    float: left;
-    position: relative;
-    
-    svg {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      width: 22px;
-      height: 22px;
-      
-      circle {
-        stroke: $ruler-color;
-      }
-      
-      path {
-        stroke: $ruler-color;
-        fill: $ruler-color;
-      }
-    }
-  }
-  
-  input {
-    width: 200px;
-    outline: 0;
-    padding-left: 5px;
-    float: left;
-    background-color: $ruler-color;
-  }
-
-  button {  
-    width: 24px;
-    background-color: $ruler-color;
-    float: right;
-    border-radius: 0 5px 5px 0;
-    padding: 6px 5px;
-
-    svg {
-      width: 14px;
-      height: 14px;
-    }
-      
-    polygon {
-      fill: $ruler-bg-color;
-    }
-
-  }
-
-  &:after {
-    clear: both;
-    content: "";
-    display: block;
-  }
-  
-}
-
 .spinner {
   position: absolute;
   left: calc(50% - 50px);
+  left: -webkit-calc(50% - 50px);
   top: calc(50% - 30px);
+  top: -webkit-calc(50% - 30px);
 
   div:first-child {
     margin-left: 0px;
@@ -428,81 +214,6 @@ ul {
   }
 }
 
-#prefs {
-  position: absolute;
-  top: calc(50% - 12px);
-  right: 0;
-  padding-left: 10px;
-
-  #prefs-btn {
-    cursor: pointer;
-    width: 24px;
-    height: 28px;
-    svg {
-      width: 24px;
-      height: 28px;
-    }
-    rect {
-      fill: $ruler-color;
-    }
-  }
-
-  #prefs-ddown {
-    background-color: $ruler-bg-color;
-    padding: 0 10px;
-    min-width: 100px;
-    text-align: center;
-    display: none;
-    
-    li:first-child {
-      border-top: 0px none;
-    }
-    li {
-      padding: 10px 0;
-      border-top: 1px solid $ruler-sep-color;
-    }
-    a {
-      color: $ruler-color;
-    }
-  }
-  
-  &:hover #prefs-ddown {
-    display: block;
-  }
-
-}
-
-#station-info-details {
-  background-color: $ruler-bg-color;
-  text-shadow: none;
-  min-width: 400px;
-  padding: 15px;
-  font-size: 15px;
-  cursor: initial;
-  white-space: normal;
-  color: $ruler-color;
-  line-height: 2.5ex;
-  text-align: justify;
-
-  a {
-    color: $ruler-color;
-    text-decoration: underline;
-  }
-
-  & > p {
-    margin-top: 10px;
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-
-  .stream-title {
-    text-transform: lowercase;
-    font-weight: bold;
-  }
-
-}
-
 .hovering {
   position: absolute;
   right: 0;
@@ -510,10 +221,18 @@ ul {
   border-radius: 5px 0 5px 5px;
 }
 
+.drop-down {
+  animation-name: ddown-in;
+  animation-duration: 0.05s;
+  -webkit-animation-name: ddown-in;
+  -webkit-animation-duration: 0.05s;
+}
+
 .popup {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
   position: fixed;
   left: calc(50% - 430px/2);
+  left: -webkit-calc(50% - 430px/2);
   top: 120px;
   width: 445px;
   z-index: 10;
@@ -553,27 +272,17 @@ ul {
     }
   }
   
-  .popup-close {
-    width: 30px;
-    height: 30px;
-    background-color: $ruler-bg-color;
+  .cross {
     position: absolute;
-    right: -15px;
-    top: -15px;
-    border-radius: 5px 5px 5px 0;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
+    top: 10px;
+    right: 10px;
     z-index: 30;
-    
-    svg {
-      width: 30px;
-      height: 30px;
-    }
+
     polygon {
       fill: $ruler-color;
     }
-    
   }
+
 }
 
 .glasspane {
@@ -598,50 +307,15 @@ ul {
   top: -6px;
 }
 
-.alert {
-  width: 12em;
-  padding: 20px;
-  top: 27px;
-  background-color: $alert-bg-color;
-  color: $alert-color;
-  text-shadow: none;
+.cross {
   
-  div:first-child {
-    margin-top: 0;
-  }
-  div {
-    margin-top: 5px;
-  }
-}
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
 
-.fav-star {
-  width: 21px;
-  height: 20px;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  
   svg {
-    width: 21px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
   }
-  
-  polygon {
-    stroke: $ruler-color;
-    stroke-width: 5;
-    fill: none;
-  }
-  
-  &.starred {
-    display: block;
-    polygon {
-      fill: $ruler-color;
-    }
-  }
-  
-  &:hover polygon {
-    stroke: $hover-color;
-  }
+
 }
-
-

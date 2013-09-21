@@ -6,7 +6,11 @@
 
     <div class="genres" ng-switch-when="false">
       <div class="container">
-        <div class="genre" ng-repeat="genre in genres" ng-click="select(genre)"><div class="name" title="{{genre.description}}">{{genre.name}}</div></div>
+        <div class="genre" ng-repeat="genre in genres" ng-click="select(genre)">
+          <div class="name">
+            <div title="{{genre.description}}">{{genre.name}}</div>
+          </div>
+        </div>
       </div>
       <div ng-hide="!!genres">
         <ng-include src="'/views/partials/spinner.html'"></ng-include>

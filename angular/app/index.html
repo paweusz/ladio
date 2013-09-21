@@ -15,111 +15,125 @@
 
     <!-- build:css(.tmp) css/radio.css -->
     <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/station.css">
     <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/flags16.css">
+    <link rel="stylesheet" href="css/prefs.css">
+    <link rel="stylesheet" href="css/station-info.css">
+    <link rel="stylesheet" href="css/search-box.css">
     <!-- endbuild -->
 </head>
   <body ng-app="ladioApp">
-    <!--[if lt IE 7]>
+    <!--[if lt IE 10]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+    <div ng-controller="PopupsCtrl">
+      <div ng-controller="PlayerCtrl">
+        <div id="header">
+          <div class="container">
 
-    <div ng-controller="PlayerCtrl" ng-click="hidePopups()">
-      <div id="header">
-        <div class="container">
+            <ul id="navigation" ng-controller="NavigationCtrl">
+              <li ng-cloak class="ng-class:item.css" ng-click="select(item)"
+                ng-repeat="item in items">{{item.label}}</a></li>
+            </ul>
 
-          <ul id="navigation" ng-controller="NavigationCtrl">
-            <li ng-cloak class="ng-class:item.css" ng-click="select(item)"
-              ng-repeat="item in items">{{item.label}}</a></li>
-          </ul>
+            <audio rd-player="currentStation.streams" 
+              onPlayingStarted="playingStarted()" 
+              onPlayingError="playingError()"
+              onPlayingStalled="playingStalled()"
+              onPlayingResumed="playingResumed()"
+              maxReconnects="3"></audio>
 
-          <audio rd-player="currentStation.streams" 
-            onPlayingStarted="playingStarted()" 
-            onPlayingError="playingError()"
-            onPlayingStalled="playingStalled()"
-            onPlayingResumed="playingResumed()"
-            maxReconnects="3"></audio>
-
-          <div id="station-info" ng-controller="StationInfoCtrl">
-            <div id="station-info-text" class="ng-class:stateCss()">
-              <div id="ctrl" ng-click="play()"></div>
-              <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
-                <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
-                <div id="station-info-details" ng-show="infoDetailsVisible" class="hovering" ng-cloak>
-                  <p>
-                    <span>Currently playing</span>
-                    <span class="stream-title" ng-switch on="stationDetails.title != null">
-                      <a ng-switch-when="true" href="{{stationDetails.titleLink}}" target="_blank">{{stationDetails.title}}</a>
-                      <a ng-switch-default>&hellip;</a>
-                    </span>
-                    <span>from website</span>
-                    <span ng-switch on="!!currentStation.station.website">
-                      <a ng-switch-when="true" href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a>
-                      <a ng-switch-default>unknown</a>
-                    </span>
-                    <span>at {{currentStation.station.bitrate}}.</span>
-                  </p>
-                  <p>Territory {{currentStation.station.country}}.</p>
+            <div id="station-info" ng-controller="StationInfoCtrl">
+              <div id="station-info-text" class="ng-class:stateCss()">
+                <div id="ctrl" ng-click="play()"></div>
+                <div id="name" ng-mouseenter="showStationDetails()" ng-mouseleave="hideStationDetails()" ng-cloak>
+                  <div class="value" ng-click="play()">{{currentStation.station.name}}</div>
+                  <div id="station-info-details" ng-show="popups.isVisible('StationInfoCtrl.DETAILS')" class="hovering drop-down" ng-cloak >
+                    <p>
+                      <span>currently playing</span>
+                      <span class="stream-title" ng-switch on="stationDetails.title != null">
+                        <a ng-switch-when="true" href="{{stationDetails.titleLink}}" target="_blank">{{stationDetails.title}}</a>
+                        <a ng-switch-default>&hellip;</a>
+                      </span>
+                      <span>from website</span>
+                      <span ng-switch on="!!currentStation.station.website">
+                        <a ng-switch-when="true" href="{{currentStation.station.website}}" target="_blank">{{currentStation.station.website}}</a>
+                        <a ng-switch-default>unknown</a>
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </div>
+              <div class="alert with-cross hovering drop-down" ng-show="popups.isVisible('PlayerCtrl.ALERT')" ng-cloak>
+                <p>{{currentStation.errorMsg}}</p>
+                <div class="cross" ng-click="popups.hide('PlayerCtrl.ALERT')">
+                  <ng-include src="'/images/cross.svg'"></ng-include>
+                </div>
+              </div>
+              <div class="alert hovering drop-down" ng-show="popups.isVisible('StationInfoCtrl.ALERT')" ng-cloak>
+                <p>{{currentStation.errorMsg}}</p>
+              </div>
+              <div id="station-info-connecting" class="hovering drop-down" ng-show="popups.isVisible('PlayerCtrl.CONNECTING')" ng-cloak>
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 48 24">
+                    <g id="plug">
+                      <line x1="0" y1="10" x2="20" y2="10" stroke-width="4"></line>
+                      <path d="M 23 0 C 6 7, 6 14, 23 20"></path>
+                    </g>
+                    <use x="24" y="0" xlink:href="#plug" transform="rotate(180 36 12)"/>
+                  </svg>
+                </div>
+                <div class="text">Connecting&hellip;</div>
+              </div>
             </div>
-            <div class="alert hovering" ng-show="alertVisible" ng-cloak>
-              <div>Error connecting to station.</div>
-              <div>Please try again later.</div>
-            </div>
-          </div>
-          
-          <div id="prefs" ng-cloak>
-            <div id="prefs-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <rect x="0" y="0" width="24" height="6"></rect>
-                <rect x="0" y="0" width="24" height="6" transform="translate(0 9)"></rect>
-                <rect x="0" y="0" width="24" height="6" transform="translate(0 18)"></rect>
-              </svg>
-            </div>
-            <menu id="prefs-ddown" class="hovering">
-              <li><a href="mailto:@@EMAIL">Feedback</a></li>
-              <li><a href="" ng-click="aboutVisible = true">About</a></li>
-            </menu>
-          </div>
 
-          <div ng-show="aboutVisible" ng-cloak>
-            <div class="glasspane" ng-click="aboutVisible = false"></div>
-            <div class="popup">
-              <div class="popup-close" ng-click="aboutVisible = false">
+            <div id="prefs" ng-cloak>
+              <div id="prefs-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                  <polygon 
-                    points="10,0 13,0 13,7 20,7 20,13 13,13 13,20 7,20 7,13 0,13 0,7 7,7 7,0"
-                    transform="translate(5 5) rotate(45 10 10)"></polygon>
+                  <rect x="0" y="0" width="24" height="6"></rect>
+                  <rect x="0" y="0" width="24" height="6" transform="translate(0 9)"></rect>
+                  <rect x="0" y="0" width="24" height="6" transform="translate(0 18)"></rect>
                 </svg>
               </div>
-              <div class="head">
-                <div class="title">Ladio &ndash; The Internet Radio</div>
-                <div class="subs">version: @@VERSION</div>
-              </div>
-              <div class="body">
-                <div class="app-icon"></div>
-                <div>
-                  <p>Ladio is developed by <a href="mailto:@@EMAIL">Ladio Team</a>.
-                  This is early access (&alpha; series) release. Feel free to <a href="mailto:@@EMAIL">report bugs or feature requests</a>.
-                  </p>
-                  <p>Stations catalog is provided by <a href="http://dirble.com/" target="_blank">Dirble</a>.
-                  Background image is adaptation of <a href="http://www.flickr.com/photos/derstormy/3929444513/" target="_blank">Good (old) radio</a> work by <a href="http://www.flickr.com/photos/derstormy/" target="_blank">René Hofmann</a>, licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/deed.en" target="_blank">Creative Commons</a>.
-                  </p>
+              <menu id="prefs-ddown" class="hovering drop-down">
+                <li><a href="mailto:@@EMAIL">Feedback</a></li>
+                <li><a href="" ng-click="aboutVisible = true">About</a></li>
+              </menu>
+            </div>
+
+            <div ng-show="aboutVisible" ng-cloak>
+              <div class="glasspane" ng-click="aboutVisible = false"></div>
+              <div class="popup">
+
+                <div class="cross" ng-click="aboutVisible = false">
+                  <ng-include src="'/images/cross.svg'"></ng-include>
+                </div>
+
+                <div class="head">
+                  <div class="title">Ladio &ndash; The Internet Radio</div>
+                  <div class="subs">version: @@VERSION</div>
+                </div>
+                <div class="body">
+                  <div class="app-icon"></div>
+                  <div>
+                    <p>Ladio is developed by <a href="mailto:@@EMAIL">Ladio Team</a>.
+                    This is early access (&alpha; series) release. Feel free to <a href="mailto:@@EMAIL">report bugs or feature requests</a>.
+                    </p>
+                    <p>Stations catalog is provided by <a href="http://dirble.com/" target="_blank">Dirble</a>.
+                    Background image is adaptation of <a href="http://www.flickr.com/photos/derstormy/3929444513/" target="_blank">Good (old) radio</a> work by <a href="http://www.flickr.com/photos/derstormy/" target="_blank">René Hofmann</a>, licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/deed.en" target="_blank">Creative Commons</a>. Flag images by <a href="https://github.com/lafeber/world-flags-sprite" target="_blank">Martijn Lafeber</a></p>
+                  </div>
                 </div>
               </div>
             </div>
+            
           </div>
-          
         </div>
-      </div>
 
-      <!-- Add your site or application content here -->
-      <div ng-view=""></div>
+        <!-- Add your site or application content here -->
+        <div ng-view=""></div>
+      </div>
     </div>
 
     <!-- Google Analytics -->
@@ -132,7 +146,10 @@
       ga('send', 'pageview');
     </script>
 
+    <!-- build:js scripts/modules.js -->
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- endbuild -->
 
     <!-- build:js(.tmp) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -147,7 +164,7 @@
     <script src="scripts/filters/search-fltr.js"></script>
     <script src="scripts/controllers/player-ctrl.js"></script>
     <script src="scripts/controllers/search-ctrl.js"></script>
-    <script src="scripts/controllers/navigation.js"></script>
+    <script src="scripts/controllers/navigation-ctrl.js"></script>
     <script src="scripts/controllers/recent.js"></script>
     <script src="scripts/controllers/starred-ctrl.js"></script>
     <script src="scripts/controllers/genres.js"></script>
@@ -155,10 +172,7 @@
     <script src="scripts/controllers/stations.js"></script>
     <script src="scripts/controllers/star.js"></script>
     <script src="scripts/controllers/station-info-ctrl.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js scripts/modules.js -->
-    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="scripts/controllers/popups-ctrl.js"></script>
     <!-- endbuild -->
 
 </body>

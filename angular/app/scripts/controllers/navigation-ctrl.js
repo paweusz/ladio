@@ -27,6 +27,8 @@ angular.module('ladioApp')
     };
 
     $scope.$on('$routeChangeSuccess', function() {
+      $scope.popups.hideAll();
+
       var path = $location.path();
       if (path === '/') {
         return;

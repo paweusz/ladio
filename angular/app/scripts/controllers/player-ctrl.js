@@ -12,15 +12,21 @@ angular.module('ladioApp')
 
     $scope.Events = {
       STREAMS_CHANGED: 'STREAMS_CHANGED',
-      PLAYING_STARTED: 'PLAYING_STARTED',
-      HIDE_POPUPS_REQ: 'HIDE_POPUPS_REQ'
+      PLAYING_STARTED: 'PLAYING_STARTED'
     };
 
     $scope.currentStation = {
       station: null,
       streams: null,
       state: $scope.State.STOPPED,
-      wasPlayed: false
+      wasPlayed: false,
+      errorMsg: 'Error connecting to station. Please try again later.'
+    };
+
+    var self = this;
+    self.Popups = {
+      ALERT: 'PlayerCtrl.ALERT',
+      CONNECTING: 'PlayerCtrl.CONNECTING'
     };
 
     function playStreams(streamUrl) {
@@ -74,8 +80,10 @@ angular.module('ladioApp')
       cs.wasPlayed = false;
       cs.state = $scope.State.CONNECTING;
       cs.streams = playStreams(station.streamurl);
+
+      $scope.popups.showExclusive(self.Popups.CONNECTING, 1500);
     }
-    
+
     $scope.playingStarted = function() {
       var cs = $scope.currentStation;
 
@@ -86,14 +94,12 @@ angular.module('ladioApp')
         $scope.$broadcast($scope.Events.PLAYING_STARTED);
         cs.wasPlayed = true;
       }
-
-      $scope.alertVisible = false;
     };
     
     $scope.playingError = function() {
       $scope.currentStation.state = $scope.State.ERROR;
       $scope.currentStation.streams = null;
-      $scope.alertVisible = true;
+      $scope.popups.showExclusive(self.Popups.ALERT);
     };
     
     $scope.playingStalled = function() {
@@ -141,9 +147,4 @@ angular.module('ladioApp')
       return classes.join(' ');
     };
 
-    $scope.hidePopups = function() {
-      $scope.alertVisible = false;
-      $scope.$broadcast($scope.Events.HIDE_POPUPS_REQ);
-    };
-    
   });

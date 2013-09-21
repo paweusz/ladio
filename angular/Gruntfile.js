@@ -1,5 +1,6 @@
 // Generated on 2013-07-02 using generator-angular 0.3.0
 'use strict';
+
 var LIVERELOAD_PORT = 35728;
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
 var mountFolder = function (connect, dir) {
@@ -29,14 +30,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
-        tasks: ['coffee:test']
-      },
       js: {
         options: {
           livereload: LIVERELOAD_PORT
@@ -76,7 +69,8 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               lrSnippet,
-              mountFolder(connect, '.tmp')
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'app')
             ];
           }
         }
@@ -86,6 +80,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'app'),
               mountFolder(connect, 'test')
             ];
           }
@@ -127,26 +122,6 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js'
       ]
-    },
-    coffee: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
-      }
     },
     // not used since Uglify task does concat,
     // but still available if needed
@@ -224,17 +199,6 @@ module.exports = function (grunt) {
     },
     // Put files not handled in other tasks here
     copy: {
-      dev: {
-        files: [
-          {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            'bower_components/**/*',
-            'images/{,*/}*.{png,jpg,svg}',
-            'styles/fonts/*'
-          ], dest: '.tmp'}
-        ]
-      },
       dist: {
         files: [{
           expand: true,
@@ -244,7 +208,6 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            'bower_components/**/*',
             'images/{,*/}*.{png,jpg,svg}',
             'styles/fonts/*'
           ]
@@ -260,13 +223,10 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist', 'replace:dev', 'compass', 'copy:dev'
-      ],
-      test: [
-        'coffee'
+        'replace:dev', 'compass'
       ],
       dist: [
-        'coffee', 'imagemin', 'replace:dist', 'compass'
+        'imagemin', 'replace:dist', 'compass'
       ]
     },
     karma: {
@@ -315,12 +275,11 @@ module.exports = function (grunt) {
             'API_URL': 'http://localhost:9001/api',
             'VERSION': '&alpha;5',
             'EMAIL': 'ladioteam@gmail.com'
-          },
-          force: true
+          }
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.{js,html}',
+            'scripts/{,*/}*.js',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}
@@ -337,7 +296,7 @@ module.exports = function (grunt) {
         },
         files: [
           {expand: true, flatten: false, cwd: '<%= yeoman.app %>', src: [
-            'scripts/{,*/}*.{js,html}',
+            'scripts/{,*/}*.js',
             'views/{,*/}*.html',
             '*.html',
           ], dest: '.tmp'}
@@ -362,7 +321,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'concurrent:test',
     'connect:test',
     'karma'
   ]);

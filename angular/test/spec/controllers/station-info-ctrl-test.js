@@ -19,6 +19,11 @@ describe('Controller: StationInfoCtrl', function () {
     log = $log;
     timeout = $timeout;
 
+    $controller('PopupsCtrl', {
+      $scope: scope,
+      $timeout: timeout
+    });
+
     StationInfoCtrl = $controller('StationInfoCtrl', {
       $scope: scope,
       StreamInfoSvc: StreamInfoSvcMock,
@@ -64,17 +69,32 @@ describe('Controller: StationInfoCtrl', function () {
   });
 
   it('should handle info popup visibility', function() {
-    scope.currentStation = {streams: ['stream1']};
+    scope.currentStation = {streams: ['stream1'], state: 0};
+    scope.State = {ERROR: 3};
     spyOn(StationInfoCtrl, 'updateStationDetails').andCallThrough();
     scope.showStationDetails();
 
-    expect(scope.infoDetailsVisible).toBe(true);
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(true);
     expect(StationInfoCtrl.updateStationDetails).toHaveBeenCalled();
 
     scope.hideStationDetails();
 
-    expect(scope.infoDetailsVisible).toBe(false);
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(false);
     expect(StationInfoCtrl.updateStationDetails.calls.length).toBe(1);
+  });
+
+  it('should show error popup for error state', function() {
+    scope.currentStation = {streams: ['stream1'], state: 3};
+    scope.State = {ERROR: 3};
+    spyOn(StationInfoCtrl, 'updateStationDetails').andCallThrough();
+    scope.showStationDetails();
+
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.ALERT)).toBe(true);
+    expect(StationInfoCtrl.updateStationDetails).not.toHaveBeenCalled();
+
+    scope.hideStationDetails();
+
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.ALERT)).toBe(false);
   });
 
   it('should load stream info on STREAMS_CHANGED event', function() {
@@ -84,26 +104,8 @@ describe('Controller: StationInfoCtrl', function () {
   });
 
   it('should show stream info on PLAYING_STARTED event', function() {
-    spyOn(StationInfoCtrl, 'blinkPopup');
     scope.$broadcast(scope.Events.PLAYING_STARTED);
-    expect(StationInfoCtrl.blinkPopup).toHaveBeenCalled();
-  });
-
-  it('should handle popup binking', function() {
-    expect(scope.infoDetailsVisible).toBe(false);
-    StationInfoCtrl.blinkPopup();
-    expect(scope.infoDetailsVisible).toBe(true);
-    timeout.flush();
-    expect(scope.infoDetailsVisible).toBe(false);
-  });
-
-  it('should cancel popup binking when popup has been triggered externally', function() {
-    scope.currentStation = {streams: ['stream1']};
-    StationInfoCtrl.blinkPopup();
-    expect(scope.infoDetailsVisible).toBe(true);
-    scope.showStationDetails();
-    timeout.verifyNoPendingTasks();
-    expect(scope.infoDetailsVisible).toBe(true);
+    expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(true);
   });
 
 });
