@@ -12,12 +12,19 @@ angular.module('ladioApp')
         disabled: '=disabled'
       },
       link: function(scope, element) {
-        var crossElem = element.find('.cross');
+        var children = element.children();
+        var inputElem = element.find('input');
+        var inputCtrl = inputElem.controller('ngModel');
+        var crossElem = angular.element(children[2]);
+
         crossElem.bind('click', function() {
-          scope.model = '';
+          inputElem.val('');
+          inputElem[0].focus();
+          scope.$apply(function() {
+            inputCtrl.$setViewValue('');
+          });
         });
 
-        var inputElem = element.find('input');
         function updateDisabledAttr(disabled) {
           if (disabled) {
             inputElem.attr('disabled', 'disabled');
