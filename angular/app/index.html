@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/flags16.css">
     <link rel="stylesheet" href="css/prefs.css">
+    <link rel="stylesheet" href="css/popups.css">
     <link rel="stylesheet" href="css/station-info.css">
     <link rel="stylesheet" href="css/search-box.css">
     <!-- endbuild -->
@@ -99,12 +100,16 @@
               </div>
               <menu id="prefs-ddown" class="hovering drop-down">
                 <li><a href="mailto:@@EMAIL">Feedback</a></li>
+                <li><a href="" ng-click="popups.showDialog('privacy')">Privacy</a></li>
                 <li><a href="" ng-click="popups.showDialog('about')">About</a></li>
               </menu>
             </div>
 
             <div ng-if="popups.isDialogVisible('about')">
               <ng-include src="'/views/partials/about.html'"></ng-include>
+            </div>
+            <div ng-if="popups.isDialogVisible('privacy')">
+              <ng-include src="'/views/partials/privacy.html'"></ng-include>
             </div>
             
           </div>
