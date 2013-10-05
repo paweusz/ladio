@@ -4,6 +4,7 @@ angular.module('ladioApp')
   .controller('PopupsCtrl', function ($scope, $timeout) {
 
     var popups = {};
+    var dialogs = {};
     var prms = {};
 
     var module = {};
@@ -19,13 +20,25 @@ angular.module('ladioApp')
       }
     };
 
+    module.showDialog = function(id) {
+      dialogs[id] = true;
+    };
+
     module.hide = function(id) {
       popups[id] = false;
       delete prms.id;
     };
 
+    module.hideDialog = function(id) {
+      dialogs[id] = false;
+    };
+
     module.isVisible = function(id) {
       return !!popups[id];
+    };
+
+    module.isDialogVisible = function(id) {
+      return !!dialogs[id];
     };
 
     module.hideAll = function() {

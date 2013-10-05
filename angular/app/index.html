@@ -99,33 +99,12 @@
               </div>
               <menu id="prefs-ddown" class="hovering drop-down">
                 <li><a href="mailto:@@EMAIL">Feedback</a></li>
-                <li><a href="" ng-click="aboutVisible = true">About</a></li>
+                <li><a href="" ng-click="popups.showDialog('about')">About</a></li>
               </menu>
             </div>
 
-            <div ng-show="aboutVisible" ng-cloak>
-              <div class="glasspane" ng-click="aboutVisible = false"></div>
-              <div class="popup">
-
-                <div class="cross" ng-click="aboutVisible = false">
-                  <ng-include src="'/views/partials/cross.svg'"></ng-include>
-                </div>
-
-                <div class="head">
-                  <div class="title">Ladio &ndash; The Internet Radio</div>
-                  <div class="subs">version: @@VERSION</div>
-                </div>
-                <div class="body">
-                  <div class="app-icon"></div>
-                  <div>
-                    <p>Ladio is developed by <a href="mailto:@@EMAIL">Ladio Team</a>.
-                    This is early access (&alpha; series) release. Feel free to <a href="mailto:@@EMAIL">report bugs or feature requests</a>.
-                    </p>
-                    <p>Stations catalog is provided by <a href="http://dirble.com/" target="_blank">Dirble</a>.
-                    Background image is adaptation of <a href="http://www.flickr.com/photos/derstormy/3929444513/" target="_blank">Good (old) radio</a> work by <a href="http://www.flickr.com/photos/derstormy/" target="_blank">René Hofmann</a>, licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/deed.en" target="_blank">Creative Commons</a>. Flag images by <a href="https://github.com/lafeber/world-flags-sprite" target="_blank">Martijn Lafeber</a></p>
-                  </div>
-                </div>
-              </div>
+            <div ng-if="popups.isDialogVisible('about')">
+              <ng-include src="'/views/partials/about.html'"></ng-include>
             </div>
             
           </div>

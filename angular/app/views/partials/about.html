@@ -1,0 +1,24 @@
+<div>
+  <div class="glasspane" ng-click="popups.hideDialog('about')"></div>
+  <div class="popup">
+
+    <div class="cross" ng-click="popups.hideDialog('about')">
+      <ng-include src="'/views/partials/cross.svg'"></ng-include>
+    </div>
+
+    <div class="head">
+      <div class="title">Ladio &ndash; The Internet Radio</div>
+      <div class="subs">version: @@VERSION</div>
+    </div>
+    <div class="body">
+      <div class="app-icon"></div>
+      <div>
+        <p>Ladio is developed by <a href="mailto:@@EMAIL">Ladio Team</a>.
+        This is early access (&alpha; series) release. Feel free to <a href="mailto:@@EMAIL">report bugs or feature requests</a>.
+        </p>
+        <p>Stations catalog is provided by <a href="http://dirble.com/" target="_blank">Dirble</a>.
+        Background image is adaptation of <a href="http://www.flickr.com/photos/derstormy/3929444513/" target="_blank">Good (old) radio</a> work by <a href="http://www.flickr.com/photos/derstormy/" target="_blank">René Hofmann</a>, licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/deed.en" target="_blank">Creative Commons</a>. Flag images by <a href="https://github.com/lafeber/world-flags-sprite" target="_blank">Martijn Lafeber</a></p>
+      </div>
+    </div>
+  </div>
+</div>
