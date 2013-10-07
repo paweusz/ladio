@@ -111,12 +111,19 @@
             <div ng-if="popups.isDialogVisible('privacy')">
               <ng-include src="'/views/partials/privacy.html'"></ng-include>
             </div>
-            
+
           </div>
         </div>
 
         <!-- Add your site or application content here -->
         <div ng-view=""></div>
+
+        <div class="info-bar">
+          <p>This application uses cookies.</p>
+          <div class="cross" ng-click="popups.hideDialog('about')">
+            <ng-include src="'/views/partials/cross.svg'"></ng-include>
+          </div>
+        </div>
       </div>
     </div>
 
