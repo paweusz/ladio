@@ -113,17 +113,21 @@
             </div>
 
           </div>
+  
+          <div class="info-bar">
+            <div class="container">
+              <p>This application uses cookies.</p>
+              <div class="cross" ng-click="popups.hideDialog('info-bar')">
+                <ng-include src="'/views/partials/cross.svg'"></ng-include>
+              </div>
+            </div>
+          </div>
+  
         </div>
 
         <!-- Add your site or application content here -->
         <div ng-view=""></div>
 
-        <div class="info-bar">
-          <p>This application uses cookies.</p>
-          <div class="cross" ng-click="popups.hideDialog('about')">
-            <ng-include src="'/views/partials/cross.svg'"></ng-include>
-          </div>
-        </div>
       </div>
     </div>
 

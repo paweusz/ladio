@@ -108,8 +108,8 @@ $playing-color: #FF802E;
   
   .cross {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: -5px;
+    right: 0px;
 
     polygon {
       fill: $ruler-color;
