@@ -105,6 +105,10 @@ $playing-color: #FF802E;
   color: $ruler-color;
   background-color: $playing-color;
   opacity: 0.9;
+
+  p {
+    margin-right: 15px;
+  }
   
   .cross {
     position: absolute;
