@@ -12,7 +12,7 @@ describe('Controller SearchCtrl', function () {
     scope = $rootScope.$new();
     
     genresSvc = GenresSvcMock;
-    spyOn(genresSvc, "search").andCallThrough();
+    spyOn(genresSvc, "search").and.callThrough();
 
     timeout = $timeout;
     browser = $browser;
@@ -62,12 +62,12 @@ describe('Controller SearchCtrl', function () {
     scope.$digest();
     timeout.flush();
 
-    expect(genresSvc.search.calls.length).toEqual(1);
+    expect(genresSvc.search.calls.count()).toEqual(1);
 
     scope.$digest();
     expect(browser.deferredFns.length).toEqual(0); //timeout.verifyNoPendingTasks();
 
-    expect(genresSvc.search.calls.length).toEqual(1);
+    expect(genresSvc.search.calls.count()).toEqual(1);
   });
   
   it('handles search in genre', function() {

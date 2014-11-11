@@ -71,7 +71,7 @@ describe('Controller: StationInfoCtrl', function () {
   it('should handle info popup visibility', function() {
     scope.currentStation = {streams: ['stream1'], state: 0};
     scope.State = {ERROR: 3};
-    spyOn(StationInfoCtrl, 'updateStationDetails').andCallThrough();
+    spyOn(StationInfoCtrl, 'updateStationDetails').and.callThrough();
     scope.showStationDetails();
 
     expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(true);
@@ -80,13 +80,13 @@ describe('Controller: StationInfoCtrl', function () {
     scope.hideStationDetails();
 
     expect(scope.popups.isVisible(StationInfoCtrl.Popups.DETAILS)).toBe(false);
-    expect(StationInfoCtrl.updateStationDetails.calls.length).toBe(1);
+    expect(StationInfoCtrl.updateStationDetails.calls.count()).toBe(1);
   });
 
   it('should show error popup for error state', function() {
     scope.currentStation = {streams: ['stream1'], state: 3};
     scope.State = {ERROR: 3};
-    spyOn(StationInfoCtrl, 'updateStationDetails').andCallThrough();
+    spyOn(StationInfoCtrl, 'updateStationDetails').and.callThrough();
     scope.showStationDetails();
 
     expect(scope.popups.isVisible(StationInfoCtrl.Popups.ALERT)).toBe(true);
