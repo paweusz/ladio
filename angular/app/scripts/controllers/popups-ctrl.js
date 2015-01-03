@@ -64,10 +64,10 @@ angular.module('ladioApp')
 
     module.isPrivacyAck = function() {
       return StateSvc.isPrivacyAck();
-    }
+    };
 
     module.ackPrivacy = function() {
       StateSvc.setPrivacyAck(true);
-    }
+    };
 
   });
