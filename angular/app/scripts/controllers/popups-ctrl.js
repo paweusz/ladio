@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('PopupsCtrl', function ($scope, $timeout) {
+  .controller('PopupsCtrl', function ($scope, $timeout, StateSvc) {
 
     var popups = {};
     var dialogs = {};
@@ -61,5 +61,13 @@ angular.module('ladioApp')
         delete prms.id;
       }
     };
+
+    module.isPrivacyAck = function() {
+      return StateSvc.isPrivacyAck();
+    }
+
+    module.ackPrivacy = function() {
+      StateSvc.setPrivacyAck(true);
+    }
 
   });

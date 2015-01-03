@@ -114,13 +114,13 @@
 
           </div>
   
-          <div class="info-bar">
+          <div class="info-bar" ng-if="!popups.isPrivacyAck()">
             <div class="container">
               <p>This application uses cookies to analyse its usage and help appoint direction for further development. 
                 If you continue without changing your settings, we'll assume that you are happy to receive all cookies on the Ladio website. 
                 For more information please see our <a href="" ng-click="popups.showDialog('privacy')">privacy policy</a>.
               </p>
-              <div class="cross" ng-click="popups.hideDialog('info-bar')">
+              <div class="cross" ng-click="popups.ackPrivacy()">
                 <ng-include src="'/views/partials/cross.svg'"></ng-include>
               </div>
             </div>
@@ -155,7 +155,7 @@
     <script src="scripts/services/pls.js"></script>
     <script src="scripts/services/stream-info-svc.js"></script>
     <script src="scripts/services/stat-svc.js"></script>
-    <script src="scripts/services/state.js"></script>
+    <script src="scripts/services/state-svc.js"></script>
     <script src="scripts/services/starred.js"></script>
     <script src="scripts/directives/rd-player.js"></script>
     <script src="scripts/directives/rd-search.js"></script>

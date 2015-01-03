@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .service('State', function state() {
+  .service('StateSvc', function state() {
     var stateKey = 'com.padio.state';
     var stateObj = localStorage[stateKey];
     if (!stateObj) {
@@ -25,6 +25,13 @@ angular.module('ladioApp')
           url = '/genres';
         }
         return url;
+      },
+      setPrivacyAck: function(privacyAck) {
+        stateObj.privacyAck = privacyAck;
+        updateStorage();
+      },
+      isPrivacyAck: function() {
+        return !!stateObj.privacyAck;
       }
     };
   });

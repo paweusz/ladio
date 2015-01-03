@@ -8,13 +8,14 @@ describe('Controller: PopupsCtrl', function () {
   var PopupsCtrl, scope, timeout;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $timeout) {
+  beforeEach(inject(function ($controller, $rootScope, $timeout, StateSvcMock) {
     scope = $rootScope.$new();
     timeout = $timeout;
 
     PopupsCtrl = $controller('PopupsCtrl', {
       $scope: scope,
-      $timeout: timeout
+      $timeout: timeout,
+      StateSvc: StateSvcMock
     });
   }));
 
@@ -65,6 +66,12 @@ describe('Controller: PopupsCtrl', function () {
     expect(scope.popups.isVisible('A')).toBe(false);
     expect(scope.popups.isVisible('B')).toBe(false);
     expect(scope.popups.isVisible('C')).toBe(true);
+  });
+
+  it('should display privacy acknowledge popup only once', function() {
+    expect(scope.popups.isPrivacyAck()).toBe(false);
+    scope.popups.ackPrivacy();
+    expect(scope.popups.isPrivacyAck()).toBe(true);
   });
 
 });
