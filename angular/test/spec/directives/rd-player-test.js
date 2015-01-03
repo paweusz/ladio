@@ -46,7 +46,7 @@ describe('Directive rdPlayer', function () {
       }
     };
     spyOn(element[0], 'load');
-    spyOn(element[0], 'play').andCallThrough();
+    spyOn(element[0], 'play').and.callThrough();
     attrs = {
       rdPlayer: "streams",
       onplayingstarted: "playingStarted()",
@@ -64,7 +64,7 @@ describe('Directive rdPlayer', function () {
     rdPlayerDirective[0].link($rootScope, element, attrs);
     $rootScope.$digest();
 
-    expect(element[0].load.calls.length).toEqual(1);
+    expect(element[0].load.calls.count()).toEqual(1);
     expect(element[0].play).not.toHaveBeenCalled();
 
   }));
@@ -115,15 +115,15 @@ describe('Directive rdPlayer', function () {
     rdPlayerDirective[0].link($rootScope, element, attrs);
     $rootScope.$digest();
 
-    expect(element[0].load.calls.length).toEqual(1);
+    expect(element[0].load.calls.count()).toEqual(1);
     for (var i = 0; i < 3; i++) {
       element.callbacks['error']();
-      expect(element[0].load.calls.length).toEqual(i + 2);
+      expect(element[0].load.calls.count()).toEqual(i + 2);
     }
     expect($rootScope.playingError).not.toHaveBeenCalled();
     element.callbacks['error']();
-    expect(element[0].load.calls.length).toEqual(4);
-    expect($rootScope.playingError.calls.length).toEqual(1);
+    expect(element[0].load.calls.count()).toEqual(4);
+    expect($rootScope.playingError.calls.count()).toEqual(1);
 
   }));
 
@@ -139,21 +139,21 @@ describe('Directive rdPlayer', function () {
     $rootScope.$digest();
 
     element.callbacks['progress']();
-    expect(element[0].load.calls.length).toEqual(1);
+    expect(element[0].load.calls.count()).toEqual(1);
     element.callbacks['canplay']();
     element.callbacks['progress']();
-    expect(element[0].play.calls.length).toEqual(1);
+    expect(element[0].play.calls.count()).toEqual(1);
     expect($rootScope.playingStarted).not.toHaveBeenCalled();
     element.callbacks['playing']();
-    expect($rootScope.playingStarted.calls.length).toEqual(1);
+    expect($rootScope.playingStarted.calls.count()).toEqual(1);
     
     expect($rootScope.playingStalled).not.toHaveBeenCalled();
     element.callbacks['stalled']();
     
     element.callbacks['progress']();
-    expect($rootScope.playingResumed.calls.length).toEqual(1);
+    expect($rootScope.playingResumed.calls.count()).toEqual(1);
     element.callbacks['progress']();
-    expect($rootScope.playingResumed.calls.length).toEqual(1);
+    expect($rootScope.playingResumed.calls.count()).toEqual(1);
 
   }));
 
@@ -180,10 +180,10 @@ describe('Directive rdPlayer', function () {
     expect($rootScope.playingResumed).not.toHaveBeenCalled();
 
     element.callbacks['canplay']();
-    expect(element[0].play.calls.length).toEqual(1);
+    expect(element[0].play.calls.count()).toEqual(1);
     expect($rootScope.playingStarted).not.toHaveBeenCalled();
     element.callbacks['playing']();
-    expect($rootScope.playingStarted.calls.length).toEqual(1);
+    expect($rootScope.playingStarted.calls.count()).toEqual(1);
     
 
   }));
@@ -223,16 +223,16 @@ describe('Directive rdPlayer', function () {
     element.callbacks['playing']();
     element.callbacks['stalled']();
     element.callbacks['progress']();
-    expect($rootScope.playingStarted.calls.length).toEqual(1);
-    expect($rootScope.playingResumed.calls.length).toEqual(1);
-    expect($rootScope.playingStalled.calls.length).toEqual(1);
+    expect($rootScope.playingStarted.calls.count()).toEqual(1);
+    expect($rootScope.playingResumed.calls.count()).toEqual(1);
+    expect($rootScope.playingStalled.calls.count()).toEqual(1);
     element.callbacks['ended']();
-    expect($rootScope.playingStalled.calls.length).toEqual(2);
+    expect($rootScope.playingStalled.calls.count()).toEqual(2);
 
-    expect(element[0].load.calls.length).toEqual(2);
+    expect(element[0].load.calls.count()).toEqual(2);
     element.callbacks['canplay']();
     element.callbacks['playing']();
-    expect($rootScope.playingStarted.calls.length).toEqual(2);
+    expect($rootScope.playingStarted.calls.count()).toEqual(2);
 
   }));
 

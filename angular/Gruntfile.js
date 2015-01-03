@@ -246,9 +246,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
+          cwd: '.tmp/concat/scripts',
           src: '*.js',
-          dest: '<%= yeoman.dist %>/scripts'
+          dest: '.tmp/concat/scripts'
         }]
       }
     },
@@ -256,7 +256,7 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
+            '.tmp/concat/scripts/scripts.js'
           ]
         }
       }
@@ -274,7 +274,7 @@ module.exports = function (grunt) {
         options: {
           variables: {
             'API_URL': 'http://localhost:9001/api',
-            'VERSION': '&alpha;6',
+            'VERSION': '&alpha;7',
             'EMAIL': 'ladioteam@gmail.com'
           }
         },
@@ -290,7 +290,7 @@ module.exports = function (grunt) {
         options: {
           variables: {
             'API_URL': 'http://ladio.herokuapp.com/api',
-            'VERSION': '&alpha;6',
+            'VERSION': '&alpha;7',
             'EMAIL': 'ladioteam@gmail.com'
           },
           force: true
@@ -337,7 +337,7 @@ module.exports = function (grunt) {
     'ngmin',
     'cssmin',
     'uglify',
-    'rev',
+    //'rev',
     'usemin'
   ]);
 

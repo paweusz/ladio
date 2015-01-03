@@ -1,11 +1,11 @@
 'use strict';
 
-var http = require('http'),
+var http = require('https'),
   cache = require('./cache'),
   _ = require('underscore');
 
 var apiKey = 'b4c059a7383415cb5295c9faec124b151213a788';
-var apiUrl = 'http://dirble.com/dirapi';
+var apiUrl = 'https://dirble.com/dirapi';
 
 function doGetJson(url, res, filter) {
   var cached = cache.get(url);
