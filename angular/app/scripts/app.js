@@ -5,8 +5,8 @@ angular.module('ladioApp', ['ngRoute'])
     $routeProvider
       .when('/', {
         template: '<div></div>',
-        controller: function($scope, $location, State) {
-          $location.path(State.getLastURL());
+        controller: function($scope, $location, StateSvc) {
+          $location.path(StateSvc.getLastURL());
         }
       })
       .when('/genres', {

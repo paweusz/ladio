@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ladioApp')
-  .controller('NavigationCtrl', function ($scope, $location, $log, State) {
+  .controller('NavigationCtrl', function ($scope, $location, $log, StateSvc) {
 
     $scope.items = [
       {label: 'Catalog', path: '/genres', currentPath: '/genres'},
@@ -34,7 +34,7 @@ angular.module('ladioApp')
         return;
       }
       
-      State.setLastURL(path);
+      StateSvc.setLastURL(path);
       
       var items = $scope.items;
       for (var i = 0; i < items.length; i++) {

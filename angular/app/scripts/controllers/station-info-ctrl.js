@@ -3,6 +3,8 @@
 angular.module('ladioApp')
   .controller('StationInfoCtrl', function ($scope, $log, $timeout, StreamInfoSvc) {
 
+    var isGa = typeof ga !== 'undefined';
+
     var self = this;
     self.Popups = {
       DETAILS: 'StationInfoCtrl.DETAILS',
@@ -42,6 +44,10 @@ angular.module('ladioApp')
       if ($scope.currentStation.state === $scope.State.ERROR) {
         $scope.popups.showExclusive(self.Popups.ALERT);
       } else {
+        var cs = $scope.currentStation;
+
+        if (isGa) ga('send', 'event', 'Info', 'details_req', cs.station.name); // jshint ignore:line
+
         self.updateStationDetails();
         $scope.popups.showExclusive(self.Popups.DETAILS);
       }

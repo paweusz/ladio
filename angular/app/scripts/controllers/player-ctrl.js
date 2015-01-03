@@ -3,6 +3,8 @@
 angular.module('ladioApp')
   .controller('PlayerCtrl', function ($scope, $log, $timeout, Pls, StatSvc) {
 
+    var isGa = typeof ga !== 'undefined';
+
     $scope.State = {
       STOPPED: 0,
       CONNECTING: 1,
@@ -89,6 +91,8 @@ angular.module('ladioApp')
 
       cs.state = $scope.State.PLAYING;
 
+      if (isGa) ga('send', 'event', 'Playback', 'started', cs.station.name); // jshint ignore:line
+
       if (!cs.wasPlayed) {
         StatSvc.stationPlayed(cs.station);
         $scope.$broadcast($scope.Events.PLAYING_STARTED);
@@ -97,17 +101,29 @@ angular.module('ladioApp')
     };
     
     $scope.playingError = function() {
-      $scope.currentStation.state = $scope.State.ERROR;
-      $scope.currentStation.streams = null;
+      var cs = $scope.currentStation;
+
+      if (isGa) ga('send', 'event', 'Playback', 'error', cs.station.name); // jshint ignore:line
+
+      cs.state = $scope.State.ERROR;
+      cs.streams = null;
       $scope.popups.showExclusive(self.Popups.ALERT);
     };
     
     $scope.playingStalled = function() {
-      $scope.currentStation.state = $scope.State.CONNECTING;
+      var cs = $scope.currentStation;
+
+      if (isGa) ga('send', 'event', 'Playback', 'stalled', cs.station.name); // jshint ignore:line
+
+      cs.state = $scope.State.CONNECTING;
     };
     
     $scope.playingResumed = function() {
-      $scope.currentStation.state = $scope.State.PLAYING;
+      var cs = $scope.currentStation;
+
+      if (isGa) ga('send', 'event', 'Playback', 'resumed', cs.station.name); // jshint ignore:line
+
+      cs.state = $scope.State.PLAYING;
     };
     
     $scope.play = function(station) {
