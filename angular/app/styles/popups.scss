@@ -109,6 +109,11 @@ $playing-color: #FF802E;
   p {
     margin-right: 15px;
   }
+
+  a {
+    color: $ruler-color;
+    text-decoration: underline;
+  }
   
   .cross {
     position: absolute;
