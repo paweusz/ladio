@@ -1,3 +1,3 @@
 # Ladio
 
-Simple internet radio application.
+Simple internet radio application in angular.js
